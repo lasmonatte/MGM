@@ -8,7 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Footer
-	푸터
+	<div>
+		Footer
+		푸터
+		<hr />
+	</div>
 </body>
 </html>

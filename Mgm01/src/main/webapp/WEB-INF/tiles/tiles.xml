@@ -7,23 +7,23 @@
 	<!-- jsp파일을 조립하여 layoutAll.jsp에 연결하는 부분 -->
 	<definition name="default_layout" template="/WEB-INF/layout/layoutAll.jsp">
 		<put-attribute name="include" value="/WEB-INF/layout/include.jsp" />
-		<put-attribute name="top" value="/WEB-INF/views/layout/top.jsp" />
+		<put-attribute name="top" value="/WEB-INF/layout/top.jsp" />
 		<put-attribute name="main" value="" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 
 	<!-- 개별 뷰 -->
-	<definition name="main" extends="default_layout">
+	<definition name="t:main" extends="default_layout">
 		<put-attribute name="main" value="/WEB-INF/views/index.jsp" />
 	</definition>
 
 	<!-- views 바로 아래에 있는 파일들을 찾는 wildcard -->
-	<definition name="/*" extends="default_layout">
+	<definition name="t:*" extends="default_layout">
 		<put-attribute name="main" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 
 	<!-- view 아래의 폴더 안의 파일을 찾는 wildcard -->
-	<definition name="/*/*" extends="default_layout">
+	<definition name="t:*/*" extends="default_layout">
 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 
