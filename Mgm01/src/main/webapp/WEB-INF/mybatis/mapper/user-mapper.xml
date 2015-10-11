@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.user.model.UserDao">
+	<!-- User Register Service -->
+	<insert id="createUser" parameterType="com.mgm.mgm01.user.model.UserDto">
+		insert into user(id, password)
+		values (#{id}, #{password})
+	</insert>
+	<insert id="createAutority" parameterType="com.mgm.mgm01.user.model.UserDto">
+		insert into autorities(id, autority)
+		values (#{id}, #{autority})
+	</insert>
+	<!-- Login Service -->
+	<select id="loginUser" parameterType="String" resultType="Map">
+		select
+		u.id as username, u.password, u.enabled, a.authority
+		from user u, authorities a
+		where u.id=#{username}
+		group by u.id
+	</select>
+
+	<!-- Delete User -->
+	<delete id="deleteUser" parameterType="String">
+		delete from user where
+		id=#{id}
+	</delete>
+</mapper>
