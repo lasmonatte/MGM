@@ -14,4 +14,8 @@ public class ShaEncoder {
 	public String encoding(String str){
 		return encoder.encodePassword(str,null);
 	}
+	
+	public String saltEncoding(String str,String salt){
+		 return encoder.encodePassword(str,salt);
+		} 
 }

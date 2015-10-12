@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Gameresult2 {
@@ -15,7 +17,7 @@ public class Gameresult2 {
 		String result;
 		int count = 0;
 		boolean flag = false;
-		Map<String, Object> info = new HashMap<String, Object>();
+		Map<String, Object> info = null;
 
 		/* set up */
 		URL url = new URL("http://www.scoregame.co.kr/?mod=analysPday&iframe=Y");
@@ -27,30 +29,36 @@ public class Gameresult2 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String inputLine;
 
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		while((inputLine=br.readLine()) != null){
-			int start = 0;
-			int end = 0;
-			//			날짜
-			//			if(inputLine.contains("\"date\"")) {
-			//				result = inputLine.substring(inputLine.indexOf(">")+1, inputLine.lastIndexOf("<"));
-			//				info.put("date", result");
-			//			}
 
-			//회차정보
-			if(inputLine.contains("\"OrderNum\""))
+			if(inputLine.contains("data=\"") && !inputLine.contains("+data.")) {
+				info = new HashMap<String, Object>();
 				flag = true;
+			}
 			
-			if(flag==true && count<5) {
-				if(count==0) {
-					start = inputLine.indexOf("-</span>");
-					end = inputLine.lastIndexOf("<span>");
-					result = inputLine.substring(start+8, end);
-					System.out.println(result);
-				}
-				else if(count==2)
+			if(flag==true && count<20) {
+				switch (count) {
+				case 0:
+					result = inputLine.substring(inputLine.indexOf("a=\"")+3, inputLine.lastIndexOf("\" "));
+					info.put("orderNum", result);
+					break;
+				case 3:
 					result = inputLine.substring(inputLine.indexOf(">")+1, inputLine.lastIndexOf("<"));
-				else
+					break;
+				case 2:
+				case 4:
 					result = inputLine.substring(inputLine.indexOf("\"")+1, inputLine.lastIndexOf("\""));
+					break;
+				case 19:
+					result = inputLine.substring(inputLine.indexOf("n>")+2, inputLine.lastIndexOf("</s"));
+					info.put("time", result);
+					break;
+				default:
+					result="";	
+					break;
+				}
+					
 				
 				switch (result) {
 				case "odd":
@@ -73,22 +81,18 @@ public class Gameresult2 {
 					break;
 				}
 				
-				if(count==4) {
+				if(count==19) {
 					count = 0;
 					flag = false;
+					list.add(info);
 				} else
 					count++;
-				
-				
 			}
-			//게임정보
-			if(inputLine.contains("OrderNum"))
-				count++;
 		}
-		
 		br.close();
 		conn.disconnect();
-
-		System.out.println(info);
+		
+		for(Map<String, Object> ar : list)
+			System.out.println(ar);
 	}
 }

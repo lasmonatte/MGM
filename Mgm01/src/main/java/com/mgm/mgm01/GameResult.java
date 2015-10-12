@@ -71,6 +71,9 @@ public class GameResult {
 			//게임정보
 			if(inputLine.contains("OrderNum"))
 				count++;
+			
+			if(inputLine.contains(":"))
+				System.out.println(inputLine);
 		}
 
 		br.close();

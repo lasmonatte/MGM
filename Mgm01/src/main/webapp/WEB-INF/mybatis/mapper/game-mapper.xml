@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.game.model.GameDao">
+	<!-- User Register Service -->
+	<insert id="createGame" parameterType="GameDto">
+		insert into game(ordernum, oe, lr, line)
+		values(#{ordernum}, #{oe}, #{lr}, #{line})
+	</insert>
+	<select id="readGameOne" parameterType="Integer" resultType="GameDto">
+		select * from game
+		where game_num = #{game_num} 
+	</select>
+	<select id="readGameList" parameterType="Integer" resultType="GameDto">
+		select * from game order by game_num desc limit #{start}, #{end}
+	</select>
+	<update id="updateGame" parameterType="GameDto">
+		update game set
+		ordernum=#{ordernum} and oe=#{oe} and lr=#{lr} and line=#{line}
+		where game_num=#{game_num}
+	</update>
+	<delete id="deleteGame" parameterType="Integer">
+		delete from game where
+		game_num=#{game_num}
+	</delete>
+</mapper>

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AdminController {
 
-	@RequestMapping(value="admin/main",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/main",method=RequestMethod.GET)
 	public ModelAndView mainControl(ModelAndView mav, Authentication auth){
 		System.out.println("admin");
 		mav.setViewName("t:admin/main");

@@ -44,5 +44,6 @@
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="com.mgm.mgm01.user.model.UserDto" alias="UserDto"/>
+		<typeAlias type="com.mgm.mgm01.game.model.GameDto" alias="GameDto"/>
 	</typeAliases>
 </configuration>

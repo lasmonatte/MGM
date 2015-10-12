@@ -12,7 +12,8 @@
 	<!-- DataSource -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost/mgm"/>
+<!-- 		<property name="jdbcUrl" value="jdbc:mysql://localhost/mgm"/> -->
+		<property name="jdbcUrl" value="jdbc:mysql://211.244.64.13:3306/mgm"/>
 		<property name="user" value="mgm01"/>
 		<property name="password" value="mgm01"/>
 	</bean>

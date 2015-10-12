@@ -7,15 +7,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/style.css" /> -->
+<title>MGM Games</title>
 </head>
 <body>
-	<div class="mainSection">
+	<div class="wrapper">
 		<div class="top">
 			<tiles:insertAttribute name="top" />
 		</div>
+		<hr/>
 		<div class="main">
 			<tiles:insertAttribute name="main" />
 		</div>
+		<hr/>
 		<div class="footer">
 			<tiles:insertAttribute name="footer" />
 		</div>
