@@ -1,4 +1,4 @@
-package com.mgm.mgm01.game.model;
+package com.mgm.mgm01.gameresult.model;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,36 +8,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GameServiceImpl implements GameService{
+public class GameResultServiceImpl implements GameResultService{
 
-	@Autowired GameDao dao;
+	@Autowired GameResultDao dao;
 
 	@Override
-	public int createGameService(GameDto dto) {
+	public int createGameResultService(GameResultDto dto) {
 		// TODO Auto-generated method stub
-		return dao.createGame(dto);
+		return dao.createGameResult(dto);
 	}
 
 	@Override
-	public GameDto readGameOneService(int game_num) {
+	public GameResultDto readGameResultOneService(int game_num) {
 		// TODO Auto-generated method stub
-		return dao.readGameOne(game_num);
+		return dao.readGameResultOne(game_num);
 	}
 
 	@Override
-	public List<GameDto> readGameListService(int start, int end) {
+	public List<GameResultDto> readGameResultListService(int start, int end) {
 		// TODO Auto-generated method stub
 		Map<String, Integer> info = new HashMap<String, Integer>();
 		info.put("start", start);
 		info.put("end", end);
 		
-		return dao.readGameList(info);
+		return dao.readGameResultList(info);
 	}
 
 	@Override
-	public int updateGameService(GameDto dto) {
+	public int updateGameResultService(GameResultDto dto) {
 		// TODO Auto-generated method stub
-		return dao.updateGame(dto);
+		return dao.updateGameResult(dto);
 	}
 	
 	

@@ -2,7 +2,7 @@ package com.mgm.mgm01.betting.model;
 
 import java.sql.Timestamp;
 
-import com.mgm.mgm01.game.model.GameDto;
+import com.mgm.mgm01.gameresult.model.GameResultDto;
 
 public class BettingDto {
 
@@ -13,6 +13,10 @@ public class BettingDto {
 	private int expect_money;
 	private int prize_money;
 	private float dividend;		// 배당
-	private GameDto gameDto;
-	private boolean result;
+	private String betting_oe;
+	private String betting_lr;
+	private String betting_line;
+	private boolean result_oe;
+	private boolean result_lr;
+	private boolean result_line;
 }

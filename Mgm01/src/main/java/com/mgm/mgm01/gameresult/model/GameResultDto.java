@@ -1,8 +1,8 @@
-package com.mgm.mgm01.game.model;
+package com.mgm.mgm01.gameresult.model;
 
 import java.security.Timestamp;
 
-public class GameDto {
+public class GameResultDto {
 
 	private int game_num;
 	private Timestamp date;

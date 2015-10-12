@@ -1,4 +1,4 @@
-package com.mgm.mgm01.game.controller;
+package com.mgm.mgm01.gameresult.controller;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mgm.mgm01.game.model.GameDto;
-import com.mgm.mgm01.game.model.GameService;
+import com.mgm.mgm01.gameresult.model.GameResultDto;
+import com.mgm.mgm01.gameresult.model.GameResultService;
 
 @Controller
 public class GameController {
 
-	@Autowired GameService gameService;
+	@Autowired GameResultService gameResultService;
 	
 	@RequestMapping(value="/user/main")
 	public ModelAndView control(ModelAndView mav) {
@@ -30,12 +30,13 @@ public class GameController {
 	}
 	
 	@RequestMapping(value="/game/result", method=RequestMethod.POST)
-	public ModelAndView resultsControl(ModelAndView mav) {
+	public ModelAndView resultControl(ModelAndView mav) {
 		int start=0;
 		int end=20;
-		List<GameDto> gameDtoList = gameService.readGameListService(start, end);
+		List<GameResultDto> gameResultDtoList =
+				gameResultService.readGameResultListService(start, end);
 		
-		mav.addObject("gameDtoList", gameDtoList);
+		mav.addObject("gameResultDtoList", gameResultDtoList);
 		mav.setViewName("t:game/result");
 		return mav;
 	}

@@ -9,10 +9,10 @@
 </head>
 <body>
 게임결과
-<c:if test="${gameDtoList ne null}">
+<c:if test="${gameResultDtoList ne null}">
 <table>
 <tbody>
-	<c:forEach var="gameDto" begin="1" end="${gameDtoList.size()}">
+	<c:forEach var="gameResultDto" begin="1" end="${gameResultDtoList.size()}">
 		<tr>
 			<td>
 				<div>회차</div>
@@ -29,16 +29,16 @@
 		</tr>
 		<tr>
 			<td>
-				<div>${gameDto.getOrderNum() }</div>
+				<div>${gameResultDto.getOrderNum() }</div>
 			</td>
 			<td>
-				<div>${gameDto.getOE() }</div>
+				<div>${gameResultDto.getOE() }</div>
 			</td>
 			<td>
-				<div>${gameDto.getLE() }</div>
+				<div>${gameResultDto.getLE() }</div>
 			</td>
 			<td>
-				<div>${gameDto.getLine() }</div>
+				<div>${gameResultDto.getLine() }</div>
 			</td>
 		</tr>		
 	</c:forEach>
