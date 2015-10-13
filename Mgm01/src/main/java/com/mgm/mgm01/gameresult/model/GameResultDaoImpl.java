@@ -16,26 +16,26 @@ public class GameResultDaoImpl implements GameResultDao{
 	@Override
 	public int createGameResult(GameResultDto dto) {
 		// TODO Auto-generated method stub
-		return session.insert("com.mgm.mgm01.game.model.GameDao.createGameResult", dto);
+		return session.insert("com.mgm.mgm01.gameresult.model.GameResultDao.createGameResult", dto);
 	}
 
 	@Override
 	public GameResultDto readGameResultOne(int game_num) {
 		// TODO Auto-generated method stub
-		return session.selectOne("com.mgm.mgm01.game.model.GameDao.readGameResultOne", game_num);
+		return session.selectOne("com.mgm.mgm01.gameresult.model.GameResultDao.readGameResultOne", game_num);
 	}
 
 	@Override
 	public List<GameResultDto> readGameResultList(Map<String, Integer> info) {
 		// TODO Auto-generated method stub
 		
-		return session.selectList("com.mgm.mgm01.game.model.GameDao.readGameResultList", info);
+		return session.selectList("com.mgm.mgm01.gameresult.model.GameResultDao.readGameResultList", info);
 	}
 
 	@Override
 	public int updateGameResult(GameResultDto dto) {
 		// TODO Auto-generated method stub
-		return session.update("com.mgm.mgm01.game.model.GameDao.updateGameResult", dto);
+		return session.update("com.mgm.mgm01.gameresult.model.GameResultDao.updateGameResult", dto);
 	}
 	
 	

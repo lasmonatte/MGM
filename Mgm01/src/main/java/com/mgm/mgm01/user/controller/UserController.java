@@ -1,6 +1,7 @@
 package com.mgm.mgm01.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,6 @@ public class UserController {
 		userDto.setAuthority("ROLE_USER");
 		userService.createUserService(userDto);
 		userService.grantAuthorityService(userDto);
-		
 		mav.setViewName("redirect:/");
 		return mav;
 	}

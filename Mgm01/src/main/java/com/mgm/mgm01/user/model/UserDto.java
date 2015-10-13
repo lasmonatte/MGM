@@ -13,6 +13,7 @@ public class UserDto {
 	private String b_username;
 	private String b_password;
 	private String recmd_id;
+	private int cash;
 	private String authority;
 	
 	public int getUser_num() {
@@ -80,6 +81,12 @@ public class UserDto {
 	}
 	public void setRecmd_id(String recmd_id) {
 		this.recmd_id = recmd_id;
+	}
+	public int getCash() {
+		return cash;
+	}
+	public void setCash(int cash) {
+		this.cash = cash;
 	}
 	public String getAuthority() {
 		return authority;

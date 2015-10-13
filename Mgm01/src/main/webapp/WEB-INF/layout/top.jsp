@@ -17,7 +17,7 @@
 <tr>
 	<td>
 		<div>
-			<sec:authentication property="principal.username"/>님 반갑습니다.
+			<sec:authentication property="principal.nickname"/>님 반갑습니다.
 		</div>
 	</td>
 	<td width="5%">
@@ -37,7 +37,7 @@
 	<td width="50%">
 	</td>
 	<td width="20%">
-		캐쉬:
+		캐쉬: <sec:authentication property="principal.cash"/>원
 	</td>
 </tr>
 </tbody>
@@ -65,7 +65,7 @@
 	</td>
 	<td>
 	<div>
-		<form action="" method="POST">
+		<form action="/mgm01/game/result" method="POST">
 			<input type="submit" value="경기결과" />
 		</form>
 	</div>

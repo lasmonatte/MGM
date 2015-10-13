@@ -2,20 +2,20 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mgm.mgm01.game.model.GameDao">
+<mapper namespace="com.mgm.mgm01.gameresult.model.GameResultDao">
 	<!-- User Register Service -->
-	<insert id="createResultGame" parameterType="GameDto">
+	<insert id="createGameResult" parameterType="GameResultDto">
 		insert into gameresult(ordernum, oe, lr, line)
 		values(#{ordernum}, #{oe}, #{lr}, #{line})
 	</insert>
-	<select id="readGameResultOne" parameterType="Integer" resultType="GameDto">
+	<select id="readGameResultOne" parameterType="Integer" resultType="GameResultDto">
 		select * from gameresult
 		where game_num = #{game_num} 
 	</select>
-	<select id="readGameResultList" parameterType="Integer" resultType="GameDto">
+	<select id="readGameResultList" parameterType="Integer" resultType="GameResultDto">
 		select * from gameresult order by game_num desc limit #{start}, #{end}
 	</select>
-	<update id="updateGameResult" parameterType="GameDto">
+	<update id="updateGameResult" parameterType="GameResultDto">
 		update gameresult set
 		ordernum=#{ordernum} and oe=#{oe} and lr=#{lr} and line=#{line}
 		where game_num=#{game_num}

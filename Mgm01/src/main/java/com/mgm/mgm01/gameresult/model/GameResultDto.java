@@ -1,15 +1,15 @@
 package com.mgm.mgm01.gameresult.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class GameResultDto {
 
 	private int game_num;
 	private Timestamp date;
-	private int orderNum;
-	private String OE;
-	private String LR;
-	private int Line;
+	private int ordernum;
+	private String oe;
+	private String lr;
+	private int line;
 	
 	public int getGame_num() {
 		return game_num;
@@ -23,29 +23,29 @@ public class GameResultDto {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	public int getOrderNum() {
-		return orderNum;
+	public int getOrdernum() {
+		return ordernum;
 	}
-	public void setOrderNum(int orderNum) {
-		this.orderNum = orderNum;
+	public void setOrdernum(int ordernum) {
+		this.ordernum = ordernum;
 	}
-	public String getOE() {
-		return OE;
+	public String getOe() {
+		return oe;
 	}
-	public void setOE(String oE) {
-		OE = oE;
+	public void setOe(String oe) {
+		this.oe = oe;
 	}
-	public String getLR() {
-		return LR;
+	public String getLr() {
+		return lr;
 	}
-	public void setLR(String lR) {
-		LR = lR;
+	public void setLr(String lr) {
+		this.lr = lr;
 	}
 	public int getLine() {
-		return Line;
+		return line;
 	}
 	public void setLine(int line) {
-		Line = line;
+		this.line = line;
 	}
 
 
