@@ -33,10 +33,17 @@ public class GameResultDaoImpl implements GameResultDao{
 	}
 
 	@Override
+	public int readGameNumRecently() {
+		// TODO Auto-generated method stub
+		return session.selectOne("com.mgm.mgm01.gameresult.model.GameResultDao.readGameNumRecently");
+	}
+
+	@Override
 	public int updateGameResult(GameResultDto dto) {
 		// TODO Auto-generated method stub
 		return session.update("com.mgm.mgm01.gameresult.model.GameResultDao.updateGameResult", dto);
 	}
+
 	
 	
 }

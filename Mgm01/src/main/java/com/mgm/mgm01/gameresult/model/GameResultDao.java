@@ -8,6 +8,7 @@ public interface GameResultDao {
 	public int createGameResult(GameResultDto dto);
 	public GameResultDto readGameResultOne(int game_num);
 	public List<GameResultDto> readGameResultList(Map<String, Integer> info);
+	public int readGameNumRecently();
 	public int updateGameResult(GameResultDto dto);
 	
 }

@@ -27,7 +27,7 @@
 				delete-cookies="true"
 				logout-success-url="/"
 		/>
-		<session-management invalid-session-url="/" >
+		<session-management invalid-session-url="/" session-fixation-protection="migrateSession">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/"/>
 		</session-management>
 	</http>

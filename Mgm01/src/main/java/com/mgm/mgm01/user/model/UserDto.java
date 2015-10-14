@@ -1,5 +1,7 @@
 package com.mgm.mgm01.user.model;
 
+import java.math.BigInteger;
+
 public class UserDto {
 
 	private int user_num;
@@ -13,7 +15,7 @@ public class UserDto {
 	private String b_username;
 	private String b_password;
 	private String recmd_id;
-	private int cash;
+	private BigInteger cash;
 	private String authority;
 	
 	public int getUser_num() {
@@ -82,10 +84,10 @@ public class UserDto {
 	public void setRecmd_id(String recmd_id) {
 		this.recmd_id = recmd_id;
 	}
-	public int getCash() {
+	public BigInteger getCash() {
 		return cash;
 	}
-	public void setCash(int cash) {
+	public void setCash(BigInteger cash) {
 		this.cash = cash;
 	}
 	public String getAuthority() {

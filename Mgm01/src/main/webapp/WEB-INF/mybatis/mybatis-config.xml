@@ -46,5 +46,6 @@
 		<typeAlias type="com.mgm.mgm01.user.model.UserDto" alias="UserDto"/>
 		<typeAlias type="com.mgm.mgm01.gameresult.model.GameResultDto" alias="GameResultDto"/>
 		<typeAlias type="com.mgm.mgm01.rule.model.BettingRuleDto" alias="BettingRuleDto"/>
+		<typeAlias type="com.mgm.mgm01.betting.model.BettingDto" alias="BettingDto"/>
 	</typeAliases>
 </configuration>

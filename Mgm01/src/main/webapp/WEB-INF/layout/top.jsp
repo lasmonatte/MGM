@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -37,7 +38,7 @@
 	<td width="50%">
 	</td>
 	<td width="20%">
-		캐쉬: <sec:authentication property="principal.cash"/>원
+		캐쉬: <fmt:formatNumber value="${cash }" pattern="###,###,###,###,###,###,###" /> 원
 	</td>
 </tr>
 </tbody>
@@ -58,7 +59,7 @@
 <tr>
 	<td>
 	<div>
-		<form action="/mgm01/game/ladder" method="POST">
+		<form action="/mgm01/game/ladder" method="GET">
 			<input type="submit" value="사다리" />
 		</form>
 	</div>

@@ -16,15 +16,22 @@
 	<!-- Login Service -->
 	<select id="loginUser" parameterType="String" resultType="Map">
 		select
-		u.id as username, u.password, u.enabled, a.authority, u.nickname, u.cash
+		u.id as username, u.password, u.enabled, a.authority, u.nickname
 		from user u, authorities a
 		where u.id=#{username}
 		group by u.id
 	</select>
-
 	<!-- Delete User -->
 	<delete id="deleteUser" parameterType="String">
 		delete from user where
 		id=#{id}
 	</delete>
+	
+	<!-- Util -->
+	<select id="readCash" parameterType="String" resultType="java.math.BigInteger">
+		select cash from user where id=#{id}
+	</select>
+	<update id="updateCash" parameterType="Map">
+		update user set cash=#{cash} where id=#{id}
+	</update>
 </mapper>

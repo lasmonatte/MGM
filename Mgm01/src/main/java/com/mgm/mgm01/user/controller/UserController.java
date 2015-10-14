@@ -1,5 +1,7 @@
 package com.mgm.mgm01.user.controller;
 
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,14 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@RequestMapping(value="/user/main")
+	public ModelAndView control(ModelAndView mav, Authentication auth) {
+		BigInteger cash = userService.readCashService(auth.getName());
+		mav.addObject("cash", cash);
+		mav.setViewName("t:game/main");
+		return mav;
+	}
 	
 	@Transactional
 	@RequestMapping(value="user/register", method=RequestMethod.POST)

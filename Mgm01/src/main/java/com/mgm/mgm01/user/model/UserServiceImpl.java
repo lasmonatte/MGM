@@ -1,5 +1,9 @@
 package com.mgm.mgm01.user.model;
 
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +27,20 @@ public class UserServiceImpl implements UserService {
 	public int grantAuthorityService(UserDto dto) {
 		// TODO Auto-generated method stub
 		return dao.grantAuthority(dto);
+	}
+
+	@Override
+	public BigInteger readCashService(String id) {
+		// TODO Auto-generated method stub
+		return dao.readCash(id);
+	}
+
+	@Override
+	public int updateCashService(String id, BigInteger cash) {
+		// TODO Auto-generated method stub
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("cash", cash);
+		info.put("id", id);
+		return dao.updateCash(info);
 	}
 }

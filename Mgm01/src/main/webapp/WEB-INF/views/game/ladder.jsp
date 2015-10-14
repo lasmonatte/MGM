@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,12 +10,16 @@
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script> 
 <script language="javascript">
+	var cash = ${cash };
 	var total_money = 0;
 	var total_dividend = 1;
 	var expect_money = 0;
 	var game_list = new Array();
 	var gameType_list = new Array();
 	var str = new Array();
+	var betting_oe = null;
+	var betting_lr = null;
+	var betting_line = null;
 	
 	$(document).ready(function(){
 		//on window scroll fire it will call a function.
@@ -27,23 +32,37 @@
 	});
 	
 	function addMoney(money){
-		if(total_money+money> 3000000)
+		if(total_money+money>cash)
+			alert("현재 보유캐시를 초과하여 베팅할 수 없습니다.\n"+"현재 보유캐시 : " + max_money);
+		else if(total_money+money> 3000000)
 			alert("300만원을 초과할 수 없습니다.");
-		else
+		else 
 			total_money+=money;
-		document.getElementById('total_money').value = total_money;
-		
+
+		var result = numberWithCommas(total_money);
+		printSpan("total_money", result);
+		expectMoney();
+	}
+	
+	function maxBetting(money){
+		alert(money);
+		total_money=money;
+		var result = numberWithCommas(total_money);
+		printSpan("total_money", result);
+		expectMoney();
 	}
 	
 	function expectMoney(){
 		expect_money=total_money*total_dividend;
-		document.getElementById('expect_money').value = expect_money;		
+		var result = numberWithCommas(expect_money);
+		printSpan("expect_money", result);
 	}
 
+	
 	function oneCheckbox(a, name, value, dividend){
 		var obj = document.getElementsByName(name);
+		var result = name + ":"+ value;
 		if(gameType_list.indexOf(name)==-1){
-			alert("옴");
 			total_dividend *= dividend;
 			gameType_list.push(name);
 		}
@@ -51,10 +70,21 @@
 		for(var i=0; i<obj.length; i++){
 			if(obj[i] != a){
 				obj[i].checked = false;
-				$("#betting_"+name).empty();
-				$("#betting_"+name).append("<span>"+name + ":"+ value +"</span><br />");
+				if(name=="oe")
+					betting_oe=value;
+				else if(name=="lr")
+					betting_lr=value;
+				else if(name=="line")
+					betting_line=value;
+				printSpan("betting_"+name, result);
 			}
 			if(a.checked==false && obj[i].checked==false){
+				if(name=="oe")
+					betting_oe=null;
+				else if(name=="lr")
+					betting_lr=null;
+				else if(name=="line")
+					betting_line=null;
 				$("#betting_"+name).empty();
 				total_dividend /= dividend;
 				gameType_list.checkAndReplace(name, "");
@@ -65,7 +95,9 @@
 		if(total_dividend<=1)
 			total_dividend=1;
 		
-		document.getElementById('total_dividend').value = total_dividend;
+		printSpan("total_dividend", total_dividend);
+		
+		expectMoney();
 	}
 	
 	// contains 메소드 추가
@@ -73,23 +105,45 @@
 		for (var i = 0; i < this.length; i++) {
 			if (this[i] == oldOne) {
 				this[i] = newOne;
-				alert("뺌");
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	function testAjax(){
-		$.ajax({
-			url : "/mgm01/game/betting",
-			type : 'POST',
-			cache : false,
-			data : ${"#fff"}.serialize(),
-			dataType :
-		})	
-		
-		
+	function betting() { // 일단 popup에서만 작동함 - feed_init(feed_num) 작성필요
+
+		cash-=total_money;
+		$.ajax({ // feed_num과 input으로 댓글작성하는 inner 작동.
+		      method : 'POST', // post!
+		      url : '/mgm01/betting/new', // url
+		      data : { // 데이타!
+		         betting_money : total_money,
+				 expect_money : expect_money,
+				 dividend : total_dividend,
+				 betting_oe : betting_oe,
+				 betting_lr : betting_lr,
+				 betting_line : betting_line,
+				 cash : cash
+		      },
+		      success : function() { // 댓글작성이 성공하면
+				   alert("배팅에 성공하셨습니다.");
+				   location.reload();
+				   },
+		      error :function() { // 댓글작성이 성공하면
+				   alert("배팅에 실패하셨습니다.");
+				}
+		   })
+		   
+		}
+	
+	function printSpan(id, result){
+		$("#"+id).empty();
+		$("#"+id).append("<span>"+result+"</span>");
+	}
+	
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 </script>
 <style type="text/css">
@@ -103,42 +157,53 @@
         height:500px;
         background-color: orange;
     }
+    
+    #betting_info {
+        position:absolute;
+        left:20%;
+        top:20%;
+        margin-top:200px;
+        margin-left:-200px;
+        width:300px;
+        height:500px;
+        background-color: yellow;
+    }
             
     </style>
 </head>
 <body>
-	<form action="/mgm01/game/betting" method="POST" id="fff">
+	<form  method="POST" id="fff">
 	<div style='width:810px; height:555px; overflow:hidden;text-align:center; margin-top:5%; margin-left: 25% '>
 		<iframe style='position:relative; top:-70px; left:-10px;' src='http://named.com/game/ladder/v2_index.php' 
 				id='named-ladder' name='named-ladder' width='830' height='617' scrolling='no' frameborder='0'></iframe>
 	</div>
+	<!-- Float -->
 	<div id="floatDiv">
 		<div style="height:60px;line-height:80px;">
-			<label><input type="checkbox">카트고정</label>
+			<label><input type="checkbox" id="cart">카트고정</label>
 			<label>MGM</label>
 		</div>
-		<form action="/game/betting" method="POST">
-		<table cellpadding="8" cellspacing="0" border="0" width="100%">
+		<table cellpadding="8" cellspacing="0" border="0" width="100%" id="betting_context">
 		<tbody>
 			<tr>
 				<td width="100"><div>보유금액</div></td>
-				<td align="right"><div><sec:authentication property="principal.cash"/></div></td>
+				<td align="right"><div><fmt:formatNumber value="${cash }" pattern="###,###,###,###,###,###,###"/></div></td>
 			</tr>
 			<tr>
 				<td><div>누적배당</div></td>
-				<td align="right"><div><input type="text" disabled="disabled" id="total_dividend" /></div></td>
+				<td align="right"><div id="total_dividend">1</div></td>
 			</tr>
 			<tr>
 				<td><div>배팅상한금액</div></td>
-				<td align="right"><div> [${bettingRuleDto.betting_max }]</div></td>
+				<td align="right"><div><fmt:formatNumber value="${bettingRuleDto.betting_max }" pattern="###,###,###,###,###"/></div></td>
 			</tr>
 			<tr>
 				<td><div>배팅금액</div></td>
-				<td align="right"><div><input type="text" disabled="disabled" id="total_money" /></div></td>
+				<td align="right"><div id="total_money">0</div></td>
 			</tr>
 			<tr>
 				<td><div>예상당첨금</div></td>
-				<td align="right"><div><input type="text" disabled="disabled" id="expect_money" /></div></td>
+				<td align="right"><div id="expect_money" >0</div></td>
 			</tr>
 		</tbody>
 		</table>
@@ -156,23 +221,83 @@
 			</tr>
 		</tbody>
 		</table>
-		<div style="margin-top:1px;text-align:center;" id="">
+		<div style="margin-top:1px;text-align:center;" id="betting_max">
 <!-- 		<img src="../skin/member/lion/img/btn-max.png" onclick="max_bet();" style="cursor: pointer;"> -->
-			맥스
+			<input type="button" value="최대금액" onclick="maxBetting()"/>
 		</div>
 		<div style="margin-top:5px;text-align:center;" id="betting_action">
 <!-- 		<img src="../skin/member/lion/img/btn-betting.png" onclick="betting()" style="cursor: pointer;"> -->
-			<input type="submit" value="베팅"/>
+			<input type="button" value="배팅" onclick="betting()"/>
 		</div>
 		<div style="height:182px;margin-top:5px;width:203px;margin-left:6px;" id="betting_list">
 			<div id="betting_oe"></div>
 			<div id="betting_lr"></div>
 			<div id="betting_line"></div>
 		</div>
-		</form>
     </div>
     
+    <div id="betting_info" >
+		<div id="recently_betting">
+			<table border="1">
+			<thead>
+				<tr>
+				<td colspan="2"><span>${bettingDto.betting_num }회차</span></td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${bettingDto.betting_oe ne 'null' }">
+					<tr>
+						<td>홀짝</td>
+						<c:if test="${bettingDto.result_oe eq true  }">
+						<td>당첨</td>
+						</c:if>
+						<c:if test="${bettingDto.result_oe eq false  }">
+						<td>미당첨</td>
+						</c:if>
+					<tr>
+				</c:if>
+				<c:if test="${bettingDto.betting_lr ne 'null' }">
+					<tr>
+						<td>좌우</td>
+						<c:if test="${bettingDto.result_lr eq true  }">
+						<td>당첨</td>
+						</c:if>
+						<c:if test="${bettingDto.result_lr eq false  }">
+						<td>미당첨</td>
+						</c:if>
+					<tr>
+				</c:if>
+				<c:if test="${bettingDto.betting_line ne 'null' }">
+					<tr>
+						<td>사다리수</td>
+						<c:if test="${bettingDto.result_line eq true  }">
+						<td>적중</td>
+						</c:if>
+						<c:if test="${bettingDto.result_line eq false  }">
+						<td>실패</td>
+						</c:if>
+					<tr>
+				</c:if>
+				<tr>
+					<td>배팅액:${bettingDto.betting_money }</td>
+				</tr>
+				<tr>
+					<td>배당:${bettingDto.dividend }</td>
+				</tr>
+				<tr>
+					<td>당첨금:${bettingDto.prize_money }</td>
+				</tr>
+				<c:if test="${bettingDto.received eq 'N' }">
+				<tr>
+					<td><input type="button" value="당첨금을 받으세요"/></td>
+				</tr>
+				</c:if>
+			</tbody>
+			</table>
+		</div>
+	</div>
     
+    <!-- 테이블 -->
 	<table width="80%" border="1" cellpadding="0" cellspacing="0" class="betting_table " id="betting_table" align="center">
 
 	<tbody>

@@ -9,7 +9,7 @@ public class GameResultDto {
 	private int ordernum;
 	private String oe;
 	private String lr;
-	private int line;
+	private String line;
 	
 	public int getGame_num() {
 		return game_num;
@@ -41,12 +41,19 @@ public class GameResultDto {
 	public void setLr(String lr) {
 		this.lr = lr;
 	}
-	public int getLine() {
+	public String getLine() {
 		return line;
 	}
-	public void setLine(int line) {
+	public void setLine(String line) {
 		this.line = line;
+	}
+	
+	@Override
+	public String toString() {
+		return "GameResultDto [game_num=" + game_num + ", date=" + date + ", ordernum=" + ordernum + ", oe=" + oe
+				+ ", lr=" + lr + ", line=" + line + "]";
 	}
 
 
+	
 }

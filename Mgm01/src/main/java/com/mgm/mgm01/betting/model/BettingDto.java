@@ -2,11 +2,10 @@ package com.mgm.mgm01.betting.model;
 
 import java.sql.Timestamp;
 
-import com.mgm.mgm01.gameresult.model.GameResultDto;
-
 public class BettingDto {
 
 	private int betting_num;
+	private String id;
 	private int game_num;
 	private Timestamp date;
 	private int betting_money;
@@ -19,12 +18,19 @@ public class BettingDto {
 	private boolean result_oe;
 	private boolean result_lr;
 	private boolean result_line;
+	private String received;
 	
 	public int getBetting_num() {
 		return betting_num;
 	}
 	public void setBetting_num(int betting_num) {
 		this.betting_num = betting_num;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public int getGame_num() {
 		return game_num;
@@ -98,4 +104,21 @@ public class BettingDto {
 	public void setResult_line(boolean result_line) {
 		this.result_line = result_line;
 	}
+	
+	public String getReceived() {
+		return received;
+	}
+	public void setReceived(String received) {
+		this.received = received;
+	}
+	@Override
+	public String toString() {
+		return "BettingDto [betting_num=" + betting_num + ", id=" + id + ", game_num=" + game_num + ", date=" + date
+				+ ", betting_money=" + betting_money + ", expect_money=" + expect_money + ", prize_money=" + prize_money
+				+ ", dividend=" + dividend + ", betting_oe=" + betting_oe + ", betting_lr=" + betting_lr
+				+ ", betting_line=" + betting_line + ", result_oe=" + result_oe + ", result_lr=" + result_lr
+				+ ", result_line=" + result_line + "]";
+	}
+
+	
 }
