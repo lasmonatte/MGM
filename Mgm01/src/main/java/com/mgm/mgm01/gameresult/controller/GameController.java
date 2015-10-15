@@ -2,6 +2,7 @@ package com.mgm.mgm01.gameresult.controller;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,9 @@ import com.mgm.mgm01.gameresult.model.GameResultDto;
 import com.mgm.mgm01.gameresult.model.GameResultService;
 import com.mgm.mgm01.rule.model.BettingRuleDto;
 import com.mgm.mgm01.rule.model.RuleService;
+import com.mgm.mgm01.rule.model.TradeRuleDto;
+import com.mgm.mgm01.sercurity.UserDetailsVO;
+import com.mgm.mgm01.user.model.UserDto;
 import com.mgm.mgm01.user.model.UserService;
 
 @Controller
@@ -52,10 +56,59 @@ public class GameController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/game/betting")
-	public ModelAndView bettingControl(ModelAndView mav, Authentication auth, BettingDto dto) {
+	@RequestMapping("/game/betlist")
+	public ModelAndView betlistControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth,
+			BigInteger new_cash) {
+		// List li = bls.readAllService();
 		BigInteger cash = userService.readCashService(auth.getName());
+		if(new_cash!=null)
+			userService.updateCashService(auth.getName(), new_cash);
+		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
 		mav.addObject("cash", cash);
+		mav.addAllObjects(map);
+		mav.addObject("isInner", false);
+		mav.setViewName("t:game/list");
+		return mav;
+	}
+	
+	@RequestMapping("/game/betlist_inner")
+	public ModelAndView innerControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth,
+			BigInteger new_cash) {
+		BigInteger cash = userService.readCashService(auth.getName());
+
+		// List li = bls.readAllService();
+		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
+		if(new_cash!=null)
+			userService.updateCashService(auth.getName(), new_cash);
+		mav.addAllObjects(map);
+		mav.addObject("cash", cash);
+		mav.addObject("isInner", true);
+		mav.setViewName("game/list");
+		return mav;
+	}
+	
+	@RequestMapping(value="/game/charge")
+	public ModelAndView chargeControl(ModelAndView mav, Authentication auth) {
+		BigInteger cash = userService.readCashService(auth.getName());
+
+		UserDto userDto = userService.readUserService(auth.getName());
+		TradeRuleDto rule = ruleService.readTradeRuleService();
+		mav.addObject("cash", cash);
+		mav.addObject("userDto", userDto);
+		mav.addObject("rule", rule);
+		mav.setViewName("trade/charge");
+		return mav;
+	}
+	
+	@RequestMapping(value="/game/exchange")
+	public ModelAndView exchangeControl(ModelAndView mav, Authentication auth) {
+		BigInteger cash = userService.readCashService(auth.getName());
+
+		UserDto userDto = userService.readUserService(auth.getName());
+
+		mav.addObject("cash", cash);
+		mav.addObject("userDto", userDto);
+		mav.setViewName("trade/exchange");
 		return mav;
 	}
 }

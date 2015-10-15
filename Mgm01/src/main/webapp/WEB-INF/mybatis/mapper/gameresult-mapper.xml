@@ -15,9 +15,6 @@
 	<select id="readGameResultList" parameterType="Integer" resultType="GameResultDto">
 		select * from gameresult order by game_num desc limit #{start}, #{end}
 	</select>
-	<select id="readGameNumRecently" resultType="Integer">
-		select game_num from gameresult order by game_num desc limit 0, 1
-	</select>
 	<update id="updateGameResult" parameterType="GameResultDto">
 		update gameresult set
 		ordernum=#{ordernum} and oe=#{oe} and lr=#{lr} and line=#{line}

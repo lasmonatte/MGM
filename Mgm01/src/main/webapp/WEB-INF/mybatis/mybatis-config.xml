@@ -45,7 +45,10 @@
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="com.mgm.mgm01.user.model.UserDto" alias="UserDto"/>
 		<typeAlias type="com.mgm.mgm01.gameresult.model.GameResultDto" alias="GameResultDto"/>
-		<typeAlias type="com.mgm.mgm01.rule.model.BettingRuleDto" alias="BettingRuleDto"/>
 		<typeAlias type="com.mgm.mgm01.betting.model.BettingDto" alias="BettingDto"/>
+		<typeAlias type="com.mgm.mgm01.rule.model.BettingRuleDto" alias="BettingRuleDto"/>
+		<typeAlias type="com.mgm.mgm01.board.model.BoardDto" alias="BoardDto"/>
+		<typeAlias type="com.mgm.mgm01.trade.model.TradeDto" alias="TradeDto"/>
+		<typeAlias type="com.mgm.mgm01.rule.model.TradeRuleDto" alias="TradeRuleDto"/>
 	</typeAliases>
 </configuration>

@@ -8,9 +8,38 @@
 <style>
 <!--
     .logo img { width:400px; height:250px;}
+    .Pstyle {
+    	opacity: 0;
+    	display: none;
+    	position: relative;
+    	width: auto;
+    	border: 5px solid#fff;
+    	padding: 20px;
+    	background-color: #fff;
+    }
     
+    .b-close{
+    	position: absolute;
+    	right: 5px;
+    	top: 5px;
+    	padding: 5px;
+    	display: inline-block;
+    	cursor: pointer;
+    }
 -->
 </style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/mgm01/resources/js/jquery.bpopup.min.js"></script>
+<script type="text/javascript">
+	function trade(type){
+		var url = '/mgm01/game/'+type;
+		$('#popup').bPopup({
+		    contentContainer:'.content',
+            loadUrl: url, //Uses jQuery.load()
+           	modalClose: false,
+		});
+	}
+</script>
 </head>
 <body>
 <table cellpadding="0" cellspacing="0" border="1px" width="90%" height="35" align="center" >
@@ -73,28 +102,42 @@
 	</td>
 	<td width="20%">
 	<div>
-		<form action="" method="POST">
+		<form action="/mgm01/game/betlist" method="POST">
 			<input type="submit" value="배팅내역" />
 		</form>
 	</div>
 	</td>
 	<td>
 	<div>
-		<form action="" method="POST">
+		<form action="/mgm01/board/notice" method="GET">
 			<input type="submit" value="공지사항" />
 		</form>
 	</div>
 	</td>
 	<td>
 	<div>
-		<form action="" method="POST">
+		<form action="/mgm01/board/customer" method="GET">
 			<input type="submit" value="고객센터" />
 		</form>
+	</div>
+	</td>
+	<td>
+	<div>
+		<input type="button" value="충전" onclick="trade('charge')"/>
+	</div>
+	</td>
+	<td>
+	<div>
+		<input type="button" value="환전" onclick="trade('exchange')"/>
 	</div>
 	</td>
 </tr>
 </tbody>
 </table>
 <hr/>
-
+<div id="popup" class="Pstyle">
+	<span class="b-close">X</span>
+	<div class="content" style="height: auto; width: auto;">
+	</div>
+</div>
 </body>

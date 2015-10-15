@@ -37,6 +37,9 @@
                     <input type="password" placeholder="비밀번호를 다시 입력하세요" id="password2" name="password2" required="required" />
                 </div>
                 <div class="input_register">
+                    <input type="text" placeholder="성함을 입력하세요" id="name" name="name" required="required" />
+                </div>
+                <div class="input_register">
                     <input type="tel" placeholder="핸드폰번호를 입력하세요" id="phone" name="phone" pattern="[0-9]{11}"
                     		title="숫자만 입력하여 11자리의  전화번호를 입력해주세요" required="required" />
                 </div>

@@ -24,6 +24,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public UserDto readUserService(String id) {
+		// TODO Auto-generated method stub
+		System.out.println("Service " + id);
+		return dao.readUser(id);
+	}
+	
+	@Override
 	public int grantAuthorityService(UserDto dto) {
 		// TODO Auto-generated method stub
 		return dao.grantAuthority(dto);
@@ -43,4 +50,15 @@ public class UserServiceImpl implements UserService {
 		info.put("id", id);
 		return dao.updateCash(info);
 	}
+
+	@Override
+	public boolean readB_passwordService(String id, String pass) {
+		// TODO Auto-generated method stub
+		String b_password = dao.readB_password(id);
+		if(b_password.equals(pass))
+			return true;
+		else
+			return false;
+	}
+
 }

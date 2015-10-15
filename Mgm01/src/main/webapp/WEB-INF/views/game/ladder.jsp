@@ -7,8 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script> 
 <script language="javascript">
 	var cash = ${cash };
 	var total_money = 0;
@@ -164,8 +162,7 @@
         top:20%;
         margin-top:200px;
         margin-left:-200px;
-        width:300px;
-        height:500px;
+      
         background-color: yellow;
     }
             
@@ -237,64 +234,9 @@
     </div>
     
     <div id="betting_info" >
-		<div id="recently_betting">
-			<table border="1">
-			<thead>
-				<tr>
-				<td colspan="2"><span>${bettingDto.betting_num }회차</span></td>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${bettingDto.betting_oe ne 'null' }">
-					<tr>
-						<td>홀짝</td>
-						<c:if test="${bettingDto.result_oe eq true  }">
-						<td>당첨</td>
-						</c:if>
-						<c:if test="${bettingDto.result_oe eq false  }">
-						<td>미당첨</td>
-						</c:if>
-					<tr>
-				</c:if>
-				<c:if test="${bettingDto.betting_lr ne 'null' }">
-					<tr>
-						<td>좌우</td>
-						<c:if test="${bettingDto.result_lr eq true  }">
-						<td>당첨</td>
-						</c:if>
-						<c:if test="${bettingDto.result_lr eq false  }">
-						<td>미당첨</td>
-						</c:if>
-					<tr>
-				</c:if>
-				<c:if test="${bettingDto.betting_line ne 'null' }">
-					<tr>
-						<td>사다리수</td>
-						<c:if test="${bettingDto.result_line eq true  }">
-						<td>적중</td>
-						</c:if>
-						<c:if test="${bettingDto.result_line eq false  }">
-						<td>실패</td>
-						</c:if>
-					<tr>
-				</c:if>
-				<tr>
-					<td>배팅액:${bettingDto.betting_money }</td>
-				</tr>
-				<tr>
-					<td>배당:${bettingDto.dividend }</td>
-				</tr>
-				<tr>
-					<td>당첨금:${bettingDto.prize_money }</td>
-				</tr>
-				<c:if test="${bettingDto.received eq 'N' }">
-				<tr>
-					<td><input type="button" value="당첨금을 받으세요"/></td>
-				</tr>
-				</c:if>
-			</tbody>
-			</table>
-		</div>
+		<iframe  src='/mgm01/game/betlist_inner' 
+				id='betting_list' name='betting_list' width='300' height='850' scrolling='no' frameborder="0">
+		</iframe>
 	</div>
     
     <!-- 테이블 -->

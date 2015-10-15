@@ -27,7 +27,6 @@ public class GameResultServiceImpl implements GameResultService{
 		// TODO Auto-generated method stub
 		MakeGameResults mgr = new MakeGameResults();
 		dao.createGameResult(mgr.dto);
-
 		List<BettingDto> bettingDtoList = bettingService.readBettingListToUpdateService();
 
 		for(BettingDto dto : bettingDtoList) {
@@ -71,7 +70,7 @@ public class GameResultServiceImpl implements GameResultService{
 			else
 				dto.setPrize_money(0);
 			
-			dto.setGame_num(readGameNumRecentlyService());
+			dto.setOrdernum(mgr.dto.getOrdernum());
 			bettingService.updateBettingService(dto);
 		}
 		
@@ -94,12 +93,6 @@ public class GameResultServiceImpl implements GameResultService{
 		return dao.readGameResultList(info);
 	}
 
-	@Override
-	public int readGameNumRecentlyService() {
-		// TODO Auto-generated method stub
-		return dao.readGameNumRecently();
-	}
-	
 	@Override
 	public int updateGameResultService(GameResultDto dto) {
 		// TODO Auto-generated method stub

@@ -6,7 +6,7 @@ public class BettingDto {
 
 	private int betting_num;
 	private String id;
-	private int game_num;
+	private int ordernum;
 	private Timestamp date;
 	private int betting_money;
 	private int expect_money;
@@ -32,11 +32,11 @@ public class BettingDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getGame_num() {
-		return game_num;
+	public int getOrdernum() {
+		return ordernum;
 	}
-	public void setGame_num(int game_num) {
-		this.game_num = game_num;
+	public void setOrdernum(int ordernum) {
+		this.ordernum = ordernum;
 	}
 	public Timestamp getDate() {
 		return date;
@@ -111,14 +111,16 @@ public class BettingDto {
 	public void setReceived(String received) {
 		this.received = received;
 	}
+	
 	@Override
 	public String toString() {
-		return "BettingDto [betting_num=" + betting_num + ", id=" + id + ", game_num=" + game_num + ", date=" + date
+		return "BettingDto [betting_num=" + betting_num + ", id=" + id + ", ordernum=" + ordernum + ", date=" + date
 				+ ", betting_money=" + betting_money + ", expect_money=" + expect_money + ", prize_money=" + prize_money
 				+ ", dividend=" + dividend + ", betting_oe=" + betting_oe + ", betting_lr=" + betting_lr
 				+ ", betting_line=" + betting_line + ", result_oe=" + result_oe + ", result_lr=" + result_lr
-				+ ", result_line=" + result_line + "]";
+				+ ", result_line=" + result_line + ", received=" + received + "]";
 	}
 
+	
 	
 }

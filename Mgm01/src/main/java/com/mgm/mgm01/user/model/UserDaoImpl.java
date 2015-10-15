@@ -19,6 +19,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public UserDto readUser(String id) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao : " + id);
+		return session.selectOne("com.mgm.mgm01.user.model.UserDao.readUser", id);
+	}
+	
+	@Override
 	public int grantAuthority(UserDto dto) {
 		// TODO Auto-generated method stub
 		return session.insert("com.mgm.mgm01.user.model.UserDao.grantAuthority", dto);
@@ -34,6 +41,12 @@ public class UserDaoImpl implements UserDao {
 	public int updateCash(Map<String, Object> info) {
 		// TODO Auto-generated method stub
 		return session.update("com.mgm.mgm01.user.model.UserDao.updateCash", info);
+	}
+
+	@Override
+	public String readB_password(String id) {
+		// TODO Auto-generated method stub
+		return session.selectOne("com.mgm.mgm01.user.model.UserDao.readB_password", id);
 	}
 
 }

@@ -9,6 +9,7 @@ public class UserDto {
 	private String password;
 	private boolean enabled;
 	private String nickname;
+	private String name;
 	private int phone;
 	private String b_bankname;
 	private String b_account;
@@ -47,6 +48,12 @@ public class UserDto {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getPhone() {
 		return phone;
@@ -96,6 +103,14 @@ public class UserDto {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-
+	
+	
+	@Override
+	public String toString() {
+		return "UserDto [user_num=" + user_num + ", id=" + id + ", password=" + password + ", enabled=" + enabled
+				+ ", nickname=" + nickname + ", name=" + name + ", phone=" + phone + ", b_bankname=" + b_bankname
+				+ ", b_account=" + b_account + ", b_username=" + b_username + ", b_password=" + b_password
+				+ ", recmd_id=" + recmd_id + ", cash=" + cash + ", authority=" + authority + "]";
+	}
 	
 }

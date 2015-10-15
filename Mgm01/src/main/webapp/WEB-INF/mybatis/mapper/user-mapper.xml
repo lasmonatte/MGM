@@ -5,10 +5,13 @@
 <mapper namespace="com.mgm.mgm01.user.model.UserDao">
 	<!-- User Register Service -->
 	<insert id="createUser" parameterType="UserDto">
-		insert into user(id, password, nickname, phone, b_bankname, b_account, b_username, b_password, recmd_id)
-		values (#{id}, #{password}, #{nickname}, #{phone}, 
+		insert into user(id, password, nickname, name, phone, b_bankname, b_account, b_username, b_password, recmd_id)
+		values (#{id}, #{password}, #{nickname}, #{name}, #{phone}, 
 		#{b_bankname}, #{b_account}, #{b_username}, #{b_password}, #{recmd_id})
 	</insert>
+	<select id="readUser" parameterType="String" resultType="UserDto">
+		select * from user where id=#{id}
+	</select>
 	<insert id="grantAuthority" parameterType="UserDto">
 		insert into authorities(id, authority)
 		values (#{id}, #{authority})
@@ -16,7 +19,7 @@
 	<!-- Login Service -->
 	<select id="loginUser" parameterType="String" resultType="Map">
 		select
-		u.id as username, u.password, u.enabled, a.authority, u.nickname
+		u.id as username, u.password, u.enabled, a.authority, u.nickname, u.b_password
 		from user u, authorities a
 		where u.id=#{username}
 		group by u.id
@@ -34,4 +37,7 @@
 	<update id="updateCash" parameterType="Map">
 		update user set cash=#{cash} where id=#{id}
 	</update>
+	<select id="readB_password" parameterType="String" resultType="String">
+		select b_password from user where id=#{id}
+	</select>
 </mapper>

@@ -12,8 +12,6 @@
 게임결과
 <c:if test="${gameResultDtoList ne null}">
 	<c:forEach var="gameResultDto" items="${gameResultDtoList }">
-	<fmt:parseDate var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss.SSS" value="${gameResultDto.date }"/>
-	<fmt:formatDate var="dateTempParse" pattern="yyyy년 MM월 dd일 HH시 mm분" value="${dateFmt }"/>
 	<table cellpadding="0" cellspacing="0" border="1px" width="90%" height="35" align="center"  >
 	<tbody>
 		<tr>
@@ -35,7 +33,7 @@
 		</tr>
 		<tr>
 			<td>
-				<div>${dateTempParse }</div>
+				<div><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${gameResultDto.date }"/></div>
 			</td>
 			<td>
 				<div>${gameResultDto.ordernum }</div>

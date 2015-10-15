@@ -1,41 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-</head>
-<body>
-<script>
-var total=1110;
-function resl(){
-	document.write(total);
-}
-function addMoney(money){
-	
-	total+=money;
-}
-function doMath() {
-    var totalparts = parseInt(document.getElementById('parts_input').value);
-    var labor = parseInt(document.getElementById('labor_input').value);
-    var misc = parseInt(document.getElementById('misc_input').value);
-    var subtotal = totalparts + labor + misc;
-    var tax = subtotal * .13;
-    var total = subtotal + tax;
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+	type="text/javascript"></script>
+<script language="javascript">
+	function loadData(code){
+	$.ajax({
+		url:"/test/api/url?test=" + test,
+		type:"GET",
+		cache: false,
+		dataType: "json",
+		headers: { "cache-control": "no-cache" },
+		success:function (data){
+			var lists = data.result;
+			var temp = "<thead><tr><td class='listth' style='width:150px;' >등록번호</td>"+
+				"<td class='listth' style='width:115px;' >이름</td>"+
+				"<td class='listth' style='width:130px' >단말기명</td>"+
+				"<td class='listth' style='width:150px' >전화번호</td>"+
+				"<td class='listth' style='width:100px' >관리</td></tr></thead>";
 
-    document.getElementById('subtotal_input').value = subtotal;
-    document.getElementById('tax_input').value = tax;
-    document.getElementById('total_input').value = total;
-}
+				for (var i=0; i< lists.length; i++) {
+					temp += '<tr><td class="listtd" >' + lists[i].udid +'</td>' +
+					'<td class="listtd" >' + lists[i].owner +'</td>' +
+					'<td class="listtd" >' + lists[i].product_name +'</td>' +
+					'<td class="listtd" >' + lists[i].tel +'</td>' +
+					'<td class="listtd" >수정</td></tr>';
+				}
+		$("#tbl").html(temp);
+		page();
+		}
+	}); 
+	}
+
+// 만들어진 테이블에 페이지 처리
+	function page(){ 
+		var reSortColors = function($table) {
+  			$('tbody tr:odd td', $table).removeClass('even').removeClass('listtd').addClass('odd');
+  			$('tbody tr:even td', $table).removeClass('odd').removeClass('listtd').addClass('even');
+ 		};
+ 		
+ 		$('table.paginated').each(function() {
+  			var pagesu = 10;  //페이지 번호 갯수
+  			var currentPage = 0;
+  			var numPerPage = 10;  //목록의 수
+  			var $table = $(this);    
+	  
+  //length로 원래 리스트의 전체길이구함
+  			var numRows = $table.find('tbody tr').length;
+  //Math.ceil를 이용하여 반올림
+  			var numPages = Math.ceil(numRows / numPerPage);
+	//리스트가 없으면 종료
+  			if (numPages==0) return;
+  //pager라는 클래스의 div엘리먼트 작성
+  			var $pager = $('<td align="center" id="remo" colspan="10"><div class="pager"></div></td>');
+  
+  			var nowp = currentPage;
+  			var endp = nowp+10;
+  
+  //페이지를 클릭하면 다시 셋팅
+  			$table.bind('repaginate', function() {
+  //기본적으로 모두 감춘다, 현재페이지+1 곱하기 현재페이지까지 보여준다
+  
+   			$table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+   			$("#remo").html("");
+   
+   			if (numPages > 1) {     // 한페이지 이상이면
+    			if (currentPage < 5 && numPages-currentPage >= 5) {   // 현재 5p 이하이면
+     				nowp = 0;     // 1부터 
+     				endp = pagesu;    // 10까지
+    			}else{
+     				nowp = currentPage -5;  // 6넘어가면 2부터 찍고
+     				endp = nowp+pagesu;   // 10까지
+     				pi = 1;
+    			}
+    
+    			if (numPages < endp) {   // 10페이지가 안되면
+     			endp = numPages;   // 마지막페이지를 갯수 만큼
+     			nowp = numPages-pagesu;  // 시작페이지를   갯수 -10
+    			}
+    			if (nowp < 1) {     // 시작이 음수 or 0 이면
+     				nowp = 0;     // 1페이지부터 시작
+    			}
+   			}else{       // 한페이지 이하이면
+    			nowp = 0;      // 한번만 페이징 생성
+    			endp = numPages;
+   			}
+   		// [처음]
+   			$('<br /><span class="page-number" cursor: "pointer">[처음]</span>').bind('click', {newPage: page},function(event) {
+          		currentPage = 0;   
+          		$table.trigger('repaginate');  
+          		$($(".page-number")[2]).addClass('active').siblings().removeClass('active');
+      		}).appendTo($pager).addClass('clickable');
+    // [이전]
+      		$('<span class="page-number" cursor: "pointer">&nbsp;&nbsp;&nbsp;[이전]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+          		if(currentPage == 0) return; 
+          		currentPage = currentPage-1;
+    			$table.trigger('repaginate'); 
+    			$($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+   			}).appendTo($pager).addClass('clickable');
+    // [1,2,3,4,5,6,7,8]
+   			for (var page = nowp ; page < endp; page++) {
+    			$('<span class="page-number" cursor: "pointer" style="margin-left: 8px;"></span>').text(page + 1).bind('click', {newPage: page}, function(event) {
+     			currentPage = event.data['newPage'];
+     			$table.trigger('repaginate');
+     			$($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+     		}).appendTo($pager).addClass('clickable');
+   } 
+    // [다음]
+      		$('<span class="page-number" cursor: "pointer">&nbsp;&nbsp;&nbsp;[다음]&nbsp;</span>').bind('click', {newPage: page},function(event) {
+    			if(currentPage == numPages-1) return;
+        		currentPage = currentPage+1;
+    			$table.trigger('repaginate'); 
+     		$($(".page-number")[(currentPage-nowp)+2]).addClass('active').siblings().removeClass('active');
+   				}).appendTo($pager).addClass('clickable');
+    // [끝]
+   			$('<span class="page-number" cursor: "pointer">&nbsp;[끝]</span>').bind('click', {newPage: page},function(event) {
+           		currentPage = numPages-1;
+           		$table.trigger('repaginate');
+           		$($(".page-number")[endp-nowp+1]).addClass('active').siblings().removeClass('active');
+   			}).appendTo($pager).addClass('clickable');
+     
+     		$($(".page-number")[2]).addClass('active');
+				reSortColors($table);
+  			});
+   			
+  			$pager.insertAfter($table).find('span.page-number:first').next().next().addClass('active');   
+   			$pager.appendTo($table);
+			$table.trigger('repaginate');
+ 		});
+	}
 </script>
 
-<div>Total Parts: <input type="text" id="parts_input" value="1" readonly="true" /></div>
-<div>Labor: <input type="text" id="labor_input" onBlur="doMath();" /></div>
-<div>Misc: <input type="text" id="misc_input" onBlur="doMath();" /></div>
-<div>Sub Total: <input type="text" id="subtotal_input" readonly="true" /></div>
-<div>Tax: <input type="text" id="tax_input" readonly="true" /></div>
-<div>Total: <input type="text" id="total_input" readonly="true" /></div>
-<div><input type="button" onclick="addMoney(1000)"></div>
-<input type="button" onclick="resl()">
+<style type="text/css">
+.clickable {
+	cursor: pointer;
+}
+
+.hover {
+	text-decoration: underline;
+}
+
+.odd {
+	background: #FFC;
+}
+
+.even {
+	background: #FF9;
+}
+
+.active {
+	width: 10px;
+	height: 10px;
+	background: #f60;
+	color: white;
+}
+</style>
+</head>
+<body>
+	<table class="tbl paginated" id="tbl">
+	</table>
+
 </body>
 </html>
