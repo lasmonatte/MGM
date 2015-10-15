@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.betting.model.BettingDao">
+	<!-- User Register Service -->
+	<insert id="createBetting" parameterType="BettingDto">
+		insert into betting(id, betting_money, expect_money, dividend,
+		betting_oe, betting_lr, betting_line)
+		values(
+		#{id}, 
+		#{betting_money},
+		 #{expect_money}, 
+		 #{dividend}, 
+		#{betting_oe, jdbcType=VARCHAR},
+		 #{betting_lr, jdbcType=VARCHAR}, 
+		 #{betting_line, jdbcType=VARCHAR}
+		 )
+	</insert>
+	<select id="readBettingOne" parameterType="String" resultType="BettingDto">
+		select * from betting where id=#{id}
+		order by betting_num desc limit 0, 1 
+	</select>
+	<select id="readBettingList" parameterType="Map" resultType="BettingDto">
+		select * from betting where id=#{id}
+		order by betting_num desc limit #{start}, #{end} 
+	</select>
+	<select id="readBettingListToUpdate" resultType="BettingDto">
+		select * from betting where ordernum=0
+	</select>
+	<select id="readBettingListAll" parameterType="String" resultType="BettingDto">
+		select * from betting where id=#{id}
+		order by betting_num desc
+	</select>
+	<update id="updateBetting" parameterType="BettingDto">
+		update betting set
+		ordernum=#{ordernum}, prize_money=#{prize_money}, result_oe=#{result_oe, jdbcType=BOOLEAN},
+		result_lr=#{result_lr, jdbcType=BOOLEAN}, result_line=#{result_line, jdbcType=BOOLEAN}
+		<if test='received != "F"'>
+            , received=#{received}
+        </if>
+		where id=#{id} and betting_num=#{betting_num}
+	</update>
+	<delete id="deleteBetting" parameterType="Integer">
+		delete from betting
+		where betting_num=#{betting_num}
+	</delete>
+</mapper>

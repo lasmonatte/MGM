@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.board.model.BoardDao">
+	<!-- User Register Service -->
+	<insert id="createBoard" parameterType="BoardDto">
+		insert into board(nickname, title, content, type) 
+		values(#{nickname}, #{title}, #{content}, #{type})
+	</insert>
+	<select id="readBoardOne" parameterType="Integer" resultType="BoardDto">
+		select * from board
+		where board_num=#{board_num}
+	</select>
+	<select id="readBoardList" parameterType="String" resultType="BoardDto">
+		select * from board where type=#{type} and nickname=#{nickname}
+		order by board_num desc
+	</select>
+	<select id="readBoardListAll" parameterType="String" resultType="BoardDto">
+		select * from board where type=#{type} order by board_num desc
+	</select>
+	<update id="updateBoard" parameterType="BoardDto">
+		update board set content=#{content}
+		where board_num=#{board_num}
+	</update>
+	<delete id="deleteBoard" parameterType="Integer">
+		delete from board where board_num=#{board_num}
+	</delete>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.rule.model.RuleDao">
+	<!-- User Register Service -->
+	<insert id="createBettingRule" parameterType="BettingRuleDto">
+		insert into betting_rule 
+		values(#{dividend_oe}, #{dividend_lr}, #{dividend_line}, #{betting_max}, #{betting_min})
+	</insert>
+	<select id="readBettingRule" resultType="BettingRuleDto">
+		select * from betting_rule 
+	</select>
+	<update id="updateBettingRule" parameterType="BettingRuleDto">
+		update betting_rule set
+		dividend_oe=#{dividend_oe} and dividend_lr=#{dividend_lr} and dividend_line=#{dividend_line}
+		and betting_max=#{betting_max} and betting_min=#{betting_min}
+	</update>
+	<delete id="deleteBettingRule" parameterType="BettingRuleDto">
+		delete from betting_rule
+	</delete>
+	
+	
+	<select id="readTradeRule" resultType="TradeRuleDto">
+		select * from trade_rule 
+	</select>
+</mapper>

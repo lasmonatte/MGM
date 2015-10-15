@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.trade.model.TradeDao">
+	<!-- User Register Service -->
+	<insert id="createTrade" parameterType="TradeDto">
+		insert into trade(id, name, b_bankname, b_username, b_account, amount, type)
+		values(#{id}, #{name}, #{b_bankname}, #{b_username}, #{b_account}, #{amount}, #{type})
+	</insert>
+	<select id="readTradeOne" parameterType="Integer" resultType="TradeDto">
+		select * from trade where t_num=#{t_num}
+	</select>
+	<select id="readTradeListAll" resultType="TradeDto">
+		select * from trade order by t_num desc
+	</select>
+	<select id="readTradeListById" parameterType="Map" resultType="TradeDto">
+		select * from trade where id=#{id} order by t_num desc
+	</select>
+	<update id="updateTrade" parameterType="TradeDto">
+		update trade set result=#{result}
+	</update>
+	<delete id="deleteTrade" parameterType="TradeDto">
+		delete from trade where t_num=#{t_num}
+	</delete>
+</mapper>
