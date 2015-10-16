@@ -15,30 +15,33 @@
 </script>
 </head>
 <body>
-	<table>
-		<tr>
-			<td>${boardDto.title }</td>
+<div align="center">
+	<table class="table">
+		<tr class="tr">
+			<th class="th">제목</th>
+			<th class="th" colspan="3">${boardDto.title }</th>
 		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${boardDto.nickname }</td>
-			<td>작성일자</td>
-			<td>${boardDto.date }</td>
+		<tr class="tr">
+			<td class="td">작성자</td>
+			<td class="td">${boardDto.nickname }</td>
+			<td class="td">작성일자</td>
+			<td class="td">${boardDto.date }</td>
 		</tr>	
-		<tr>
-			<td>내용</td>
-			<td>${boardDto.content }</td>
+		<tr class="tr">
+			<td class="td" colspan="4">내용</td>
 		</tr>
-		<tr>
-			<td>댓글</td>
+		<tr class="tr">
+			<td class="td" colspan="4">${boardDto.content }</td>
 		</tr>
-		<tr>
-			<td><textarea rows="5" cols="20" ></textarea></td>
-			<td><input type="submit" value="댓글입력" /></td>
+		<tr class="tr">
+			<td class="td" colspan="4">댓글</td>
 		</tr>
-		<tr>
-			<td><button onclick="toList('${boardDto.type }')">목록으로</button></td>
-		</tr>		
+		<tr class="tr">
+			<td class="td" colspan="3"><textarea rows="4" cols="180"  ></textarea></td>
+			<td class="td"><input type="submit" value="댓글입력" /></td>
+		</tr>
 	</table>
+	<input type="button" value="목록으로" onclick="toList('${boardDto.type }')" />
+</div>
 </body>
 </html>

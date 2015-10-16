@@ -9,19 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/style.css" /> -->
 <title>MGM Games</title>
+<link href="/mgm01/resources/tablecloth/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- <script type="text/javascript" src="/mgm01/resources/tablecloth/tablecloth.js"></script> -->
 </head>
 <body>
 	<div class="wrapper">
 		<div class="top">
 			<tiles:insertAttribute name="top" />
 		</div>
-		<hr/>
 		<div class="main">
 			<tiles:insertAttribute name="main" />
-		</div>
-		<hr/>
-		<div class="footer">
-			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
 </body>

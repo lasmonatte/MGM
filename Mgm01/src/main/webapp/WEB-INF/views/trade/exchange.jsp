@@ -5,19 +5,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/mgm01/resources/tablecloth/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript">
+
+function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num) 작성필요
+	var b_password = document.getElementById("b_password").value;
+	 if(b_password==b_pass){
+		$("#b_bankname").empty();
+		$("#b_username").empty();
+		$("#b_account").empty();
+		$("#b_bankname").append("<span>${rule.b_bankname }</span>");
+		$("#b_username").append("<span>${rule.b_username }</span>");
+		$("#b_account").append("<span>${rule.b_account }</span>");
+		$("#su_ca").append("<input type='submit' value='확인'/><input type='button' value='취소' />");
+	 }else
+		 alert("환전 비밀번호를 정확히 입력하세요.");
+	 
+	}
+</script>
 </head>
 <body>
+<div align="center">
 	<form action="/mgm01/trade/exchange" method="POST">
-	<table width="500px">
+	<table class="table">
 	<thead>
-		<tr>
-			<td>캐쉬환불</td>
+		<tr class="tr">
+			<th class="th" colspan="3">캐쉬환불</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr height="300px">
-			<td colspan="3">
-				<div>
+		<tr class="tr">
+			<td class="td" colspan="3" align="left">
+				<div class="div">
 				환전신청은 등록된 계좌에서만 가능합니다.<br />
 				환전계좌변경은 고객센터에 문의하시기 바랍니다.<br />
 				<br />
@@ -30,36 +49,39 @@
 				</div>
 			</td>
 		</tr>
-		<tr>
-			<td>보유캐쉬</td>
-			<td>${userDto.cash }</td>
+		<tr class="tr">
+			<td class="td">보유캐쉬</td>
+			<td class="td">${userDto.cash }</td>
 		</tr>
-		<tr>
-			<td>요청금액</td>
-			<td><input type="text" name="amount" />원</td>
+		<tr class="tr">
+			<td class="td">요청금액</td>
+			<td class="td"><input type="text" name="amount" />원</td>
 		</tr>
-		<tr>
-			<td>환전 비밀번호</td>
-			<td><input type="password" /></td>
-			<td>입금계좌확인</td>
+		<tr class="tr">
+			<td class="td">환전 비밀번호</td>
+			<td class="td">
+				<input type="password" id="b_password"/>
+				<input type="button" value="환전 비밀번호 확인" 
+					onclick="check('<sec:authentication property='principal.b_password'/>')" />
+			</td>
 		</tr>
-		<tr>
-			<td>은행명</td>
-			<td><input type="text" name="${userDto.b_bankname }" disabled="disabled" /></td>
+		<tr class="tr">
+			<td class="td">은행명</td>
+			<td class="td"><input type="text" name="${userDto.b_bankname }" disabled="disabled" /></td>
 		</tr>
-		<tr>
-			<td>계좌번호</td>
-			<td><input type="text" value="${userDto.b_account }" disabled="disabled" /></td>
+		<tr class="tr">
+			<td class="td">계좌번호</td>
+			<td class="td"><input type="text" value="${userDto.b_account }" disabled="disabled" /></td>
 		</tr>
-		<tr>
-			<td>예금주</td>
-			<td><input type="text" value="${userDto.name }" disabled="disabled"/></td>	
+		<tr class="tr">
+			<td class="td">예금주</td>
+			<td class="td"><input type="text" value="${userDto.name }" disabled="disabled"/></td>	
 		</tr>
 	</tbody>
 	</table>
 	<input type="hidden" name="name" value="${userDto.name }">
 	<input type="submit" value="확인"/><input type="button" value="취소" />
 	</form>
-	
+</div>
 </body>
 </html>

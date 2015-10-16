@@ -7,32 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-.tr1 {
-	text-align: center;
-	background-color: #FAF4C0;
-}
-
-.tr2 {
-	background-color: #FAE0D4;
-}
-
-.th10 {
-	text-align: center;
-	width: 10%;
-}
-
-.th15 {
-	text-align: center;
-	width: 15%;
-}
-
-.th40 {
-	text-align: center;
-	width: 40%;
-}
-
 a:VISITED, a:LINK {
-	color: #000000;
+	color: #C98500;
 	text-decoration: none;
 }
 
@@ -54,28 +30,28 @@ a:HOVER {
 </head>
 <body>
 <div align="center">
-<table style="width: 80%">
+<table class="table">
 	<thead>
-		<tr class="tr1">
-			<th class="th10">번호</th>
-			<th class="th40">타이틀</th>
-			<th class="th15">작성자</th>
-			<th class="th15">등록일</th>
+		<tr class="tr">
+			<th class="th">번호</th>
+			<th class="th">타이틀</th>
+			<th class="th">작성자</th>
+			<th class="th">등록일</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="item" items="${list }">
-			<tr class="tr2">
-				<td class="th10">${item.board_num }</td>
-				<td><a href="javascript:showDetail('${item.board_num }')"> ${ item.title }
+			<tr class="tr">
+				<td class="td">${item.board_num }</td>
+				<td class="td"><a href="javascript:showDetail('${item.board_num }')"> ${ item.title }
 				</a></td>
-				<td class="th15">${item.nickname }</td>
-				<td class="th15"><fmt:formatDate value="${item.date }"
+				<td class="td">${item.nickname }</td>
+				<td class="td"><fmt:formatDate value="${item.date }"
 						pattern="yyyy/MM/dd HH:mm " /></td>
 			</tr>
 		</c:forEach>
 		<tr>
-			<td>
+			<td colspan="4" align="center">
 				<form action="write" method="GET">
 					<input type="hidden" name="type" value="customer"/>
 					<input type="submit" value="글쓰기"/>				

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/mgm01/resources/tablecloth/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 
 function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num) 작성필요
@@ -25,17 +26,18 @@ function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num
 </script>
 </head>
 <body>
+	<div align="center">
 	<form action="/mgm01/trade/charge" method="POST">
-	<table width="500px">
+	<table class="table">
 	<thead>
-		<tr>
-			<td>캐쉬충전</td>
+		<tr class="tr">
+			<th class="th" colspan="3">캐쉬충전</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr height="300px">
-			<td colspan="3">
-				<div>
+		<tr class="tr">
+			<td class="td" colspan="3">
+				<div class="div">
 				입금하실 계좌에 PC 뱅킹, 폰뱅킹, 무통장 입금, ATM등의 방법으로 금액 중 하나를 선택하여 입금합니다.<br />
 				입금하신 금액을 입력하세요. 입금자명에는 입금하신 분의 성함을 넣어 주세요.<br />
 				확인 버튼을 클릭하시면 충전신청이 완료됩니다. 입금액은 10,000원 이상입니다.<br /><br /><br />
@@ -45,41 +47,43 @@ function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num
 				</div>
 			</td>
 		</tr>
-		<tr>
-			<td>보유캐쉬</td>
-			<td>${userDto.cash }</td>
+		<tr class="tr">
+			<td class="td">보유캐쉬</td>
+			<td class="td">${userDto.cash }</td>
 		</tr>
-		<tr>
-			<td>요청금액</td>
-			<td><input type="text" name="amount" />원</td>
-			<td>12</td>
+		<tr class="tr">
+			<td class="td">요청금액</td>
+			<td class="td"><input type="text" name="amount" />원</td>
 		</tr>
-		<tr>
-			<td>환전 비밀번호</td>
-			<td><input type="password" id="b_password"/></td>
-			<td><input type="button" value="환전 비밀번호 확인" onclick="check('<sec:authentication property="principal.b_password"/>')" /></td>
+		<tr class="tr">
+			<td class="td">환전 비밀번호</td>
+			<td class="td">
+				<input type="password" id="b_password"/>
+				<input type="button" value="환전 비밀번호 확인" 
+					onclick="check('<sec:authentication property="principal.b_password"/>')" />
+			</td>
 		</tr>
-		<tr>
-			<td>은행명</td>
-			<td><div id="b_bankname">환전 비밀번호 인증 후 표시됩니다.</div></td>
+		<tr class="tr">
+			<td class="td">은행명</td>
+			<td class="td"><div id="b_bankname">환전 비밀번호 인증 후 표시됩니다.</div></td>
 		</tr>
-		<tr>
-			<td>예금주</td>
-			<td><div id="b_username">환전 비밀번호 인증 후 표시됩니다.</div></td>
+		<tr class="tr">
+			<td class="td">예금주</td>
+			<td class="td"><div id="b_username">환전 비밀번호 인증 후 표시됩니다.</div></td>
 		</tr>
-		<tr>
-			<td>계좌번호</td>
-			<td><div id="b_account">환전 비밀번호 인증 후 표시됩니다.</div></td>
+		<tr class="tr">
+			<td class="td">계좌번호</td>
+			<td class="td"><div id="b_account">환전 비밀번호 인증 후 표시됩니다.</div></td>
 		</tr>
-		<tr>
-			<td>입금자</td>
-			<td><input type="text" name="name" value="${userDto.name }" /></td>	
+		<tr class="tr">
+			<td class="td">입금자</td>
+			<td class="td"><input type="text" name="name" value="${userDto.name }" /></td>	
 		</tr>
 	</tbody>
 	</table>
 	<div id="su_ca" align="center" >
 	</div>
 	</form>
-	
+	</div>
 </body>
 </html>

@@ -31,7 +31,7 @@ public class GameController {
 	@Autowired UserService userService;
 	@Autowired BettingService bettingService;
 	
-	@RequestMapping(value="/game/ladder", method=RequestMethod.GET)
+	@RequestMapping(value="/game/ladder")
 	public ModelAndView gameControl(ModelAndView mav, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
 		BettingDto bettingDto = bettingService.readBettingOneService(auth.getName());
@@ -44,7 +44,7 @@ public class GameController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/game/result", method=RequestMethod.POST)
+	@RequestMapping(value="/game/result")
 	public ModelAndView resultControl(ModelAndView mav, @RequestParam(defaultValue="0")int start,
 			@RequestParam(defaultValue="20")int end, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
@@ -57,12 +57,9 @@ public class GameController {
 	}
 	
 	@RequestMapping("/game/betlist")
-	public ModelAndView betlistControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth,
-			BigInteger new_cash) {
+	public ModelAndView betlistControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth) {
 		// List li = bls.readAllService();
 		BigInteger cash = userService.readCashService(auth.getName());
-		if(new_cash!=null)
-			userService.updateCashService(auth.getName(), new_cash);
 		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
 		mav.addObject("cash", cash);
 		mav.addAllObjects(map);
@@ -72,14 +69,11 @@ public class GameController {
 	}
 	
 	@RequestMapping("/game/betlist_inner")
-	public ModelAndView innerControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth,
-			BigInteger new_cash) {
+	public ModelAndView innerControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
 
 		// List li = bls.readAllService();
 		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
-		if(new_cash!=null)
-			userService.updateCashService(auth.getName(), new_cash);
 		mav.addAllObjects(map);
 		mav.addObject("cash", cash);
 		mav.addObject("isInner", true);

@@ -4,5 +4,4 @@
 	<div>
 		Footer
 		푸터
-		<hr />
 	</div>

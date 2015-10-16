@@ -37,5 +37,27 @@ public class UserController {
 		return mav;
 	}
 	
+	@RequestMapping(value="user/info", method=RequestMethod.GET)
+	public ModelAndView updateInfoControl(ModelAndView mav, Authentication auth) {
+		UserDto dto = userService.readUserService(auth.getName());
+
+		mav.addObject("userDto", dto);
+		mav.setViewName("t:user/info");
+		return mav;
+	}
 	
+	@RequestMapping(value="user/updateCash")
+	public ModelAndView updateCashControl(ModelAndView mav, Authentication auth,
+			BigInteger cash, BigInteger prize_cash, boolean isInner) {
+		BigInteger new_cash = cash.add(prize_cash);
+		userService.updateCashService(auth.getName(), new_cash);
+		System.out.println("user/updateCash" + new_cash);
+		mav.addObject("cash", new_cash);
+		
+		if(isInner)
+			mav.setViewName("game/list");
+		else
+			mav.setViewName("t:game/list");
+		return mav;
+	}
 }
