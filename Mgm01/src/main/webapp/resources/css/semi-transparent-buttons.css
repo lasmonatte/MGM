@@ -1,0 +1,43 @@
+.semi-transparent-button {
+  display: block;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 8px;
+  width: 100%;
+  background: #810000; /* fallback color for old browsers */
+  background: rgba(201, 133, 0, 0.05);
+  border-radius: 8px;
+  color: #C98500;
+  text-align: center;
+  text-decoration: none;
+  text-shadow:black;
+  font-size:xx-large;
+  letter-spacing: 5px;
+  transition: all 0.3s ease-out;
+}
+.semi-transparent-button:hover,
+.semi-transparent-button:focus,
+.semi-transparent-button:active {
+  background: #C98500;
+  color: #222;
+  transition: all 0.5s ease-in;
+}
+.semi-transparent:focus {
+  outline: none;
+}
+
+.is-blue {
+  background: #1e348e; /* fallback color for old browsers */
+  background: rgba(30, 52, 142, 0.5);
+}
+.is-blue:hover,
+.is-blue:focus,
+.is-blue:active {
+  background: #1e348e; /* fallback color for old browsers */
+  background: rgb(30, 52, 142);
+  color: #fff;
+}
+
+.with-border {
+  border: 1px solid #fff;
+}
