@@ -12,6 +12,7 @@
 	var total_money = 0;
 	var total_dividend = 1;
 	var expect_money = 0;
+	var max_money = ${bettingRuleDto.betting_max };
 	var game_list = new Array();
 	var gameType_list = new Array();
 	var str = new Array();
@@ -42,9 +43,12 @@
 		expectMoney();
 	}
 	
-	function maxBetting(money){
-		alert(money);
-		total_money=money;
+	function maxBetting(){
+		
+		if(cash>max_money)
+		total_money=max_money;
+		else
+			total_money=cash;
 		var result = numberWithCommas(total_money);
 		printSpan("total_money", result);
 		expectMoney();
@@ -124,12 +128,14 @@
 				 betting_line : betting_line,
 				 cash : cash
 		      },
-		      success : function() { // 댓글작성이 성공하면
-				   alert("배팅에 성공하셨습니다.");
+		      success : function(msg) { // 댓글작성이 성공하면
+		    	  alert("good?");
+		    	  alert(msg);
 				   location.reload();
 				   },
-		      error :function() { // 댓글작성이 성공하면
+		      error :function(msg) { // 댓글작성이 성공하면
 				   alert("배팅에 실패하셨습니다.");
+		      		alert(msg);
 				}
 		   })
 		   

@@ -7,7 +7,7 @@ import java.util.List;
 public interface GameResultService {
 
 	public void createGameResultService() throws MalformedURLException, IOException;
-	public GameResultDto readGameResultOneService(int game_num);
+	public GameResultDto readGameResultOneService();
 	public List<GameResultDto> readGameResultListService(int start, int end);
 	public int updateGameResultService(GameResultDto dto);
 }

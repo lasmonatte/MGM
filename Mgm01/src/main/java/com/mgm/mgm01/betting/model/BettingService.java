@@ -11,6 +11,7 @@ public interface BettingService {
 	public List<BettingDto> readBettingListAllService(String id);
 	public List<BettingDto> readBettingListToUpdateService();
 	public int updateBettingService(BettingDto dto);
+	public int updateBettingInfoService(BettingDto dto);
 	public int deleteBettingService(int betting_num);
 	public Map<String, Object> readPageServiceNaver(int p, String id);
 }

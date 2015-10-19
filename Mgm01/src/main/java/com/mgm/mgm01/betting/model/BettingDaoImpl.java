@@ -48,6 +48,12 @@ public class BettingDaoImpl implements BettingDao{
 		// TODO Auto-generated method stub
 		return session.update("com.mgm.mgm01.betting.model.BettingDao.updateBetting", dto);
 	}
+	
+	@Override
+	public int updateBettingInfo(BettingDto dto) {
+		// TODO Auto-generated method stub
+		return session.update("com.mgm.mgm01.betting.model.BettingDao.updateBettingInfo", dto);
+	}
 
 	@Override
 	public int deleteBetting(int betting_num) {

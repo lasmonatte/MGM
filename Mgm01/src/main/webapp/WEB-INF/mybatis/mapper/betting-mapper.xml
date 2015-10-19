@@ -5,17 +5,18 @@
 <mapper namespace="com.mgm.mgm01.betting.model.BettingDao">
 	<!-- User Register Service -->
 	<insert id="createBetting" parameterType="BettingDto">
-		insert into betting(id, betting_money, expect_money, dividend,
+		insert into betting(id, game_num, betting_money, expect_money, dividend,
 		betting_oe, betting_lr, betting_line)
 		values(
 		#{id}, 
+		#{game_num},
 		#{betting_money},
-		 #{expect_money}, 
-		 #{dividend}, 
+		#{expect_money}, 
+		#{dividend}, 
 		#{betting_oe, jdbcType=VARCHAR},
-		 #{betting_lr, jdbcType=VARCHAR}, 
-		 #{betting_line, jdbcType=VARCHAR}
-		 )
+		#{betting_lr, jdbcType=VARCHAR}, 
+		#{betting_line, jdbcType=VARCHAR}
+		)
 	</insert>
 	<select id="readBettingOne" parameterType="String" resultType="BettingDto">
 		select * from betting where id=#{id}
@@ -39,6 +40,12 @@
 		<if test='received != "F"'>
             , received=#{received}
         </if>
+		where id=#{id} and betting_num=#{betting_num}
+	</update>
+	<update id="updateBettingInfo" parameterType="BettingDto">
+		update betting set
+		betting_money=#{betting_money}, expect_money=#{expect_money}, dividend=#{dividend},
+		betting_oe=#{betting_oe}, betting_lr=#{betting_lr}, betting_line=#{betting_line}
 		where id=#{id} and betting_num=#{betting_num}
 	</update>
 	<delete id="deleteBetting" parameterType="Integer">

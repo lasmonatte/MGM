@@ -78,9 +78,9 @@ public class GameResultServiceImpl implements GameResultService{
 	}
 
 	@Override
-	public GameResultDto readGameResultOneService(int game_num) {
+	public GameResultDto readGameResultOneService() {
 		// TODO Auto-generated method stub
-		return dao.readGameResultOne(game_num);
+		return dao.readGameResultOne();
 	}
 
 	@Override

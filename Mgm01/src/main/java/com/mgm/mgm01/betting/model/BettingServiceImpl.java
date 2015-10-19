@@ -57,6 +57,13 @@ public class BettingServiceImpl implements BettingService{
 	}
 
 	@Override
+	public int updateBettingInfoService(BettingDto dto) {
+		// TODO Auto-generated method stub
+		return dao.updateBettingInfo(dto);
+	}
+	
+	
+	@Override
 	public int deleteBettingService(int betting_num) {
 		// TODO Auto-generated method stub
 		return dao.deleteBetting(betting_num);
@@ -82,7 +89,5 @@ public class BettingServiceImpl implements BettingService{
 		map.put("list", li.subList(start, end));
 		return map;
 	}
-
-
 
 }

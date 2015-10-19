@@ -20,9 +20,9 @@ public class GameResultDaoImpl implements GameResultDao{
 	}
 
 	@Override
-	public GameResultDto readGameResultOne(int game_num) {
+	public GameResultDto readGameResultOne() {
 		// TODO Auto-generated method stub
-		return session.selectOne("com.mgm.mgm01.gameresult.model.GameResultDao.readGameResultOne", game_num);
+		return session.selectOne("com.mgm.mgm01.gameresult.model.GameResultDao.readGameResultOne");
 	}
 
 	@Override

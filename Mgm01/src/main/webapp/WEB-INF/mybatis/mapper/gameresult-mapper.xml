@@ -10,7 +10,7 @@
 	</insert>
 	<select id="readGameResultOne" parameterType="Integer" resultType="GameResultDto">
 		select * from gameresult
-		where game_num = #{game_num} 
+		order by game_num desc limit 0, 1 
 	</select>
 	<select id="readGameResultList" parameterType="Integer" resultType="GameResultDto">
 		select * from gameresult order by game_num desc limit #{start}, #{end}

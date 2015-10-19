@@ -6,6 +6,7 @@ public class BettingDto {
 
 	private int betting_num;
 	private String id;
+	private int game_num;
 	private int ordernum;
 	private Timestamp date;
 	private int betting_money;
@@ -31,6 +32,12 @@ public class BettingDto {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getGame_num() {
+		return game_num;
+	}
+	public void setGame_num(int game_num) {
+		this.game_num = game_num;
 	}
 	public int getOrdernum() {
 		return ordernum;
