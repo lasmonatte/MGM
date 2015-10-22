@@ -19,7 +19,7 @@ public class GameResultServiceImpl implements GameResultService{
 
 	@Autowired GameResultDao dao;
 	@Autowired BettingService bettingService;
-
+	
 	@Scheduled(cron="10 0/5 * * * *")
 	@Transactional
 	@Override
@@ -32,8 +32,8 @@ public class GameResultServiceImpl implements GameResultService{
 		for(BettingDto dto : bettingDtoList) {
 			int toCorrect = 0;
 			int correct = 0;
-			
-			 if(!dto.getBetting_oe().equals("null")) {
+
+			if(!dto.getBetting_oe().equals("")) {
 				toCorrect++;
 				if(dto.getBetting_oe().equals(mgr.dto.getOe())) {
 					correct++;
@@ -43,7 +43,7 @@ public class GameResultServiceImpl implements GameResultService{
 					dto.setResult_oe(false);
 			}
 
-			if(!dto.getBetting_lr().equals("null")) {
+			if(!dto.getBetting_lr().equals("")) {
 				toCorrect++;
 				if(dto.getBetting_lr().equals(mgr.dto.getLr())) {
 					correct++;
@@ -52,29 +52,30 @@ public class GameResultServiceImpl implements GameResultService{
 				else
 					dto.setResult_lr(false);
 			}
-			
-			if(!dto.getBetting_line().equals("null")) {
+
+			if(!dto.getBetting_line().equals("")) {
 				toCorrect++;
 				if(dto.getBetting_line().equals(mgr.dto.getLine())) {
 					correct++;
 					dto.setResult_line(true);
+
 				}
 				else
 					dto.setResult_line(false);
 			}
-			
+
 			if(toCorrect==correct) {
 				dto.setPrize_money(dto.getExpect_money());
 				dto.setReceived("N");
 			}
 			else
 				dto.setPrize_money(0);
-			
+
 			dto.setOrdernum(mgr.dto.getOrdernum());
 			bettingService.updateBettingService(dto);
 		}
-		
-		
+
+
 	}
 
 	@Override

@@ -2,6 +2,10 @@ package com.mgm.mgm01.betting.model;
 
 import java.sql.Timestamp;
 
+/**
+ * @author pc3
+ *
+ */
 public class BettingDto {
 
 	private int betting_num;
@@ -119,15 +123,13 @@ public class BettingDto {
 		this.received = received;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "BettingDto [betting_num=" + betting_num + ", id=" + id + ", ordernum=" + ordernum + ", date=" + date
-				+ ", betting_money=" + betting_money + ", expect_money=" + expect_money + ", prize_money=" + prize_money
-				+ ", dividend=" + dividend + ", betting_oe=" + betting_oe + ", betting_lr=" + betting_lr
-				+ ", betting_line=" + betting_line + ", result_oe=" + result_oe + ", result_lr=" + result_lr
-				+ ", result_line=" + result_line + ", received=" + received + "]";
+		return "BettingDto [betting_num=" + betting_num + ", id=" + id + ", game_num=" + game_num + ", ordernum="
+				+ ordernum + ", date=" + date + ", betting_money=" + betting_money + ", expect_money=" + expect_money
+				+ ", prize_money=" + prize_money + ", dividend=" + dividend + ", betting_oe=" + betting_oe
+				+ ", betting_lr=" + betting_lr + ", betting_line=" + betting_line + ", result_oe=" + result_oe
+				+ ", result_lr=" + result_lr + ", result_line=" + result_line + ", received=" + received + "]";
 	}
-
-	
-	
 }

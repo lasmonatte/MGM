@@ -71,38 +71,44 @@ public class BettingController {
 		//check Duration
 		Instant instant = Instant.now();
 		Instant instant2 = gameResultDto.getDate().toInstant();
-		Instant instant3 = tmpDto.getDate().toInstant();
+//		Instant instant3 = tmpDto.getDate().toInstant();
 
 		Duration duration = Duration.between(instant2, instant);
-		Duration duration2 = Duration.between(instant3, instant);
+//		Duration duration2 = Duration.between(instant3, instant);
 
 		long seconds = duration.getSeconds();
-		long seconds2 = duration2.getSeconds();
+//		long seconds2 = duration2.getSeconds();
 
 //		if(seconds<90) {
+		dto.setGame_num(gameResultDto.getGame_num()+1);
+		System.out.println("gameBUm" + gameResultDto.getGame_num() + " / " + dto.getGame_num());
 			if(tmpDto!=null) {
-				if(tmpDto.getOrdernum()==dto.getOrdernum() && seconds2<90) {
+				dto.setBetting_num(tmpDto.getBetting_num());
+				
+				if(tmpDto.getOrdernum()==dto.getOrdernum()) {
 					BigInteger cash2 = userService.readCashService(auth.getName());
-					cash2 = cash2.add(BigInteger.valueOf(tmpDto.getBetting_money()));
-					cash2 = cash2.subtract(BigInteger.valueOf(dto.getBetting_money()));
-					userService.updateCashService(auth.getName(), cash2);
-					dto.setBetting_num(tmpDto.getBetting_num());
+					System.out.println(cash);
+					cash = cash2.add(BigInteger.valueOf(tmpDto.getBetting_money()));
+					System.out.println(cash);
+					cash = cash.subtract(BigInteger.valueOf(dto.getBetting_money()));
+					System.out.println(cash);
 					bettingService.updateBettingInfoService(dto);
 					msg = "배팅내용을 변경하였습니다.";
 				}
 
 				else {
 					bettingService.createBettingService(dto);
-					userService.updateCashService(auth.getName(), cash);
 					msg = "배팅에 성공하였습니다.";
 				}
 			} else {
 				bettingService.createBettingService(dto);
-				userService.updateCashService(auth.getName(), cash);
+				
 				msg = "배팅에 성공하였습니다.";
 			}
 //		} else
 //			msg="배팅 가능시간이 지났습니다.\n 다음회차에 배팅해주세요";
+			System.out.println(cash);
+			userService.updateCashService(auth.getName(), cash);
 		return msg;
 	}
 	

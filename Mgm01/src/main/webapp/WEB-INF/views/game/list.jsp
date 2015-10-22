@@ -13,7 +13,7 @@ a:VISITED, a:LINK {
 	text-decoration: none;
 }
 </style>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var isIn = ${isInner };
 	var cash = ${cash };
@@ -23,21 +23,22 @@ a:VISITED, a:LINK {
 		//	location.href=loc;
 	}
 	
-	function reLoad(prize_cash){
-		
+	function updateCash(game_num, prize_money){
+
+		alert(game_num + "/" + prize_money + " / " + cash);
 		$.ajax({ // feed_num과 input으로 댓글작성하는 inner 작동.
 		      method : 'POST', // post!
 		      url : '/mgm01/user/updateCash', // url
 		      data : { // 데이타!
-				 cash : cash,
-				 prize_cash : prize_cash,
-				 isInner : isIn
+		    	cash : cash,
+				game_num : game_num,
+				prize_money : prize_money
 		      },
-		      success : function() { // 댓글작성이 성공하면
-				   alert("수령에 성공하셨습니다.");
+		      success : function(msg) { // 댓글작성이 성공하면
+				   alert(msg);
 				   location.reload();
 				   },
-		      error :function() { // 댓글작성이 성공하면
+		      error :function(msg) { // 댓글작성이 성공하면
 				   alert("수령에 실패하셨습니다.");
 				}
 		   })
@@ -48,7 +49,7 @@ a:VISITED, a:LINK {
 <body>
 <div align="center">
 <c:forEach var="item" items="${list }">
-	<table class="table" >
+	<table class="table" id="betlist" >
 		<thead>
 			<tr>
 				<th class="th" colspan="2"><span>${item.ordernum }회차</span></th>
@@ -59,7 +60,7 @@ a:VISITED, a:LINK {
 				<td class="td">배팅일시</td>
 				<td class="td"><fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분"/></td>
 			</tr>
-			<c:if test="${item.betting_oe ne 'null' }">
+			<c:if test="${item.betting_oe ne null }">
 				<tr>
 					<td class="td">홀짝</td>
 					<c:if test="${item.result_oe eq true  }">
@@ -104,13 +105,18 @@ a:VISITED, a:LINK {
 				<td class="td">당첨금</td>
 				<td class="td">${item.prize_money }</td>
 			</tr>
+			<tr>
 			<c:if test="${item.received eq 'N' }">
-				<tr>
 					<td class="td" colspan="2">
-						<input type="button" value="당첨금을 받으세요" onclick="reLoad('${item.prize_money}')"/>
+						<input type="button" value="당첨금을 받으세요" onclick="updateCash('${item.game_num }', '${item.prize_money }')"/>
 					</td>
-				</tr>
 			</c:if>
+			<c:if test="${item.received eq 'Y' }">
+				<td class="td" colspan="2">
+						<input type="button" value="당첨금을 수령하셨습니다."/>
+					</td>
+			</c:if>
+			</tr>
 		</tbody>
 	</table>
 

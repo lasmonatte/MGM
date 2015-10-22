@@ -48,6 +48,10 @@
 		betting_oe=#{betting_oe}, betting_lr=#{betting_lr}, betting_line=#{betting_line}
 		where id=#{id} and betting_num=#{betting_num}
 	</update>
+	<update id="updateBettingReceived" parameterType="BettingDto">
+		update betting set received='Y'
+		where id=#{id} and game_num=#{game_num}
+	</update>
 	<delete id="deleteBetting" parameterType="Integer">
 		delete from betting
 		where betting_num=#{betting_num}

@@ -11,7 +11,16 @@
 		<put-attribute name="main" value="" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
-
+	
+	<definition name="admin_layout" template="/WEB-INF/layout/admin/layoutAll.jsp">
+		<put-attribute name="top" value="/WEB-INF/layout/admin/top.jsp" />
+		<put-attribute name="main" value="" />
+	</definition>
+	
+	<definition name="t:admin/*" extends="admin_layout">
+		<put-attribute name="main" value="/WEB-INF/views/admin/{1}.jsp" />
+	</definition>
+	
 	<!-- 개별 뷰 -->
 	<definition name="t:main" extends="default_layout">
 		<put-attribute name="main" value="/WEB-INF/views/index.jsp" />
@@ -26,5 +35,7 @@
 	<definition name="t:*/*" extends="default_layout">
 		<put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
+	
+	
 
 </tiles-definitions>

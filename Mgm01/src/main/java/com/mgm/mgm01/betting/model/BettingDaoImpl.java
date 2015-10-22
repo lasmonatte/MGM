@@ -56,9 +56,15 @@ public class BettingDaoImpl implements BettingDao{
 	}
 
 	@Override
+	public int updateBettingReceived(BettingDto dto) {
+		// TODO Auto-generated method stub
+		return session.update("com.mgm.mgm01.betting.model.BettingDao.updateBettingReceived", dto);
+	}
+
+	
+	@Override
 	public int deleteBetting(int betting_num) {
 		// TODO Auto-generated method stub
 		return session.delete("com.mgm.mgm01.betting.model.BettingDao.deleteBetting", betting_num);
 	}
-
 }

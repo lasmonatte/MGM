@@ -12,5 +12,6 @@ public interface BettingDao {
 	public List<BettingDto> readBettingListToUpdate();
 	public int updateBetting(BettingDto dto);
 	public int updateBettingInfo(BettingDto dto);
+	public int updateBettingReceived(BettingDto dto);
 	public int deleteBetting(int betting_num); 
 }

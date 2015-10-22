@@ -6,16 +6,12 @@
 */
 
 body{
-	background-image: url(/mgm01/resources/images/background_game.jpg);
-	background-repeat: repeat-x;
-	background-attachment: fixed;
-	color: #FAED7D;
 	font: 100%, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: large;
-	 text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
      
 }
+
 
 
 /* general styles */

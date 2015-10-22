@@ -40,7 +40,6 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int updateCash(Map<String, Object> info) {
 		// TODO Auto-generated method stub
-		System.out.println(info.get("cash"));
 		return session.update("com.mgm.mgm01.user.model.UserDao.updateCash", info);
 	}
 

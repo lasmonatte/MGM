@@ -27,16 +27,24 @@
 				delete-cookies="true"
 				logout-success-url="/"
 		/>
-		<session-management invalid-session-url="/" session-fixation-protection="migrateSession">
+		<session-management invalid-session-url="/" session-fixation-protection="newSession">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/"/>
 		</session-management>
 	</http>
 
+<!-- 	<authentication-manager> -->
+<!-- 		<authentication-provider user-service-ref="userService"> -->
+<!-- 			<password-encoder ref="passwordEncoder"> -->
+<!-- 				<salt-source user-property="nickname"/> -->
+<!-- 			</password-encoder> -->
+<!-- 		</authentication-provider> -->
+<!-- 	</authentication-manager> -->
+
 	<authentication-manager>
-		<authentication-provider user-service-ref="userService">
-			<password-encoder ref="passwordEncoder">
-				<salt-source user-property="nickname"/>
-			</password-encoder>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" authorities="ROLE_ADMIN" password="admin"/>
+			</user-service>		
 		</authentication-provider>
 	</authentication-manager>
 

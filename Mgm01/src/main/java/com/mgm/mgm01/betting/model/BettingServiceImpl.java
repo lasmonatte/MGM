@@ -90,4 +90,14 @@ public class BettingServiceImpl implements BettingService{
 		return map;
 	}
 
+	@Override
+	public int updateBettingReceivedService(int game_num, String id) {
+		// TODO Auto-generated method stub
+		BettingDto dto = new BettingDto();
+		dto.setGame_num(game_num);
+		dto.setId(id);
+		
+		return dao.updateBettingReceived(dto);
+	}
+
 }

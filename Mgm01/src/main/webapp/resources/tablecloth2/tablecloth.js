@@ -17,15 +17,13 @@ this.tablecloth = function(){
 	var highlightRows = true;	
 	
 	// if set to true then click on a table sell will select row or column based on config
-	var selectable = true;
+	var selectable = false;
 	
 	// this function is called when 
 	// add your own code if you want to add action 
 	// function receives object that has been clicked 
 	this.clickAction = function(obj){
 		//alert(obj.innerHTML);
-		alert(obj);
-		alert("으악");
 	};
 
 

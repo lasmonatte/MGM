@@ -96,7 +96,7 @@
 	
 		if(total_dividend<=1)
 			total_dividend=1;
-		
+		total_dividend = total_dividend.toFixed(2);
 		printSpan("total_dividend", total_dividend);
 		
 		expectMoney();
