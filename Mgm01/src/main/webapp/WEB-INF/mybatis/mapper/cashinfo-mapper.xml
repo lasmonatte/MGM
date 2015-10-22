@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.cashinfo.model.CashDao">
+	<!-- User Register Service -->
+	<insert id="createCashInfo" parameterType="CashInfoDto">
+		insert into cashinfo(breakdown, type, id)
+		values (#{breakdown}, #{type}, #{id})
+	</insert>
+	<select id="readCashInfoById" parameterType="String" resultType="CashInfoDto">
+		select * from cashinfo where id=#{id}
+		order by date desc
+	</select>
+	<select id="readCashInfoByRecmd" parameterType="String" resultType="CashInfoDto">
+		select c.* from cashinfo c, user u
+		where c.id=u.id AND u.recmd_id=#{recmd_id}
+		order by date desc
+	</select>
+	<select id="readCashInfoAll" parameterType="String" resultType="CashInfoDto">
+		select * from cashinfo
+		<if test='_parameter != "all"'>
+            where type=#{type}
+        </if>
+		order by date desc
+	</select>
+	<delete id="deleteCashInfo" parameterType="Integer">
+		delete from cashinfo
+		where cashinfo_num=#{cashinfo_num}
+	</delete>
+</mapper>
