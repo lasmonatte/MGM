@@ -21,6 +21,7 @@ public class BoardController {
 
 	@Autowired BoardService boardService;
 	@Autowired UserService userService;
+	
 	@RequestMapping(value="/board/write", method=RequestMethod.GET)
 	public ModelAndView writeControl(ModelAndView mav, String type, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());

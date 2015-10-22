@@ -1,6 +1,7 @@
 package com.mgm.mgm01.user.model;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -47,6 +48,12 @@ public class UserDaoImpl implements UserDao {
 	public String readB_password(String id) {
 		// TODO Auto-generated method stub
 		return session.selectOne("com.mgm.mgm01.user.model.UserDao.readB_password", id);
+	}
+
+	@Override
+	public List<UserDto> readAllUser(String type) {
+		// TODO Auto-generated method stub
+		return session.selectList("com.mgm.mgm01.user.model.UserDao.readAllUser", type);
 	}
 
 }

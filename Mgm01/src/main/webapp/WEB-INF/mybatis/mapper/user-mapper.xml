@@ -40,4 +40,8 @@
 	<select id="readB_password" parameterType="String" resultType="String">
 		select b_password from user where id=#{id}
 	</select>
+	<select id="readAllUser" parameterType="String" resultType="UserDto">
+		SELECT u.* FROM user u, authorities a
+		WHERE u.id=a.id and a.authority=#{type}
+	</select>
 </mapper>

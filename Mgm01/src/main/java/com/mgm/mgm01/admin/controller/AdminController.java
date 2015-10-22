@@ -1,41 +1,55 @@
 package com.mgm.mgm01.admin.controller;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mgm.mgm01.user.model.UserDto;
+import com.mgm.mgm01.board.model.BoardService;
+import com.mgm.mgm01.cashinfo.model.CashInfoService;
+import com.mgm.mgm01.user.model.UserService;
 
 @Controller
 public class AdminController {
 
+	@Autowired UserService userService;
+	@Autowired CashInfoService cashInfoService;
+	@Autowired BoardService boardService;
+
 	@RequestMapping(value="/admin/main",method=RequestMethod.GET)
-	public ModelAndView mainControl(ModelAndView mav, Authentication auth){
-		System.out.println("admin");
-		
-		//fake
-		List<UserDto> userDtoList = new ArrayList<UserDto>();
-		UserDto dto = new UserDto();
-		dto.setB_account("12-1234-4567");
-		dto.setB_bankname("신한은행");
-		dto.setB_username("예금주는테스트");
-		dto.setCash(BigInteger.valueOf(1000000000));
-		dto.setId("test");
-		dto.setName("이름은테스트");
-		dto.setNickname("닉네임도테스트");
-		dto.setPhone(1012345678);
-		dto.setRecmd_id("추천인은유저");
-		
-		userDtoList.add(dto);
-		
-		mav.addObject("userDtoList", userDtoList);
+	public ModelAndView mainControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth){
+		Map<String, Object> map = userService.readAllUserService(start, "ROLE_USER");
+
+		mav.addAllObjects(map);
 		mav.setViewName("t:admin/main");
 		return mav;
 	}
+
+	@RequestMapping("/admin/cashInfo")
+	public ModelAndView betlistControl(ModelAndView mav,  Authentication auth,
+			@RequestParam(defaultValue="all")String type, @RequestParam(defaultValue = "1") int start) {
+		// List li = bls.readAllService();
+		switch (type) {
+		case "all":
+		case "charge":
+		case "exchange":
+			break;
+		case "ex_ch":
+		default:
+			break;
+		}
+		Map<String, Object> map = cashInfoService.readCashInfoAll(start, type);
+
+		mav.addAllObjects(map);
+		mav.addObject("type", type);
+		mav.setViewName("t:admin/cashInfo");
+		return mav;
+	}
+
+
 }

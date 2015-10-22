@@ -1,43 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="/mgm01/resources/css/semi-transparent-buttons.css">
-<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
-<style>
-<!--
-    .logo img { width:400px; height:250px;}
-    .Pstyle {
-    	opacity: 0;
-    	display: none;
-    	position: relative;
-    	width: auto;
-    	border: 5px solid#fff;
-    	padding: 20px;
-    	background-color: #fff;
-    }
-    
-    .b-close{
-    	position: absolute;
-    	right: 5px;
-    	top: 5px;
-    	padding: 5px;
-    	display: inline-block;
-    	cursor: pointer;
-    }
-    h2{
-    	font-style: italic;
-    	margin-bottom: 1px;
-    }
--->
-</style>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SimpleAdmin</title>
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/navi.css" media="screen" />
+<script type="text/javascript" src="/mgm01/resources/admin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".box .h_title").not(this).next("ul").hide("normal");
+	$(".box .h_title").not(this).next("#home").show("normal");
+	$(".box").children(".h_title").click( function() { $(this).next("ul").slideToggle(); });
+});
+</script>
 </head>
 <body>
-</body>
-</html>
+<div class="wrap">
+	<div id="header">
+		<div id="top">
+			<div class="left">
+				
+			</div>
+			<div class="right">
+				<div class="align-right">
+				<p><strong><sec:authentication property="principal.nickname"/></strong>님 어서오세요 [ <a href="/mgm01/user/logout">logout</a> ]</p>
+<!-- 					<p>Last login: <strong>23-04-2012 23:12</strong></p> -->
+				</div>
+			</div>
+		</div>
+		<div id="nav">
+			<ul>
+				<li class="upp"><a href="#">회원관리</a>
+					<ul>
+						<li>&#8250; <a href="/mgm01/admin/main">전체보기</a></li>
+					</ul>
+				</li>
+				<li class="upp"><a href="#">캐쉬내역</a>
+					<ul>
+						<li>&#8250; <a href="/mgm01/admin/cashInfo">전체내역</a></li>
+						<li>&#8250; <a href="">충환전내역</a></li>
+						<li>&#8250; <a href="">충전내역</a></li>
+						<li>&#8250; <a href="">환전내역</a></li>
+						<li>&#8250; <a href="">배팅내역</a></li>
+						<li>&#8250; <a href="">적중내역</a></li>
+					</ul>
+				</li>
+				<li class="upp"><a href="#">총판관리</a>
+					<ul>
+						<li>&#8250; <a href="">총판현황</a></li>
+						<li>&#8250; <a href="/mgm01/admin/notice">공지사항</a></li>
+						<li>&#8250; <a href="">고객센터</a></li>
+						<li>&#8250; <a href="">충전신청 관리</a></li>
+						<li>&#8250; <a href="">환전신청 관리</a></li>
+					</ul>
+				</li>
+				<li class="upp"><a href="#">전체관리</a>
+					<ul>
+						<li>&#8250; <a href="">전체현황</a></li>
+						<li>&#8250; <a href="">총판아이디부여</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</div>
+	
