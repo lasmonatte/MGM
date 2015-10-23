@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,8 +16,11 @@ function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num
 		$("#b_username").empty();
 		$("#b_account").empty();
 		$("#b_bankname").append("<span>${rule.b_bankname }</span>");
+		$("#b_bankname").append("<input type='hidden' name='b_bankname' value='${rule.b_bankname}' />");
 		$("#b_username").append("<span>${rule.b_username }</span>");
+		$("#b_username").append("<input type='hidden' name='b_username' value='${rule.b_username}' />");
 		$("#b_account").append("<span>${rule.b_account }</span>");
+		$("#b_account").append("<input type='hidden' name='b_account' value='${rule.b_account}' />");
 		$("#su_ca").append("<input type='submit' value='확인'/><input type='button' value='취소' />");
 	 }else
 		 alert("환전 비밀번호를 정확히 입력하세요.");
@@ -53,7 +56,7 @@ function check(b_pass) { // 일단 popup에서만 작동함 - feed_init(feed_num
 		</tr>
 		<tr class="tr">
 			<td class="td">요청금액</td>
-			<td class="td"><input type="text" name="amount" />원</td>
+			<td class="td"><input type="number" name="amount" pattern="[0-9]" />원</td>
 		</tr>
 		<tr class="tr">
 			<td class="td">환전 비밀번호</td>

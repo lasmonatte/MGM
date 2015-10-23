@@ -11,14 +11,14 @@
 	<select id="readTradeOne" parameterType="Integer" resultType="TradeDto">
 		select * from trade where t_num=#{t_num}
 	</select>
-	<select id="readTradeListAll" resultType="TradeDto">
-		select * from trade order by t_num desc
+	<select id="readTradeListAll" parameterType="String" resultType="TradeDto">
+		select * from trade where type=#{type} order by t_num desc
 	</select>
 	<select id="readTradeListById" parameterType="Map" resultType="TradeDto">
 		select * from trade where id=#{id} order by t_num desc
 	</select>
-	<update id="updateTrade" parameterType="TradeDto">
-		update trade set result=#{result}
+	<update id="updateTrade" parameterType="Integer">
+		update trade set result=true where t_num=#{t_num}
 	</update>
 	<delete id="deleteTrade" parameterType="TradeDto">
 		delete from trade where t_num=#{t_num}

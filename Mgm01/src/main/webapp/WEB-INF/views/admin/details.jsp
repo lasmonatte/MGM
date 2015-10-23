@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 	function toList(type) {
-		location.href=type;
+		var url = "/mgm01/admin/board?type=" + type;
+		location.href=url;
 
 // 		window.open(loc, "dts", "parent=opener,width=400,height=600,", false);
 		// 띄울 경로 , 윈도우 프레임이름, 기타옵션

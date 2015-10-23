@@ -50,39 +50,46 @@ a:HOVER {
 	}
 </script>
 <div align="center">
-	<table border="1" >
+	<table class="table" >
 		<thead>
 			<tr>
-				<td>종류</td>
-				<td>아이디</td>
-				<td>신청자이름</td>
-				<td>은행명</td>
-				<td>예금주</td>
-				<td>계좌번호</td>
-				<td>신청날짜</td>
-				<td>신청금액</td>
-				<td>처리결과</td>
-				<td>처리날짜</td>
+				<th class="th">종류</th>
+				<th class="th">아이디</th>
+				<th class="th">신청자이름</th>
+				<th class="th">은행명</th>
+				<th class="th">예금주</th>
+				<th class="th">계좌번호</th>
+				<th class="th">신청날짜</th>
+				<th class="th">신청금액</th>
+				<th class="th">처리결과</th>
+				<th class="th">처리날짜</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="item" items="${list }">
-			<tr>
-				<td>${item.type }</td>
-				<td>${item.id }</td>
-				<td>${item.name }</td>
-				<td>${item.b_bankname }</td>
-				<td>${item.b_username }</td>
-				<td>${item.b_account }</td>
-				<td>${item.date }</td>
-				<td>${item.amount }
-				<td>${item.result }</td>
-				<c:if test="${item.result_date eq null }">
-					<td>처리중</td>
+			<tr class="tr">
+				<td class="td">
+				<c:if test="${item.type eq 'charge' }">
+					충전
 				</c:if>
-				<c:if test="${item.result_date eq null }">
-					<td>${item.result_date }</td>
+				<c:if test="${item.type eq 'exchange' }">
+					환전
 				</c:if>
+				</td>
+				<td class="td">${item.id }</td>
+				<td class="td">${item.name }</td>
+				<td class="td">${item.b_bankname }</td>
+				<td class="td">${item.b_username }</td>
+				<td class="td">${item.b_account }</td>
+				<td class="td">${item.date }</td>
+				<td class="td">${item.amount }</td>
+				<c:if test="${item.result_date eq null }">
+					<td class="td">처리중</td>
+				</c:if>
+				<c:if test="${item.result_date ne null }">
+					<td class="td">처리완료</td>
+				</c:if>
+				<td class="td">${item.result_date }</td>
 			</tr>
 		</c:forEach>
 		</tbody>

@@ -22,15 +22,15 @@
 		select * from betting where id=#{id}
 		order by betting_num desc limit 0, 1 
 	</select>
-	<select id="readBettingList" parameterType="Map" resultType="BettingDto">
+	<select id="readBettingListById" parameterType="String" resultType="BettingDto">
 		select * from betting where id=#{id}
-		order by betting_num desc limit #{start}, #{end} 
+		order by betting_num desc
 	</select>
 	<select id="readBettingListToUpdate" resultType="BettingDto">
 		select * from betting where ordernum=0
 	</select>
-	<select id="readBettingListAll" parameterType="String" resultType="BettingDto">
-		select * from betting where id=#{id}
+	<select id="readBettingListAll" resultType="BettingDto">
+		select * from betting
 		order by betting_num desc
 	</select>
 	<update id="updateBetting" parameterType="BettingDto">

@@ -1,7 +1,6 @@
 package com.mgm.mgm01.betting.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,15 @@ public class BettingDaoImpl implements BettingDao{
 	}
 
 	@Override
-	public List<BettingDto> readBettingList(Map<String, Object> info) {
+	public List<BettingDto> readBettingListById(String id) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.betting.model.BettingDao.readBettingList", info);
+		return session.selectList("com.mgm.mgm01.betting.model.BettingDao.readBettingListById", id);
 	}
 
 	@Override
-	public List<BettingDto> readBettingListAll(String id) {
+	public List<BettingDto> readBettingListAll() {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.betting.model.BettingDao.readBettingListAll", id);
+		return session.selectList("com.mgm.mgm01.betting.model.BettingDao.readBettingListAll");
 	}
 	
 	@Override

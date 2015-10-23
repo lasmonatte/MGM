@@ -24,7 +24,6 @@ public class TradeController {
 	@RequestMapping(value="/trade/charge", method=RequestMethod.POST)
 	public ModelAndView chargeControl(ModelAndView mav, Authentication auth, TradeDto dto) {
 		BigInteger new_cash = userService.readCashService(auth.getName());
-		
 		dto.setId(auth.getName());
 		dto.setType("charge");
 		tradeService.createTradeService(dto);

@@ -25,12 +25,11 @@ public class TradeServiceImpl implements TradeService{
 	}
 
 	@Override
-	public Map<String, Object>  readTradeListAllService(int p) {
+	public Map<String, Object>  readTradeListAllService(String type, int p) {
 		// TODO Auto-generated method stub
 		Map<String, Object> info = new HashMap<String, Object>();
 
-		List<TradeDto> list = dao.readTradeListAll();
-		
+		List<TradeDto> list = dao.readTradeListAll(type);
 		int size = 10;	// 몇개씩 볼것인지
 		int pageSize = list.size()/size;
 		
@@ -75,9 +74,9 @@ public class TradeServiceImpl implements TradeService{
 	}
 
 	@Override
-	public int updateTradeService(TradeDto dto) {
+	public int updateTradeService(int t_num) {
 		// TODO Auto-generated method stub
-		return dao.updateTrade(dto);
+		return dao.updateTrade(t_num);
 	}
 
 	@Override

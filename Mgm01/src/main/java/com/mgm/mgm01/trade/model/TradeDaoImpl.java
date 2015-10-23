@@ -25,9 +25,9 @@ public class TradeDaoImpl implements TradeDao {
 	}
 
 	@Override
-	public List<TradeDto> readTradeListAll() {
+	public List<TradeDto> readTradeListAll(String type) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.trade.model.TradeDao.readTradeListAll");
+		return session.selectList("com.mgm.mgm01.trade.model.TradeDao.readTradeListAll", type);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class TradeDaoImpl implements TradeDao {
 
 
 	@Override
-	public int updateTrade(TradeDto dto) {
+	public int updateTrade(int t_num) {
 		// TODO Auto-generated method stub
-		return session.update("com.mgm.mgm01.trade.model.TradeDao.updateTrade", dto);
+		return session.update("com.mgm.mgm01.trade.model.TradeDao.updateTrade", t_num);
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class GameController {
 	public ModelAndView betlistControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth) {
 		// List li = bls.readAllService();
 		BigInteger cash = userService.readCashService(auth.getName());
-		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
+		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start);
 		mav.addObject("cash", cash);
 		mav.addAllObjects(map);
 		mav.addObject("isInner", false);
@@ -73,7 +73,7 @@ public class GameController {
 		BigInteger cash = userService.readCashService(auth.getName());
 
 		// List li = bls.readAllService();
-		Map<String, Object> map = bettingService.readPageServiceNaver(start, auth.getName());
+		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start);
 		mav.addAllObjects(map);
 		mav.addObject("cash", cash);
 		mav.addObject("isInner", true);

@@ -20,13 +20,17 @@
 	<div id="content" align="center">
 		<div id="main" align="center">
 			<div class="full_w">
-				<h2>공 지 사 항</h2>
-				
+				<c:if test="${type eq 'notice' }">
+					<h2>공 지 사 항</h2>
+				</c:if>
+				<c:if test="${type eq 'customer' }">
+					<h2>고 객 센 터</h2>
+				</c:if>
 				<div class="entry">
 					<div class="sep"></div>
 				</div>
 				<table>
-					<thead>					<thead>
+					<thead>				
 						<tr>
 							<th scope="col">번호</th>
 							<th scope="col">타이틀</th>
@@ -34,7 +38,6 @@
 							<th scope="col">등록일</th>
 						</tr>
 					</thead>
-						
 					<tbody align="center">
 					<c:forEach var="item" items="${list }">
 						<tr onclick="showDetail(${item.board_num })">
@@ -63,6 +66,7 @@
 					</tbody>
 				</table>
 
+				
 				<div class="entry">
 					<div class="pagination">
 					<c:forEach var="num" begin="1" end="${size }">
@@ -72,7 +76,7 @@
 							<span class="active">${num }</span>
 						</c:when>
 						<c:when test="${num ne param.start }">
-							<a href="/mgm01/game/betlist_inner?start=${num }"><b>${num }</b></a>
+							<a href="/mgm01/admin/board?start=${num }&type=${type }"><b>${num }</b></a>
 						</c:when>
 					</c:choose>
 					</c:forEach>

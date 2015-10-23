@@ -28,7 +28,7 @@ $(function(){
 			</div>
 			<div class="right">
 				<div class="align-right">
-				<p><strong><sec:authentication property="principal.nickname"/></strong>님 어서오세요 [ <a href="/mgm01/user/logout">logout</a> ]</p>
+				<p><strong><sec:authentication property="principal.username"/></strong>님 어서오세요 [ <a href="/mgm01/user/logout">logout</a> ]</p>
 <!-- 					<p>Last login: <strong>23-04-2012 23:12</strong></p> -->
 				</div>
 			</div>
@@ -37,26 +37,26 @@ $(function(){
 			<ul>
 				<li class="upp"><a href="#">회원관리</a>
 					<ul>
-						<li>&#8250; <a href="/mgm01/admin/main">전체보기</a></li>
+						<li>&#8250; <a href="/mgm01/admin/userInfo">전체보기</a></li>
 					</ul>
 				</li>
 				<li class="upp"><a href="#">캐쉬내역</a>
 					<ul>
 						<li>&#8250; <a href="/mgm01/admin/cashInfo">전체내역</a></li>
-						<li>&#8250; <a href="">충환전내역</a></li>
-						<li>&#8250; <a href="">충전내역</a></li>
-						<li>&#8250; <a href="">환전내역</a></li>
-						<li>&#8250; <a href="">배팅내역</a></li>
-						<li>&#8250; <a href="">적중내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=ex_ch">충환전내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=charge">충전내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=exchange">환전내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/bettinglist?type=all">배팅내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/bettinglist?type=win">적중내역</a></li>
 					</ul>
 				</li>
 				<li class="upp"><a href="#">총판관리</a>
 					<ul>
 						<li>&#8250; <a href="">총판현황</a></li>
-						<li>&#8250; <a href="/mgm01/admin/notice">공지사항</a></li>
-						<li>&#8250; <a href="">고객센터</a></li>
-						<li>&#8250; <a href="">충전신청 관리</a></li>
-						<li>&#8250; <a href="">환전신청 관리</a></li>
+						<li>&#8250; <a href="/mgm01/admin/board?type=notice">공지사항</a></li>
+						<li>&#8250; <a href="/mgm01/admin/board?type=customer">고객센터</a></li>
+						<li>&#8250; <a href="/mgm01/admin/tradeInfo?type=charge">충전신청 관리</a></li>
+						<li>&#8250; <a href="/mgm01/admin/tradeInfo?type=exchange">환전신청 관리</a></li>
 					</ul>
 				</li>
 				<li class="upp"><a href="#">전체관리</a>

@@ -39,26 +39,15 @@ public class AdminBoardController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/admin/notice")
+	@RequestMapping(value="/admin/board")
 	public ModelAndView noticeControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start,
-			Authentication auth) {
-		String type = "notice";
+			Authentication auth, @RequestParam(name="type")String type) {
+//		String type = "notice";
 		Map<String, Object> info = boardService.readBoardListAllService(start, type);
 		
 		mav.addAllObjects(info);
-		mav.setViewName("t:admin/notice");
-		return mav;
-	}
-	
-	@RequestMapping(value="/admin/customer")
-	public ModelAndView customerControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start,
-			@RequestParam(defaultValue="")String id, Authentication auth) {
-		String type = "customer";
-		
-		Map<String, Object> info = boardService.readBoardListAllService(start, type);
-			
-		mav.addAllObjects(info);
-		mav.setViewName("t:admin/customer");
+		mav.addObject("type", type);
+		mav.setViewName("t:admin/board");
 		return mav;
 	}
 	

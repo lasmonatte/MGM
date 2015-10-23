@@ -33,6 +33,7 @@ public class CashInfoDaoImpl implements CashInfoDao{
 	@Override
 	public List<CashInfoDto> readCashInfoAll(String type) {
 		// TODO Auto-generated method stub
+		System.out.println(type);
 		return session.selectList("com.mgm.mgm01.cashinfo.model.CashDao.readCashInfoAll", type);
 	}
 

@@ -44,7 +44,6 @@
 					</c:forEach>
 					</tbody>
 				</table>
-				p=1 or p=2 이런식으로 갈수 있게 링크를 만들어두자.
 <c:forEach var="num" begin="1" end="${size }">
 	<c:choose>
 		<c:when test="${param.start eq null and num eq 1 }">
