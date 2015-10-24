@@ -46,8 +46,8 @@ $(function(){
 						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=ex_ch">충환전내역</a></li>
 						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=charge">충전내역</a></li>
 						<li>&#8250; <a href="/mgm01/admin/cashInfo?type=exchange">환전내역</a></li>
-						<li>&#8250; <a href="/mgm01/admin/bettinglist?type=all">배팅내역</a></li>
-						<li>&#8250; <a href="/mgm01/admin/bettinglist?type=win">적중내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/bettingList?type=all">배팅내역</a></li>
+						<li>&#8250; <a href="/mgm01/admin/bettingList?type=win">적중내역</a></li>
 					</ul>
 				</li>
 				<li class="upp"><a href="#">총판관리</a>
@@ -59,12 +59,15 @@ $(function(){
 						<li>&#8250; <a href="/mgm01/admin/tradeInfo?type=exchange">환전신청 관리</a></li>
 					</ul>
 				</li>
+			<sec:authorize access="hasRole('ROLE_MASTER')">
 				<li class="upp"><a href="#">전체관리</a>
 					<ul>
-						<li>&#8250; <a href="">전체현황</a></li>
-						<li>&#8250; <a href="">총판아이디부여</a></li>
+						<li>&#8250; <a href="/mgm01/admin/adminInfo">전체현황</a></li>
+						<li>&#8250; <a href="/mgm01/admin/modAdmin">총판관리</a></li>
+						<li>&#8250; <a href="/mgm01/admin/ruleInfo">게임정보 및 계좌 관리</a></li>
 					</ul>
 				</li>
+			</sec:authorize>
 			</ul>
 		</div>
 	</div>

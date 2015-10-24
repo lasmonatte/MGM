@@ -55,17 +55,12 @@
 							</td>
 						</tr>
 					</c:forEach>
-					<tr>
-			<td colspan="4" align="center">
-				<form action="write" method="GET">
-					<input type="hidden" name="type" value="notice"/>
-					<input type="submit" value="글쓰기"/>				
-				</form>
-			</td>
-		</tr>
 					</tbody>
 				</table>
-
+	<form action="board_write" method="GET">
+					<input type="hidden" name="type" value="${type }"/>
+					<input type="submit" value="글쓰기"/>				
+				</form>
 				
 				<div class="entry">
 					<div class="pagination">
@@ -78,6 +73,9 @@
 						<c:when test="${num ne param.start }">
 							<a href="/mgm01/admin/board?start=${num }&type=${type }"><b>${num }</b></a>
 						</c:when>
+						<c:otherwise>
+							<span class="active">${num }</span>
+						</c:otherwise>
 					</c:choose>
 					</c:forEach>
 					</div>

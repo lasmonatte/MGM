@@ -52,5 +52,6 @@
 		<typeAlias type="com.mgm.mgm01.trade.model.TradeDto" alias="TradeDto"/>
 		<typeAlias type="com.mgm.mgm01.rule.model.TradeRuleDto" alias="TradeRuleDto"/>
 		<typeAlias type="com.mgm.mgm01.cashinfo.model.CashInfoDto" alias="CashInfoDto"/>
+		<typeAlias type="com.mgm.mgm01.admin.model.AdminDto" alias="AdminDto"/>
 	</typeAliases>
 </configuration>

@@ -117,8 +117,11 @@
 							<span class="active">${num }</span>
 						</c:when>
 						<c:when test="${num ne param.start }">
-							<a href="/mgm01/game/betlist_inner?start=${num }&type=${type }"><b>${num }</b></a>
+							<a href="/mgm01/admin/cashInfo?start=${num }&type=${type }"><b>${num }</b></a>
 						</c:when>
+						<c:otherwise>
+							<span class="active">${num }</span>
+						</c:otherwise>
 					</c:choose>
 					</c:forEach>
 					</div>

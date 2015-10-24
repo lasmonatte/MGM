@@ -24,16 +24,16 @@
 				<div class="entry">
 					<div class="sep"></div>
 				</div>
-				<table>
+	<table>
 		<tr>
 			<th scope="col">제목</th>
 			<td colspan="3">${boardDto.title }</td>
 		</tr>
 		<tr>
-			<th scope="col" width="10%" >작성자</th>
-			<td width="30%" >${boardDto.nickname }</td>
-			<th scope="col" width="20%" >작성일자</th>
-			<td width="40%">${boardDto.date }</td>
+			<th scope="col">작성자</th>
+			<td>${boardDto.nickname }</td>
+			<th scope="col">작성일자</th>
+			<td>${boardDto.date }</td>
 		</tr>	
 		<tr>
 			<th scope="col" colspan="4">내용</th>
@@ -43,17 +43,28 @@
 		</tr>
 		<c:if test="${boardDto.type ne 'notice'}">
 		<tr>
-			<td align="center" colspan="4">댓글</td>
+			<th scope="col" colspan="4">댓글</th>
 		</tr>
 		<tr>
-			<td colspan="3"><textarea rows="4" cols="180"  ></textarea></td>
-			<td><input type="submit" value="댓글입력" /></td>
+			<td colspan="4">
+				<textarea style="width: 100%" rows="5"></textarea>
+			</td>
+		</tr>
+		<tr align="center">
+			<td colspan="4">
+				<input type="submit" value="댓글입력" style="width: 20%"/>
+			</td>
 		</tr>
 		</c:if>
 	</table>
-	<input type="button" value="목록으로" onclick="toList('${boardDto.type }')" />
+	<input type="button" value="목록으로" onclick="toList('${boardDto.type }')"
+	 		style="width: 20%; margin-bottom: 5%" />
+	 		<div class="sep">
+	 			
+	 		</div>		
+			</div>
 		</div>
-	</div>
+		<div class="clear"></div>
 </div>
 
 </body>

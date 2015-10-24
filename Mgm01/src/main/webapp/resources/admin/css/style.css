@@ -282,9 +282,20 @@ table{
 	width: 90%; 
 }
 table th{ 
-	background: url(../img/bg_box_head.jpg) repeat-x;
+	background: url(../img/bg_box_head.jpg) repeat-x ;
 	color: #DACDCD;
 	border-left: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	font-size: 11px; 
+	font-weight: bold; 
+	padding: 7px; 
+	text-shadow: 0px 1px #242424; 
+}
+.write{
+	background: #222222;
+	color: #DACDCD;
+	border-left: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
 	border-right: 1px solid #ffffff;
 	font-size: 11px; 
 	font-weight: bold; 

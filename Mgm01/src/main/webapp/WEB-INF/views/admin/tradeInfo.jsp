@@ -112,6 +112,9 @@
 						<c:when test="${num ne param.start }">
 							<a href="/mgm01/admin/tradeInfo?start=${num }&type=${type }"><b>${num }</b></a>
 						</c:when>
+						<c:otherwise>
+							<span class="active">${num }</span>
+						</c:otherwise>
 					</c:choose>
 					</c:forEach>
 					</div>

@@ -34,6 +34,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 				page="/mgm01/user/main";
 			else if(a.getAuthority().equals("ROLE_ADMIN"))
 				page="/mgm01/admin/main";
+			else if(a.getAuthority().equals("ROLE_MASTER"))
+				page="/mgm01/admin/adminInfo";
 		}
 
 		UserDetails user = (UserDetails)authentication.getPrincipal();

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.admin.model.AdminDao">
+	<!-- User Register Service -->
+	<insert id="createAdmin" parameterType="String">
+		insert into admin(id)
+		values (#{id})
+	</insert>
+	<select id="readAdminOne" parameterType="String" resultType="AdminDto">
+		select * from admin
+		where id=#{id}
+	</select>
+	<select id="readAdminAll" resultType="AdminDto">
+		select * from admin
+		order by admin_num desc
+	</select>
+	<select id="readTotal" resultType="Admindto">
+		select
+		sum(total_cash) as total_cash,
+		sum(total_charge) as total_charge,
+		sum(total_exchange) as total_exchange,
+		sum(total_betting) as total_betting,
+		sum(total_win) as total_win,
+		sum(total_lose) as total_lose,
+		sum(total_user) as total_user,
+		sum(salary) as total_salary
+		from admin 
+	</select>
+	<update id="updateAdminCharge" parameterType="Map">
+		update admin set
+		total_cash = total_cash + #{total_cash},
+		total_charge = total_charge + #{charge, jdbcType=BIGINT}, 
+		total_exchange = total_exchange + #{exchange, jdbcType=BIGINT},
+		total_betting = total_betting + #{betting, jdbcType=BIGINT},
+		total_win = total_win + #{win, jdbcType=BIGINT},
+		total_lose = total_lose + #{total_lose, jdbcType=BIGINT}
+		total_salary = total_salary + #{salary},
+		salary = salary + #{salary}
+		where id=#{id}
+	</update>
+	<update id="updateAdminSalary" parameterType="String">
+		update admin set
+		salary = 0
+		date=current_timestamp()
+		where id=#{id}
+	</update>
+	<update id="updateDividend" parameterType="Map">
+		update admin set
+		dividend = #{dividend}
+		where id=#{id}
+	</update>
+	<delete id="deleteAdmin" parameterType="Integer">
+		delete from admin where admin_num=#{admin_num}
+	</delete>
+</mapper>

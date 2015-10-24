@@ -21,13 +21,15 @@ public class AdminBoardController {
 	@Autowired UserService userService;
 	
 	
-	@RequestMapping(value="/admin/n_write", method=RequestMethod.GET)
-	public ModelAndView writeControl(ModelAndView mav, Authentication auth) {
+	@RequestMapping(value="/admin/board_write", method=RequestMethod.GET)
+	public ModelAndView writeControl(ModelAndView mav, Authentication auth,
+			@RequestParam(name="type")String type) {
 		mav.setViewName("t:admin/write");
+		mav.addObject("type", type);
 		return mav;
 	}
 
-	@RequestMapping(value="/admin/n_write", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/board_write", method=RequestMethod.POST)
 	public ModelAndView writeControl(ModelAndView mav, Authentication auth, BoardDto dto) {
 
 		String nickname = ((UserDetailsVO)auth.getPrincipal()).getNickname();
@@ -35,7 +37,7 @@ public class AdminBoardController {
 		
 		boardService.createBoardSerivce(dto);
 		
-		mav.setViewName("redirect:/admin/notice");
+		mav.setViewName("redirect:/admin/board?type="+dto.getType());
 		return mav;
 	}
 	

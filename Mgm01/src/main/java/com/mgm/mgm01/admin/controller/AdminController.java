@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgm.mgm01.admin.model.AdminService;
 import com.mgm.mgm01.betting.model.BettingService;
 import com.mgm.mgm01.board.model.BoardService;
 import com.mgm.mgm01.cashinfo.model.CashInfoDto;
@@ -24,6 +25,7 @@ import com.mgm.mgm01.user.model.UserService;
 @Controller
 public class AdminController {
 
+	@Autowired AdminService adminService;
 	@Autowired UserService userService;
 	@Autowired CashInfoService cashInfoService;
 	@Autowired BoardService boardService;
@@ -60,7 +62,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping("/admin/bettinglist")
+	@RequestMapping("/admin/bettingList")
 	public ModelAndView betlistControl(ModelAndView mav,  Authentication auth,
 			@RequestParam(name="type")String type, @RequestParam(defaultValue = "1") int start) {
 		// List li = bls.readAllService();
