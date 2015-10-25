@@ -22,13 +22,14 @@
 	</select>
 	<select id="readCashInfoByRecmd" parameterType="String" resultType="CashInfoDto">
 		select c.* from cashinfo c, user u
-		where c.id=u.id AND u.recmd_id=#{recmd_id}
+		where c.id=u.id AND u.recmd_id=#{id}
 		<if test='type != "all"'>
             <if test='type != "ex_ch"'>	
         		and type=#{type}
         	</if>
         	<if test='type == "ex_ch"'>	
         		and type='exchange' or type='charge'
+        		group by c.cashinfo_num
         	</if>
         </if>
 		order by date desc
@@ -37,10 +38,11 @@
 		select * from cashinfo 
 		<if test='_parameter != "all"'>
         	<if test='_parameter != "ex_ch"'>	
-        		where type=#{type}
+        		where type=#{_parameter}
         	</if>
         	<if test='_parameter == "ex_ch"'>	
         		where type='exchange' or type='charge'
+        		group by c.cashinfo_num
         	</if>
         </if>
 		order by date desc

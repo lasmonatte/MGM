@@ -51,9 +51,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<UserDto> readAllUser(String type) {
+	public List<UserDto> readAllUser(Map<String, Object> info) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.user.model.UserDao.readAllUser", type);
+		return session.selectList("com.mgm.mgm01.user.model.UserDao.readAllUser", info);
 	}
 
 }

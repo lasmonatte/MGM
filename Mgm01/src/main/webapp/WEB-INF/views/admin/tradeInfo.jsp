@@ -10,17 +10,19 @@
 	
 		$.ajax({ 
 	      	method : 'POST',
-		      url : '/mgm01/admin/trade',
-		      data : {
-	    	     t_num: t_num
-		      },
-	    	  success : function(msg) {
-		    	  alert(msg);
-				   location.reload();
-				   },
-		      error :function(msg) { 
-	    	  		alert(msg);
-				}
+		    url : '/mgm01/admin/trade',
+		    data : {
+	    	t_num: t_num
+		    },
+	    	success : function(msg) {
+				alert(msg);
+				alert("성공");
+				location.reload();
+			},
+		    error :function(msg) { 
+	    		alert(msg);
+	    		alert("실패");
+		    }
 	   	})
 }
 	   

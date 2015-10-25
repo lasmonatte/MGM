@@ -1,6 +1,7 @@
 package com.mgm.mgm01.gameresult.model;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +12,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mgm.mgm01.admin.model.AdminService;
 import com.mgm.mgm01.betting.model.BettingDto;
 import com.mgm.mgm01.betting.model.BettingService;
+import com.mgm.mgm01.cashinfo.model.CashInfoService;
 
 @Component
 public class GameResultServiceImpl implements GameResultService{
 
 	@Autowired GameResultDao dao;
 	@Autowired BettingService bettingService;
+	@Autowired CashInfoService cashInfoService;
+	@Autowired AdminService adminService;
 	
 	@Scheduled(cron="10 0/5 * * * *")
 	@Transactional
@@ -73,6 +78,9 @@ public class GameResultServiceImpl implements GameResultService{
 
 			dto.setOrdernum(mgr.dto.getOrdernum());
 			bettingService.updateBettingService(dto);
+			cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()),
+					"betting");
+			adminService.updateMasterSalaryService(BigInteger.valueOf(dto.getBetting_money()));
 		}
 
 

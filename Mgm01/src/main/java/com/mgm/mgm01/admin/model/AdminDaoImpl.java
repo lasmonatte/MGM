@@ -1,5 +1,6 @@
 package com.mgm.mgm01.admin.model;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int updateAdmin(Map<String, Object> info) {
 		// TODO Auto-generated method stub
+		System.err.println("dao : " + info);
 		return session.update("com.mgm.mgm01.admin.model.AdminDao.updateAdmin", info);
 	}
 
@@ -53,6 +55,12 @@ public class AdminDaoImpl implements AdminDao {
 	public int updateDividend(Map<String, Object> info) {
 		// TODO Auto-generated method stub
 		return session.update("com.mgm.mgm01.admin.model.AdminDao.updateDividend", info);
+	}
+	
+	@Override
+	public int updateMasterSalary(BigInteger cash) {
+		// TODO Auto-generated method stub
+		return session.update("com.mgm.mgm01.admin.model.AdminDao.updateMasterSalary", cash);
 	}
 	
 	@Override

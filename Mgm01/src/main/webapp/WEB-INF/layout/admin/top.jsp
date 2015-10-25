@@ -52,7 +52,9 @@ $(function(){
 				</li>
 				<li class="upp"><a href="#">총판관리</a>
 					<ul>
-						<li>&#8250; <a href="">총판현황</a></li>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li>&#8250; <a href="/mgm01/admin/myInfo">총판현황</a></li>
+						</sec:authorize>
 						<li>&#8250; <a href="/mgm01/admin/board?type=notice">공지사항</a></li>
 						<li>&#8250; <a href="/mgm01/admin/board?type=customer">고객센터</a></li>
 						<li>&#8250; <a href="/mgm01/admin/tradeInfo?type=charge">충전신청 관리</a></li>

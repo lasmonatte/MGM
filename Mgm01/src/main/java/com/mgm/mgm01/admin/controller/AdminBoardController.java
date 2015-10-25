@@ -1,5 +1,6 @@
 package com.mgm.mgm01.admin.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgm.mgm01.board.model.BoardDto;
 import com.mgm.mgm01.board.model.BoardService;
+import com.mgm.mgm01.reply.model.ReplyDto;
+import com.mgm.mgm01.reply.model.ReplyService;
 import com.mgm.mgm01.sercurity.UserDetailsVO;
 import com.mgm.mgm01.user.model.UserService;
 
@@ -19,7 +22,7 @@ import com.mgm.mgm01.user.model.UserService;
 public class AdminBoardController {
 	@Autowired BoardService boardService;
 	@Autowired UserService userService;
-	
+	@Autowired ReplyService replyService;
 	
 	@RequestMapping(value="/admin/board_write", method=RequestMethod.GET)
 	public ModelAndView writeControl(ModelAndView mav, Authentication auth,
@@ -57,9 +60,21 @@ public class AdminBoardController {
 	public ModelAndView detailsControl(ModelAndView mav, @RequestParam(required=true) int num,
 			Authentication auth) {
 		BoardDto boardDto = boardService.readBoardOneService(num);
-
+		List<ReplyDto> replyList = replyService.readReplyListService(num);
+		
 		mav.addObject("boardDto", boardDto);
+		mav.addObject("replyList", replyList);
 		mav.setViewName("t:admin/details");
 		return mav;
 	}
+	
+	@RequestMapping(value="/admin/reply_write", method=RequestMethod.POST)
+	public ModelAndView replyWriteControl(ModelAndView mav, Authentication auth, ReplyDto dto) {
+		
+		replyService.createReplyService(dto);
+		
+		mav.setViewName("redirect:/admin/details?num="+dto.board_num);
+		return mav;
+	}
+	
 }

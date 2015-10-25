@@ -49,6 +49,7 @@
 		<typeAlias type="com.mgm.mgm01.betting.model.BettingDto" alias="BettingDto"/>
 		<typeAlias type="com.mgm.mgm01.rule.model.BettingRuleDto" alias="BettingRuleDto"/>
 		<typeAlias type="com.mgm.mgm01.board.model.BoardDto" alias="BoardDto"/>
+		<typeAlias type="com.mgm.mgm01.reply.model.ReplyDto" alias="ReplyDto"/>
 		<typeAlias type="com.mgm.mgm01.trade.model.TradeDto" alias="TradeDto"/>
 		<typeAlias type="com.mgm.mgm01.rule.model.TradeRuleDto" alias="TradeRuleDto"/>
 		<typeAlias type="com.mgm.mgm01.cashinfo.model.CashInfoDto" alias="CashInfoDto"/>

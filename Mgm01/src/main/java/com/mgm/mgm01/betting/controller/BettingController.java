@@ -21,41 +21,9 @@ import com.mgm.mgm01.user.model.UserService;
 
 @Controller
 public class BettingController {
-		@Autowired BettingService bettingService;
-		@Autowired UserService userService;
-		@Autowired GameResultService gameResultService;
-		
-	//	@Transactional
-	//	@RequestMapping(value="/betting/new")
-	//	public ModelAndView newControl(ModelAndView mav, Authentication auth, BettingDto dto,
-	//			@RequestParam(value="cash")BigInteger cash) {
-	////		dto.setId(auth.getName());
-	////		BettingDto tmpDto = bettingService.readBettingOneService(auth.getName());
-	////		GameResultDto gameResultDto = gameResultService.readGameResultOneService();
-	////
-	////		
-	////		Instant instant = Instant.now();
-	////		Instant instant2 = gameResultDto.getDate().toInstant();
-	////
-	////		Duration duration = Duration.between(instant2, instant);
-	////		long seconds = duration.getSeconds();
-	////		System.out.println("seconds : "	+ seconds);
-	////
-	////		if(seconds>90) {}
-	////			
-	////		userService.updateCashService(auth.getName(), cash);
-	////		
-	//		
-	//		mav.addObject("message", "asss");
-	//		BigInteger new_cash = userService.readCashService(auth.getName());
-	//		
-	//		mav.addObject("cash", new_cash);
-	//		mav.setViewName("game/ladder");
-	//		return mav;
-	//	}
-
-
-
+	@Autowired BettingService bettingService;
+	@Autowired UserService userService;
+	@Autowired GameResultService gameResultService;
 
 	@Transactional
 	@ResponseBody
@@ -71,20 +39,20 @@ public class BettingController {
 		//check Duration
 		Instant instant = Instant.now();
 		Instant instant2 = gameResultDto.getDate().toInstant();
-//		Instant instant3 = tmpDto.getDate().toInstant();
+		//		Instant instant3 = tmpDto.getDate().toInstant();
 
 		Duration duration = Duration.between(instant2, instant);
-//		Duration duration2 = Duration.between(instant3, instant);
+		//		Duration duration2 = Duration.between(instant3, instant);
 
 		long seconds = duration.getSeconds();
-//		long seconds2 = duration2.getSeconds();
+		//		long seconds2 = duration2.getSeconds();
 
-//		if(seconds<90) {
-		dto.setGame_num(gameResultDto.getGame_num()+1);
-		System.out.println("gameBUm" + gameResultDto.getGame_num() + " / " + dto.getGame_num());
+		if(seconds<90) {
+			dto.setGame_num(gameResultDto.getGame_num()+1);
+			System.out.println("gameBUm" + gameResultDto.getGame_num() + " / " + dto.getGame_num());
 			if(tmpDto!=null) {
 				dto.setBetting_num(tmpDto.getBetting_num());
-				
+
 				if(tmpDto.getOrdernum()==dto.getOrdernum()) {
 					BigInteger cash2 = userService.readCashService(auth.getName());
 					System.out.println(cash);
@@ -102,15 +70,15 @@ public class BettingController {
 				}
 			} else {
 				bettingService.createBettingService(dto);
-				
+
 				msg = "배팅에 성공하였습니다.";
 			}
-//		} else
-//			msg="배팅 가능시간이 지났습니다.\n 다음회차에 배팅해주세요";
-			System.out.println(cash);
-			userService.updateCashService(auth.getName(), cash);
+		} else
+			msg="배팅 가능시간이 지났습니다.\n 다음회차에 배팅해주세요";
+
+		userService.updateCashService(auth.getName(), cash);
 		return msg;
 	}
-	
-	
+
+
 }

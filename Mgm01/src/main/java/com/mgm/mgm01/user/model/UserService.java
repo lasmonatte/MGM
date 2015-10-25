@@ -10,5 +10,5 @@ public interface UserService {
 	public BigInteger readCashService(String id);
 	public int updateCashService(String id, BigInteger cash);
 	public boolean readB_passwordService(String id, String pass);
-	public Map<String, Object> readAllUserService(int p, String type);
+	public Map<String, Object> readAllUserService(int p, String type, boolean master, String admin_id);
 }

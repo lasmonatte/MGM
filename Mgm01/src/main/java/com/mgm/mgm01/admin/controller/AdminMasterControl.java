@@ -12,11 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgm.mgm01.admin.model.AdminDto;
 import com.mgm.mgm01.admin.model.AdminService;
+import com.mgm.mgm01.rule.model.BettingRuleDto;
+import com.mgm.mgm01.rule.model.RuleService;
+import com.mgm.mgm01.rule.model.TradeRuleDto;
 
 @Controller
 public class AdminMasterControl {
 	
 	@Autowired AdminService adminService;
+	@Autowired RuleService ruleService;
 	
 	@RequestMapping(value="/admin/adminInfo", method=RequestMethod.GET)
 	public ModelAndView adminInfoControl(ModelAndView mav, Authentication auth,
@@ -51,7 +55,7 @@ public class AdminMasterControl {
 			@RequestParam(name="id")String id){
 		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]")){
 			adminService.createAdminService(id);
-			mav.setViewName("redirect:/admin/adminInfo");;
+			mav.setViewName("redirect:/admin/modAdmin");;
 		}
 		else
 			mav.setViewName("redirect:/admin/main");
@@ -64,7 +68,7 @@ public class AdminMasterControl {
 			@RequestParam(name="admin_num")int admin_num){
 		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]")){
 			adminService.deleteAdminService(admin_num);
-			mav.setViewName("redirect:/admin/adminInfo");
+			mav.setViewName("redirect:/admin/modAdmin");
 		}
 		else
 			mav.setViewName("redirect:/admin/main");
@@ -80,7 +84,7 @@ public class AdminMasterControl {
 				adminService.updateAdminSalaryService(id);
 			else if(type.equals("dividend"))
 				adminService.updateDividendService(id, dividend);
-			mav.setViewName("redirect:/admin/adminInfo");
+			mav.setViewName("redirect:/admin/modAdmin");
 		}
 		else
 			mav.setViewName("redirect:/admin/main");
@@ -91,7 +95,11 @@ public class AdminMasterControl {
 	@RequestMapping(value="/admin/ruleInfo", method=RequestMethod.GET)
 	public ModelAndView ruleInfoControl(ModelAndView mav, Authentication auth){
 		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]")){
-
+			BettingRuleDto bettingRuleDto = ruleService.readBettingRuleService();
+			TradeRuleDto tradeRuleDto = ruleService.readTradeRuleService();
+			
+			mav.addObject("bettingRuleDto", bettingRuleDto);
+			mav.addObject("tradeRuleDto", tradeRuleDto);
 			mav.setViewName("t:admin/ruleInfo");
 		}
 		else
@@ -100,9 +108,14 @@ public class AdminMasterControl {
 	}
 	
 	@RequestMapping(value="/admin/ruleInfo", method=RequestMethod.POST)
-	public ModelAndView ruleInfControl(ModelAndView mav, Authentication auth){
+	public ModelAndView ruleInfControl(ModelAndView mav, Authentication auth,
+			BettingRuleDto bettingRuleDto, TradeRuleDto tradeRuleDto, String type){
 		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]")){
-
+			if(type.equals("bettingRule"))
+				ruleService.updateBettingRuleService(bettingRuleDto);
+			if(type.equals("tradeRule"))
+				ruleService.updateTradeRuleService(tradeRuleDto);
+		
 			mav.setViewName("redirect:/admin/ruleInfo");
 		}
 		else

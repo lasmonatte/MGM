@@ -27,9 +27,21 @@ public class RuleServiceImpl implements RuleService{
 	}
 
 	@Override
+	public int createTradeRuleService(TradeRuleDto dto) {
+		// TODO Auto-generated method stub
+		return dao.createTradeRule(dto);
+	}
+
+	@Override
 	public TradeRuleDto readTradeRuleService() {
 		// TODO Auto-generated method stub
 		return dao.readTradeRule();
+	}
+
+	@Override
+	public int updateTradeRuleService(TradeRuleDto dto) {
+		// TODO Auto-generated method stub
+		return dao.updateTradeRule(dto);
 	}
 
 	

@@ -11,7 +11,7 @@ public interface UserDao {
 	public BigInteger readCash(String id);
 	public int updateCash(Map<String, Object> info);
 	public String readB_password(String id);
-	public List<UserDto> readAllUser(String type);
+	public List<UserDto> readAllUser(Map<String, Object> info);
 //	public UserDto readUser(String id);
 //	public int deleteUser(String id);
 //	public UserDetailsVO loginUser(String username);

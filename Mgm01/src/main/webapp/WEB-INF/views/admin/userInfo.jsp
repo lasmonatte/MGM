@@ -13,7 +13,6 @@
 		<div id="main" align="center">
 			<div class="full_w">
 				<h2>회 원 관 리</h2>
-				<p>회원을 클릭하시면 해당 회원의 캐시내역을 볼 수 있습니다. </p>
 				<!-- list로  all, charge, exchange, win, lose -->
 				
 				<div class="entry">

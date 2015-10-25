@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto readUserService(String id) {
 		// TODO Auto-generated method stub
-		System.out.println("Service " + id);
 		return dao.readUser(id);
 	}
 	
@@ -63,9 +62,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Map<String, Object> readAllUserService(int p, String type) {
+	public Map<String, Object> readAllUserService(int p, String type, boolean master, String admin_id) {
 		// TODO Auto-generated method stub
-		List<UserDto> li = dao.readAllUser(type);
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("type", type);
+		info.put("master", master);
+		info.put("admin_id", admin_id);
+		List<UserDto> li = dao.readAllUser(info);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		int size = 5;

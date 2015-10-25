@@ -6,22 +6,29 @@
 	<!-- User Register Service -->
 	<insert id="createBettingRule" parameterType="BettingRuleDto">
 		insert into betting_rule 
-		values(#{dividend_oe}, #{dividend_lr}, #{dividend_line}, #{betting_max}, #{betting_min})
+		values(#{dividend_oe}, #{dividend_lr}, #{dividend_line}, #{betting_max}, #{betting_min}, #{tax})
 	</insert>
 	<select id="readBettingRule" resultType="BettingRuleDto">
 		select * from betting_rule 
 	</select>
 	<update id="updateBettingRule" parameterType="BettingRuleDto">
 		update betting_rule set
-		dividend_oe=#{dividend_oe} and dividend_lr=#{dividend_lr} and dividend_line=#{dividend_line}
-		and betting_max=#{betting_max} and betting_min=#{betting_min}
+		dividend_oe=#{dividend_oe}, dividend_lr=#{dividend_lr}, dividend_line=#{dividend_line},
+		betting_max=#{betting_max}, betting_min=#{betting_min}, tax=#{tax}
 	</update>
 	<delete id="deleteBettingRule" parameterType="BettingRuleDto">
 		delete from betting_rule
 	</delete>
 	
-	
+	<insert id="createTradeRule" parameterType="TradeRuleDto">
+		insert into trade_rule(b_account, b_bankname, b_username)
+		values (#{b_account}, #{b_bankname}, #{b_username})
+	</insert>
 	<select id="readTradeRule" resultType="TradeRuleDto">
 		select * from trade_rule 
 	</select>
+	<update id="updateTradeRule" parameterType="TradeRuleDto">
+		update trade_rule set
+		b_account=#{b_account}, b_bankname=#{b_bankname}, b_username=#{b_username}
+	</update>
 </mapper>

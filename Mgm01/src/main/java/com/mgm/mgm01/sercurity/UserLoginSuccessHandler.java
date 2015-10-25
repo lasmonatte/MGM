@@ -31,7 +31,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler{
 		for(GrantedAuthority a : authentication.getAuthorities()){
 			logger.info(a.getAuthority());
 			if(a.getAuthority().equals("ROLE_USER"))
-				page="/mgm01/user/main";
+				page="/mgm01/game/ladder";
 			else if(a.getAuthority().equals("ROLE_ADMIN"))
 				page="/mgm01/admin/main";
 			else if(a.getAuthority().equals("ROLE_MASTER"))

@@ -45,7 +45,7 @@
 								${item.board_num }
 							</td>
 							<td>
-								${item.title }
+								${item.title }[${item.replyCount }]
 							</td>
 							<td>
 								${item.nickname }

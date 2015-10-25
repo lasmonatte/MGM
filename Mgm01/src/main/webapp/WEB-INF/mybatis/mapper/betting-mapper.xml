@@ -29,9 +29,12 @@
 	<select id="readBettingListToUpdate" resultType="BettingDto">
 		select * from betting where ordernum=0
 	</select>
-	<select id="readBettingListAll" resultType="BettingDto">
-		select * from betting
-		order by betting_num desc
+	<select id="readBettingListAll" parameterType="Map" resultType="BettingDto">
+		select b.* from betting b, user u
+			<if test='master != true'>	
+        		where b.id=u.id and u.recmd_id=#{admin_id}
+        	</if>
+		order by b.betting_num desc
 	</select>
 	<update id="updateBetting" parameterType="BettingDto">
 		update betting set

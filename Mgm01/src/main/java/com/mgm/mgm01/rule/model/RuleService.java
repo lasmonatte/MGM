@@ -6,5 +6,7 @@ public interface RuleService {
 	public BettingRuleDto readBettingRuleService();
 	public int updateBettingRuleService(BettingRuleDto dto);
 	
+	public int createTradeRuleService(TradeRuleDto dto);
 	public TradeRuleDto readTradeRuleService();
+	public int updateTradeRuleService(TradeRuleDto dto);
 }

@@ -1,6 +1,7 @@
 package com.mgm.mgm01.cashinfo.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +26,14 @@ public class CashInfoDaoImpl implements CashInfoDao{
 	}
 
 	@Override
-	public List<CashInfoDto> reareadCashInfoByRecmd(String id) {
+	public List<CashInfoDto> readCashInfoByRecmd(Map<String, String> info) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.cashinfo.model.CashDao.reareadCashInfoByRecmd", id);
+		return session.selectList("com.mgm.mgm01.cashinfo.model.CashDao.readCashInfoByRecmd", info);
 	}
 
 	@Override
 	public List<CashInfoDto> readCashInfoAll(String type) {
 		// TODO Auto-generated method stub
-		System.out.println(type);
 		return session.selectList("com.mgm.mgm01.cashinfo.model.CashDao.readCashInfoAll", type);
 	}
 

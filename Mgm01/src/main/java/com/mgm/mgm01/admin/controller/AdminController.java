@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mgm.mgm01.admin.model.AdminDto;
 import com.mgm.mgm01.admin.model.AdminService;
 import com.mgm.mgm01.betting.model.BettingService;
 import com.mgm.mgm01.board.model.BoardService;
-import com.mgm.mgm01.cashinfo.model.CashInfoDto;
 import com.mgm.mgm01.cashinfo.model.CashInfoService;
 import com.mgm.mgm01.trade.model.TradeDto;
 import com.mgm.mgm01.trade.model.TradeService;
@@ -34,16 +34,27 @@ public class AdminController {
 
 	@RequestMapping(value="/admin/main",method=RequestMethod.GET)
 	public ModelAndView mainControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth){
-		Map<String, Object> map = userService.readAllUserService(start, "ROLE_USER");
-
-		mav.addAllObjects(map);
-		mav.setViewName("t:admin/main");
+		mav.setViewName("redirect:/admin/myInfo");
+		return mav;
+	}
+	
+	@RequestMapping(value="/admin/myInfo",method=RequestMethod.GET)
+	public ModelAndView myInfoControl(ModelAndView mav, Authentication auth){
+		AdminDto dto = adminService.readAdminOneService(auth.getName());
+		
+		mav.addObject("dto", dto);
+		mav.setViewName("t:admin/myInfo");
 		return mav;
 	}
 	
 	@RequestMapping(value="/admin/userInfo",method=RequestMethod.GET)
 	public ModelAndView userInfoControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth){
-		Map<String, Object> map = userService.readAllUserService(start, "ROLE_USER");
+		boolean master = false;
+
+		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]"))
+			master = true;
+		
+		Map<String, Object> map = userService.readAllUserService(start, "ROLE_USER", master, auth.getName());
 
 		mav.addAllObjects(map);
 		mav.setViewName("t:admin/userInfo");
@@ -53,8 +64,11 @@ public class AdminController {
 	@RequestMapping("/admin/cashInfo")
 	public ModelAndView cashInfoControl(ModelAndView mav,  Authentication auth,
 			@RequestParam(defaultValue="all")String type, @RequestParam(defaultValue = "1") int start) {
-		// List li = bls.readAllService();
-		Map<String, Object> map = cashInfoService.readCashInfoAll(start, type);
+		Map<String, Object> map;
+		if(!auth.getAuthorities().toString().equals("[ROLE_MASTER]"))		
+			map = cashInfoService.readCashInfoByRecmd(start, type, auth.getName());
+		else
+			map = cashInfoService.readCashInfoAll(start, type);
 		
 		mav.addAllObjects(map);
 		mav.addObject("type", type);
@@ -65,8 +79,12 @@ public class AdminController {
 	@RequestMapping("/admin/bettingList")
 	public ModelAndView betlistControl(ModelAndView mav,  Authentication auth,
 			@RequestParam(name="type")String type, @RequestParam(defaultValue = "1") int start) {
-		// List li = bls.readAllService();
-		Map<String, Object> map = bettingService.readBettingListAllService(start);
+		boolean master = false;
+
+		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]"))
+			master = true;
+		
+		Map<String, Object> map = bettingService.readBettingListAllService(start, master, auth.getName());
 		mav.addAllObjects(map);
 		mav.addObject("type", type);
 		mav.setViewName("t:admin/bettingList");
@@ -76,8 +94,12 @@ public class AdminController {
 	@RequestMapping("/admin/tradeInfo")
 	public ModelAndView tradeInfoControl(ModelAndView mav,  Authentication auth,
 			@RequestParam(name="type")String type, @RequestParam(defaultValue = "1") int start) {
-		// List li = bls.readAllService();
-		Map<String, Object> map = tradeService.readTradeListAllService(type, start);
+		boolean master = false;
+
+		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]"))
+			master = true;
+		
+		Map<String, Object> map = tradeService.readTradeListAllService(type, start, master, auth.getName());
 		mav.addAllObjects(map);
 		mav.addObject("type", type);
 		mav.setViewName("t:admin/tradeInfo");
@@ -90,11 +112,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/trade",produces="text/plain;charset=UTF-8")
 	public String newControl(ModelAndView mav, @RequestParam(value="t_num")int t_num) {
 		String msg="기본형";
-		CashInfoDto cashInfoDto = new CashInfoDto();
-		
 		TradeDto dto = tradeService.readTradeOneService(t_num);
+		System.out.println(dto);
 		BigInteger userCash = userService.readCashService(dto.getId());
-		
 		if(dto.getType().equals("charge"))
 			userCash = userCash.add(dto.getAmount());
 		else
@@ -103,11 +123,17 @@ public class AdminController {
 		userService.updateCashService(dto.getId(), userCash);
 		tradeService.updateTradeService(t_num);
 		
-		cashInfoDto.setId(dto.getId());
-		cashInfoDto.setType(dto.getType());
-		cashInfoDto.setBreakdown(dto.getAmount());
-		cashInfoService.createCashInfo(cashInfoDto);
+		cashInfoService.createCashInfo(dto.getId(), dto.getAmount(), dto.getType());
 		msg="처리되었습니다.";
 		return msg;
 	}
+	
+//	@RequestMapping(value="/user/aa")
+//	public ModelAndView test(ModelAndView mav, String id){
+//		// List li = bls.readAllService();
+//		System.err.println(id);
+//		adminService.createAdminService(id);
+//		return mav;
+//	}
+
 }

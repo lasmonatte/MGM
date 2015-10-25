@@ -1,12 +1,15 @@
 package com.mgm.mgm01.betting.model;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.mgm.mgm01.cashinfo.model.CashInfoService;
 import com.mgm.mgm01.gameresult.model.GameResultService;
 
 @Component
@@ -14,10 +17,14 @@ public class BettingServiceImpl implements BettingService{
 
 	@Autowired BettingDao dao;
 	@Autowired GameResultService gameResultService;
+	@Autowired CashInfoService cashInfoService;
 	
+	@Transactional
 	@Override
 	public int createBettingService(BettingDto dto) {
 		// TODO Auto-generated method stub
+		cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()),
+				"betting");
 		return dao.createBetting(dto);
 	}
 
@@ -50,9 +57,12 @@ public class BettingServiceImpl implements BettingService{
 	}
 	
 	@Override
-	public Map<String, Object> readBettingListAllService(int p) {
+	public Map<String, Object> readBettingListAllService(int p, boolean master, String admin_id) {
 		// TODO Auto-generated method stub
-		List<BettingDto> li = dao.readBettingListAll();
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("master", master);
+		info.put("admin_id", admin_id);
+		List<BettingDto> li = dao.readBettingListAll(info);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int size = 5;
 		int pageSize = li.size()/size;

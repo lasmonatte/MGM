@@ -12,7 +12,6 @@ public class AdminDto {
 	private BigInteger total_exchange;
 	private BigInteger total_betting;
 	private BigInteger total_win;
-	private BigInteger total_lose;
 	private int total_user;
 	private Timestamp date_salary;
 	private BigInteger total_salary;
@@ -61,12 +60,6 @@ public class AdminDto {
 	public void setTotal_win(BigInteger total_win) {
 		this.total_win = total_win;
 	}
-	public BigInteger getTotal_lose() {
-		return total_lose;
-	}
-	public void setTotal_lose(BigInteger total_lose) {
-		this.total_lose = total_lose;
-	}
 	public int getTotal_user() {
 		return total_user;
 	}
@@ -102,7 +95,7 @@ public class AdminDto {
 	public String toString() {
 		return "AdminDto [admin_num=" + admin_num + ", id=" + id + ", total_cash=" + total_cash + ", total_charge="
 				+ total_charge + ", total_exchange=" + total_exchange + ", total_betting=" + total_betting
-				+ ", total_win=" + total_win + ", total_lose=" + total_lose + ", total_user=" + total_user
+				+ ", total_win=" + total_win + ", total_user=" + total_user
 				+ ", date_salary=" + date_salary + ", total_salary=" + total_salary + ", salary=" + salary
 				+ ", dividend=" + dividend + "]";
 	}

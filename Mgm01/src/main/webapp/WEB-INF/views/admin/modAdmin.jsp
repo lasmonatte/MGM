@@ -2,30 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 	function check(type, info){
 		switch (type) {
 		case "create":
 			if(confirm("총판을 생성하시겠습니까?"))
-				location.href("/mgm01/admin/createAdmin?id="+info);
+				location.href = "/mgm01/admin/createAdmin?id="+info;
 			break;
 		case "update":
 			if(confirm("배당금을 주셨습니까?"))
-				location.href("/mgm01/admin/updateAdmin?type=salary&id="+info);
+				location.href="/mgm01/admin/updateAdmin?type=salary&id="+info;
 			break;
 		case "delete":
 			if(confirm("해당 총판을 삭제하시겠습니까?"))
-				location.href("/mgm01/admin/deleteAdmin?admin_num="+info);
+				location.href = "/mgm01/admin/deleteAdmin?admin_num="+info;
 			break;
 		}
 	}
 </script>
 </head>
 <body>
+<sec:authentication property="principal.username" var="id"/>
 <div id="content" align="center">
 	
 		<div id="main" align="center">
@@ -76,24 +78,33 @@
 							</td>
 							<td>
 								<c:if test="${item.salary ne 0 }">
-								<input type="button" src="javascript:check('update', ${item.id })"
-									value="배당금주기" />
+								<button onclick="javascript:check('update', '${item.id }')">
+									배당금주기
+								</button>
+									
 								</c:if>
 							</td>
 							<td>
-								<a href="javascript:check('delete', ${item.admin_num });"
-									 class="table-icon delete" title="삭제하기"></a>
+								<c:if test="${item.id ne id }">
+									<a href="javascript:check('delete', ${item.admin_num });"
+										 class="table-icon delete" title="삭제하기"></a>
+								</c:if>
 							</td>
 							<td width="100px">
+							<c:if test="${item.id ne 'aa00' }">
 							<form action="/mgm01/admin/updateAdmin" 
 									style="margin: 0px; padding: 0px; width: 100%">
 								<input type="hidden" name="type" value="dividend"/>
 								<input type="hidden" name="id" value=${item.id } />
 								<input type="text" name="dividend" value=${item.dividend }
-									maxlength="4" size="5" pattern="[0-9]{1}.[0-9]{2}"
+									maxlength="4" size="5" pattern="[0-9]{1}.[0-9]{1,2}"
 									title="X.XX 혹은 X.X"/>&nbsp;
 								<input type="submit" value="변경" />
 							</form>
+							</c:if>
+							<c:if test="${item.id eq 'aa00' }">
+								${item.dividend }
+							</c:if>
 							</td>
 						</tr>
 						</c:forEach>
@@ -111,7 +122,7 @@
 					<tr>
 						<th class="write">아이디</th>
 						<td>
-						<form action="/mgm01/admin/createAdmin" 
+						<form action="/mgm01/admin/createAdmin" method="POST"
 									style="margin: 0px; padding: 0px; width: 100%">
 								<input type="text" name="id" maxlength="20" size="20"/>&nbsp;
 								<input type="submit" value="생성" />

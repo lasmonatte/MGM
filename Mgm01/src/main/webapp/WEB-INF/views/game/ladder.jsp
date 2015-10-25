@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,15 +20,6 @@
 	var betting_lr = null;
 	var betting_line = null;
 	
-	$(document).ready(function(){
-		//on window scroll fire it will call a function.
-		$(window).scroll(function () {
-			//after window scroll fire it will add define pixel added to that element.
-			set = $(document).scrollTop()+ 170 + "px" ;
- 			//this is the jQuery animate function to fixed the div position after scrolling.
-			$('#floatDiv').animate({top:set},{duration:50,queue:false});
-		});
-	});
 	
 	function addMoney(money){
 		if(total_money+money>cash)
@@ -152,40 +143,26 @@
 </script>
 <style type="text/css">
    #floatDiv {
-        position:absolute;
-        right:10%;
-        top:20%;
-        margin-top:200px;
-        margin-left:-200px;
-        width:300px;
-        height:500px;
+        width:100%;
+        height:100%;
         background-color: orange;
     }
     
-    #betting_info {
-        position:absolute;
-        left:20%;
-        top:20%;
-        margin-top:200px;
-        margin-left:-200px;
-      
-        background-color: yellow;
-    }
             
     </style>
 </head>
 <body>
-	<form  method="POST" id="fff">
-	<div style='width:810px; height:555px; overflow:hidden;text-align:center; margin-top:5%; margin-left: 25% '>
-		<iframe style='position:relative; top:-70px; left:-10px;' src='http://named.com/game/ladder/v2_index.php' 
-				id='named-ladder' name='named-ladder' width='830' height='617' scrolling='no' frameborder='0'></iframe>
-	</div>
-	<!-- Float -->
-	<div id="floatDiv">
-		<div style="height:60px;line-height:80px;">
-			<label><input type="checkbox" id="cart">카트고정</label>
-			<label>MGM</label>
-		</div>
+	<table align="center" border="0" width="95%">
+	<tbody>
+		<tr>
+			<td align="center">
+				<div style='width:810px; height:555px; overflow:hidden;text-align:center;'>
+				<iframe style='position:relative; top:-70px; left:-10px;' src='http://named.com/game/ladder/v2_index.php' 
+					id='named-ladder' name='named-ladder' width='830' height='617' scrolling='no' frameborder='0'></iframe>
+				</div>
+			</td>
+			<td>
+			<div id="floatDiv">
 		<table cellpadding="8" cellspacing="0" border="0" width="100%" id="betting_context">
 		<tbody>
 			<tr>
@@ -237,14 +214,17 @@
 			<div id="betting_lr"></div>
 			<div id="betting_line"></div>
 		</div>
-    </div>
-    
-    <div id="betting_info" >
-		<iframe  src='/mgm01/game/betlist_inner' 
-				id='betting_list' name='betting_list' width='300' height='850' scrolling='no' frameborder="0">
-		</iframe>
-	</div>
-    
+   		 </div>
+			</td>
+		</tr>
+		<tr>
+		<td>
+		</td>
+		</tr>
+	</tbody>
+	</table>
+	<form  method="POST" id="fff">
+	
     <!-- 테이블 -->
 	<table width="80%" border="1" cellpadding="0" cellspacing="0" class="betting_table " id="betting_table" align="center">
 
@@ -308,7 +288,13 @@
 		</tr>
 	</tbody>
 	</table>
+	<!-- Float -->
 	
+    <div align="center" style="margin-top: 5%">
+		<iframe  src='/mgm01/game/betlist_inner' 
+				id='betting_list' name='betting_list' width='90%' height='850' scrolling='no' frameborder="0">
+		</iframe>
+    </div>
 </form>
 </body>
 </html>

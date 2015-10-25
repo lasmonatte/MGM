@@ -11,8 +11,12 @@
 	<select id="readTradeOne" parameterType="Integer" resultType="TradeDto">
 		select * from trade where t_num=#{t_num}
 	</select>
-	<select id="readTradeListAll" parameterType="String" resultType="TradeDto">
-		select * from trade where type=#{type} order by t_num desc
+	<select id="readTradeListAll" parameterType="Map" resultType="TradeDto">
+		select t.* from trade t, user u where type=#{type}
+		<if test='master != true'>
+            and t.id=u.id and u.recmd_id=#{admin_id}
+        </if>
+		 order by t.t_num desc
 	</select>
 	<select id="readTradeListById" parameterType="Map" resultType="TradeDto">
 		select * from trade where id=#{id} order by t_num desc

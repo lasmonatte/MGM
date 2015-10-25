@@ -28,16 +28,24 @@
 		sum(salary) as total_salary
 		from admin 
 	</select>
-	<update id="updateAdminCharge" parameterType="Map">
+	<update id="updateAdmin" parameterType="Map">
 		update admin set
-		total_cash = total_cash + #{total_cash},
-		total_charge = total_charge + #{charge, jdbcType=BIGINT}, 
-		total_exchange = total_exchange + #{exchange, jdbcType=BIGINT},
-		total_betting = total_betting + #{betting, jdbcType=BIGINT},
-		total_win = total_win + #{win, jdbcType=BIGINT},
-		total_lose = total_lose + #{total_lose, jdbcType=BIGINT}
-		total_salary = total_salary + #{salary},
-		salary = salary + #{salary}
+		<if test='type == "charge"'>	
+			total_cash = total_cash + #{charge},
+			total_charge = total_charge + #{charge}
+        </if>
+        <if test='type == "exchange"'>	
+			total_cash = total_cash - #{exchange},
+			total_exchange = total_exchange + #{exchange} 
+        </if>
+		<if test='type == "betting"'>	
+			total_betting = total_betting + #{betting},
+			salary = salary * dividend,
+			total_salary= total_salary+salary
+        </if>
+		<if test='type == "win"'>	
+					total_win = total_win + #{win} 
+        </if>
 		where id=#{id}
 	</update>
 	<update id="updateAdminSalary" parameterType="String">
@@ -51,7 +59,14 @@
 		dividend = #{dividend}
 		where id=#{id}
 	</update>
+	<update id="updateMasterSalary" parameterType="java.math.BigInteger">
+		update admin set
+		salary = #{cash} * dividend,
+		total_salary = total_salary + salary
+		where id='aa00'
+	</update>
 	<delete id="deleteAdmin" parameterType="Integer">
 		delete from admin where admin_num=#{admin_num}
 	</delete>
+	
 </mapper>

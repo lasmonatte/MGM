@@ -8,12 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mgm.mgm01.betting.model.BettingDto;
 import com.mgm.mgm01.betting.model.BettingService;
+import com.mgm.mgm01.cashinfo.model.CashInfoService;
 import com.mgm.mgm01.user.model.UserDto;
 import com.mgm.mgm01.user.model.UserService;
 
@@ -22,6 +21,7 @@ public class UserController {
 
 	@Autowired UserService userService;
 	@Autowired BettingService bettingService;
+	@Autowired CashInfoService cashInfoService;
 	
 	@RequestMapping(value="/user/main")
 	public ModelAndView control(ModelAndView mav, Authentication auth) {
@@ -61,8 +61,10 @@ public class UserController {
 		
 		int rst1 = userService.updateCashService(auth.getName(), cash);
 		int rst2 = bettingService.updateBettingReceivedService(game_num, auth.getName());
-		if(rst1>0 && rst2>0)
+		if(rst1>0 && rst2>0){
 			msg = "당첨금을 수령하셨습니다.";
+			cashInfoService.createCashInfo(auth.getName(), BigInteger.valueOf(prize_money), "win");
+		}
 		else
 			msg = "당첨금을 수령하지 못했습니다.";
 				

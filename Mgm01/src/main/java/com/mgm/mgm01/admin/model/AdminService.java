@@ -11,5 +11,6 @@ public interface AdminService {
 	public int updateAdminService(String admin_id, String type, BigInteger cash);
 	public int updateAdminSalaryService(String id);
 	public int updateDividendService(String id, float dividend);
+	public int updateMasterSalaryService(BigInteger cash);
 	public int deleteAdminService(int admin_num);
 }

@@ -1,6 +1,7 @@
 package com.mgm.mgm01.trade.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class TradeDaoImpl implements TradeDao {
 	}
 
 	@Override
-	public List<TradeDto> readTradeListAll(String type) {
+	public List<TradeDto> readTradeListAll(Map<String, Object> info) {
 		// TODO Auto-generated method stub
-		return session.selectList("com.mgm.mgm01.trade.model.TradeDao.readTradeListAll", type);
+		return session.selectList("com.mgm.mgm01.trade.model.TradeDao.readTradeListAll", info);
 	}
 
 	@Override

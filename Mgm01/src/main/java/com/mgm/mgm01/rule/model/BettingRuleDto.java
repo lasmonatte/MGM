@@ -7,7 +7,8 @@ public class BettingRuleDto {
 	private float dividend_line;
 	private int betting_max;
 	private int betting_min;
-	
+	private float tax;
+
 	public float getDividend_oe() {
 		return dividend_oe;
 	}
@@ -37,5 +38,18 @@ public class BettingRuleDto {
 	}
 	public void setBetting_min(int betting_min) {
 		this.betting_min = betting_min;
+	}
+	public float getTax() {
+		return tax;
+	}
+	public void setTax(float tax) {
+		this.tax = tax;
+	}
+	
+	@Override
+	public String toString() {
+		return "BettingRuleDto [dividend_oe=" + dividend_oe + ", dividend_lr=" + dividend_lr + ", dividend_line="
+				+ dividend_line + ", betting_max=" + betting_max + ", betting_min=" + betting_min + ", tax=" + tax
+				+ "]";
 	}
 }

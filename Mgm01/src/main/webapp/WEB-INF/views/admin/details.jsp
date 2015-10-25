@@ -24,15 +24,16 @@
 				<div class="entry">
 					<div class="sep"></div>
 				</div>
+	<form action="/mgm01/admin/reply_write" method="POST">
 	<table>
 		<tr>
 			<th scope="col">제목</th>
 			<td colspan="3">${boardDto.title }</td>
 		</tr>
 		<tr>
-			<th scope="col">작성자</th>
-			<td>${boardDto.nickname }</td>
-			<th scope="col">작성일자</th>
+			<th width="10%" scope="col">작성자</th>
+			<td width="60%">${boardDto.nickname }</td>
+			<th width="10%" scope="col">작성일자</th>
 			<td>${boardDto.date }</td>
 		</tr>	
 		<tr>
@@ -45,18 +46,29 @@
 		<tr>
 			<th scope="col" colspan="4">댓글</th>
 		</tr>
+		<c:forEach var="reply" items="${replyList }">
+		<tr>
+			<td></td>
+			<td>${reply.content }</td>
+			<td>${reply.nickname }</td>
+			<td>${reply.date }</td>
+		</tr>	
+		</c:forEach>
 		<tr>
 			<td colspan="4">
-				<textarea style="width: 100%" rows="5"></textarea>
+				<textarea name="content" style="width: 100%" rows="5"></textarea>
 			</td>
 		</tr>
 		<tr align="center">
 			<td colspan="4">
+				<input type="hidden" name="board_num" value="${boardDto.board_num }"/>
+				<input type="hidden" name="nickname" value="${boardDto.nickname }"/>
 				<input type="submit" value="댓글입력" style="width: 20%"/>
 			</td>
 		</tr>
 		</c:if>
 	</table>
+	</form>
 	<input type="button" value="목록으로" onclick="toList('${boardDto.type }')"
 	 		style="width: 20%; margin-bottom: 5%" />
 	 		<div class="sep">

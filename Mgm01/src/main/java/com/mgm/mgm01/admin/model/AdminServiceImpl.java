@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mgm.mgm01.sercurity.ShaEncoder;
@@ -30,8 +29,11 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		UserDto dto = new UserDto();
 		dto.setId(id);
-		dto.setPassword(encoder.saltEncoding(id, id));
+		dto.setPassword(id);
+		dto.setNickname(id);
+		dto.setName(id);
 		dto.setAuthority("ROLE_ADMIN");
+		dto.setB_password("1234");
 		userService.createUserService(dto);
 		userService.grantAuthorityService(dto);
 		return dao.createAdmim(id);
@@ -72,23 +74,11 @@ public class AdminServiceImpl implements AdminService{
 	public int updateAdminService(String admin_id, String type, BigInteger cash) {
 		// TODO Auto-generated method stub
 		Map<String, Object> info = new HashMap<String, Object>();
-		
 		//type=charge, exchange, betting, win, lose
-		switch (type) {
-		case "charge":
-		case "exchange":
-			info.put("cash", cash);	
-			break;
-		case "betting":
-		case "win":
-		case "lose":
-			info.put("cash", 0);
-			break;
-		}
-
+		info.put("type", type);
 		info.put(type, cash);
 		info.put("id", admin_id);
-		
+
 		return dao.updateAdmin(info);
 	}
 
@@ -113,6 +103,11 @@ public class AdminServiceImpl implements AdminService{
 		return dao.updateDividend(info);
 	}
 
+	@Override
+	public int updateMasterSalaryService(BigInteger cash) {
+		// TODO Auto-generated method stub
+		return dao.updateMasterSalary(cash);
+	}
 	@Override
 	public AdminDto readTotalService() {
 		// TODO Auto-generated method stub

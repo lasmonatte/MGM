@@ -34,13 +34,13 @@
 							<th scope="col">환전총액</th>
 							<th scope="col">배팅총액</th>
 							<th scope="col">당첨총액</th>
-							<th scope="col">미당첨총액</th>
 							<th scope="col">유저수</th>
 							<th scope="col">적립총액</th>
 						</tr>
 					</thead>
 					<tbody align="center">
 					<c:forEach var="item" items="${list }">
+					<c:if test="${item.id ne 'aa00' }">
 						<tr>
 							<td>
 								${item.id }
@@ -61,15 +61,13 @@
 								${item.total_win }
 							</td>
 							<td>
-								${item.total_lose }
-							</td>
-							<td>
 								${item.total_user }
 							</td>
 							<td>
 								${item.total_salary }
 							</td>
 						</tr>
+					</c:if>
 					</c:forEach>
 						<tr style="background: #DDDDDD;">
 							<th scope="col">총계</th>
@@ -87,9 +85,6 @@
 							</td>
 							<td>
 								${total.total_win }
-							</td>
-							<td>
-								${total.total_lose }
 							</td>
 							<td>
 								${total.total_user }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgm.mgm01.reply.model.ReplyDao">
+	<!-- User Register Service -->
+	<insert id="createReply" parameterType="ReplyDto">
+		insert into reply(board_num, nickname, content) 
+		value(#{board_num}, #{nickname}, #{content})
+	</insert>
+	<select id="readReplyList" parameterType="Integer" resultType="ReplyDto">
+		select * from reply
+		where board_num=#{board_num}
+		order by reply_num asc;
+	</select>
+	<delete id="deleteReply" parameterType="Integer">
+		delete from reply where reply_num=#{reply_num}
+	</delete>
+</mapper>
