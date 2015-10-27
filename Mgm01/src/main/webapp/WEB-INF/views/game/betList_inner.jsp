@@ -47,86 +47,96 @@ a:VISITED, a:LINK {
 </script>
 </head>
 <body>
-<div id="container" align="center">  
-    <div class="transparency">  
-    </div>  
-    <div class="content">  
-    <h2>배 팅 목 록 </h2>
-	<table class="dark" id="betlist" width="90%" style="margin-top: 2%;">
-		<thead>
+<div align="center">
+    <c:forEach var="item" items="${list }">
+	<table class="dark" id="betlist" width="90%" style="margin-bottom: 3%;">
+		<tbody>
 			<tr>
 				<th>배팅일시</th>
-				<th>회차</th>
-				<th>홀짝</th>
-				<th>좌우</th>
-				<th>사다리수</th>
-				<th>배팅액</th>
-				<th>배당</th>
-				<th>당첨금</th>
-				<c:if test="${item.received ne 'F' }">
-				<th>당첨금 수령</th>
-				</c:if>
-				
-			</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="item" items="${list }">
-			<tr>
-				<td>
+				<td style="height:3%;">
 					<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분"/>
 				</td>
-				<td>${item.ordernum }회차</td>
-				<c:if test="${item.betting_oe ne null }">
+			</tr>
+			<tr>
+				<th>회차</th>
+				<c:if test="${item.ordernum eq 0 }">
+					<td style="height:3%;">현재 진행중</td>	
+				</c:if>
+				<c:if test="${item.ordernum ne 0 }">
+					<td style="height:3%;">${item.ordernum }회차</td>
+				</c:if>
+			</tr>
+			<c:if test="${item.betting_oe ne null }">
+			<tr>
+				<th>홀짝</th>
 					<c:if test="${item.result_oe eq true  }">
-						<td style="color: blue;">적중</td>
+						<td style="height:3%; color: blue;">적중</td>
 					</c:if>
 					<c:if test="${item.result_oe eq false  }">
-						<td style="color: red;">실패</td>
+						<td style="height:3%; color: red;">실패</td>
 					</c:if>
-				</c:if>
-				<c:if test="${item.betting_lr ne null }">
+			</tr>
+			</c:if>
+			<c:if test="${item.betting_lr ne null }">
+			<tr>
+				<th>좌우</th>
 					<c:if test="${item.result_lr eq true  }">
-						<td style="color: blue;">적중</td>
+						<td style="height:3%; color: blue;">적중</td>
 					</c:if>
 					<c:if test="${item.result_lr eq false  }">
-						<td style="color: red;">실패</td>
+						<td style="height:3%; color: red;">실패</td>
 					</c:if>
-				</c:if>
-				<c:if test="${item.betting_line ne null }">
+			</tr>
+			</c:if>
+			<c:if test="${item.betting_line ne null }">
+			<tr>
+				<th>사다리수</th>
 					<c:if test="${item.result_line eq true  }">
-						<td style="color: blue;">적중</td>
+						<td style="height:3%; color: blue;">적중</td>
 					</c:if>
 					<c:if test="${item.result_line eq false  }">
-						<td style="color: red;">실패</td>
+						<td style="height:3%; color: red;">실패</td>
 					</c:if>
-				</c:if>
-				<td >${item.betting_money }</td>
-				<td >${item.dividend }</td>
+			</tr>
+			</c:if>
+			<tr>
+				<th>배팅액</th>
+				<td style="height:3%;">${item.betting_money }</td>
+			</tr>
+			<tr>
+				<th>배당</th>
+				<td style="height:3%;">${item.dividend }</td>
+			</tr>
+			<tr>
+				<th>당첨금</th>
 				<c:if test="${item.prize_money ne 0 }">
-					<td style="color:gold;">${item.prize_money }</td>
+					<td style="height:3%; color:gold;">${item.prize_money }</td>
 				</c:if>
 				<c:if test="${item.prize_money eq 0 }">
-					<td>${item.prize_money }</td>
+					<td style="height:3%;">${item.prize_money }</td>
 				</c:if>
+			</tr>
+			<c:if test="${item.received ne 'F' }">
+			<tr>
+				<th>당첨금 수령</th>
 				<c:if test="${item.received eq 'N' }">
-					<td>
+					<td style="height:3%;">
 						<input type="button" value="당첨금을 받으세요" onclick="updateCash('${item.game_num }', '${item.prize_money }')"/>
 					</td>
 				</c:if>
 				<c:if test="${item.received eq 'Y' }">
-					<td> 당첨금을 수령하셨습니다.	</td>
-				</c:if>
-				<c:if test="${item.received eq 'F' }">
-					<td> - </td>
+					<td style="height:3%;">이미 수령하셨습니다.</td>
 				</c:if>
 			</tr>
-			</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
+	</c:forEach>
 
 
 
 <!-- p=1 or p=2 이런식으로 갈수 있게 링크를 만들어두자. -->
+
 <c:forEach var="num" begin="1" end="${size }">
 	<c:choose>
 		<c:when test="${param.start eq null and num eq 1 }">
@@ -146,7 +156,5 @@ a:VISITED, a:LINK {
 	</c:choose>
 </c:forEach>
 </div>
-</div>
-
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.mgm.mgm01.board.controller;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mgm.mgm01.board.model.BoardDto;
 import com.mgm.mgm01.board.model.BoardService;
+import com.mgm.mgm01.reply.model.ReplyDto;
+import com.mgm.mgm01.reply.model.ReplyService;
 import com.mgm.mgm01.sercurity.UserDetailsVO;
 import com.mgm.mgm01.user.model.UserService;
 
@@ -21,6 +24,7 @@ public class BoardController {
 
 	@Autowired BoardService boardService;
 	@Autowired UserService userService;
+	@Autowired ReplyService replyService;
 	
 	@RequestMapping(value="/board/write", method=RequestMethod.GET)
 	public ModelAndView writeControl(ModelAndView mav, String type, Authentication auth) {
@@ -84,12 +88,22 @@ public class BoardController {
 			Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
 		BoardDto boardDto = boardService.readBoardOneService(num);
-
+		List<ReplyDto> replyList = replyService.readReplyListService(num);
+		
 		mav.addObject("boardDto", boardDto);
 		mav.addObject("cash", cash);
+		mav.addObject("replyList", replyList);
 		mav.setViewName("t:board/details");
 		return mav;
 	}
 	
+	@RequestMapping(value="/board/reply_write", method=RequestMethod.POST)
+	public ModelAndView replyWriteControl(ModelAndView mav, Authentication auth, ReplyDto dto) {
+		
+		replyService.createReplyService(dto);
+		
+		mav.setViewName("redirect:/board/details?num="+dto.board_num);
+		return mav;
 
+	}
 }

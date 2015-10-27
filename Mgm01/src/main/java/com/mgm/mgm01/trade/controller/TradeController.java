@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +20,7 @@ public class TradeController {
 	@Autowired TradeService tradeService;
 	@Autowired UserService userService;
 	
-	@RequestMapping(value="/trade/charge", method=RequestMethod.POST)
+	@RequestMapping(value="/trade/charge")
 	public ModelAndView chargeControl(ModelAndView mav, Authentication auth, TradeDto dto) {
 		BigInteger new_cash = userService.readCashService(auth.getName());
 		dto.setId(auth.getName());

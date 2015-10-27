@@ -6,33 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/css/table-dark-styles.css" />
 <style>
-.tr1 {
-	text-align: center;
-	background-color: #FAF4C0;
-}
-
-.tr2 {
-	background-color: #FAE0D4;
-}
-
-.th10 {
-	text-align: center;
-	width: 10%;
-}
-
-.th15 {
-	text-align: center;
-	width: 15%;
-}
-
-.th40 {
-	text-align: center;
-	width: 40%;
-}
-
 a:VISITED, a:LINK {
-	color: #000000;
+	color: #C98500;
 	text-decoration: none;
 }
 
@@ -40,56 +17,76 @@ a:HOVER {
 	color: #FF5E00;
 	text-decoration: none;
 }
-</style>
 
-</head>
-<body>
+.title a:VISITED, a:LINK{
+	color: #ffffff;
+	text-decoration: none;
+	
+}
+</style>
 <script type="text/javascript">
 	function reLoad(){
 		location.reload();
 	}
 </script>
-<div align="center">
-	<table class="table" >
+</head>
+<body>
+<div id="container" align="center">  
+    <div class="transparency">  
+    </div>  
+    <div class="content">  
+    <h2>충 환 전 기 록</h2>
+	<table class="dark" width="80%" style="margin-top:2%;">
 		<thead>
 			<tr>
-				<th class="th">종류</th>
-				<th class="th">아이디</th>
-				<th class="th">신청자이름</th>
-				<th class="th">은행명</th>
-				<th class="th">예금주</th>
-				<th class="th">계좌번호</th>
-				<th class="th">신청날짜</th>
-				<th class="th">신청금액</th>
-				<th class="th">처리결과</th>
-				<th class="th">처리날짜</th>
+				<th >종류</th>
+				<th >아이디</th>
+				<th >신청자이름</th>
+				<th >은행명</th>
+				<th >예금주</th>
+				<th >계좌번호</th>
+				<th >신청날짜</th>
+				<th >신청금액</th>
+				<th >처리결과</th>
+				<th >처리날짜</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="item" items="${list }">
-			<tr class="tr">
-				<td class="td">
+			<tr >
 				<c:if test="${item.type eq 'charge' }">
-					충전
+				<td style="color:orange">충전</td>
 				</c:if>
 				<c:if test="${item.type eq 'exchange' }">
-					환전
+				<td style="color:gray">환전</td>
 				</c:if>
-				</td>
-				<td class="td">${item.id }</td>
-				<td class="td">${item.name }</td>
-				<td class="td">${item.b_bankname }</td>
-				<td class="td">${item.b_username }</td>
-				<td class="td">${item.b_account }</td>
-				<td class="td">${item.date }</td>
-				<td class="td">${item.amount }</td>
+				<c:if test="${item.type eq 'charge' }">
+				<td style="color:orange">${item.id }</td>
+				<td style="color:orange">${item.name }</td>
+				<td style="color:orange">${item.b_bankname }</td>
+				<td style="color:orange">${item.b_username }</td>
+				<td style="color:orange">${item.b_account }</td>
+				</c:if>
+				<c:if test="${item.type eq 'exchange' }">
+				<td style="color:gray">${item.id }</td>
+				<td style="color:gray">${item.name }</td>
+				<td style="color:gray">${item.b_bankname }</td>
+				<td style="color:gray">${item.b_username }</td>
+				<td style="color:gray">${item.b_account }</td>
+				</c:if>
+				<td ><fmt:formatDate value="${item.date }" pattern="yy/MM/dd HH:mm:ss"/></td>
+				<td style="color: gold;"><fmt:formatNumber value="${item.amount }" pattern="###,###,###,###,###,###,###" />원</td>
 				<c:if test="${item.result_date eq null }">
-					<td class="td">처리중</td>
+					<td style="color:red;" >처리중</td>
 				</c:if>
 				<c:if test="${item.result_date ne null }">
-					<td class="td">처리완료</td>
+					<td style="color:blue;">처리완료</td>
 				</c:if>
-				<td class="td">${item.result_date }</td>
+				<td style="color:blue;">
+				<c:if test="${item.result_date ne null }">
+					<fmt:formatDate value="${item.result_date }" pattern="yy/MM/dd HH:mm:ss"/>
+				</c:if>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -111,6 +108,6 @@ a:HOVER {
 	</c:choose>
 </c:forEach>
 </div>
-
+</div>
 </body>
 </html>

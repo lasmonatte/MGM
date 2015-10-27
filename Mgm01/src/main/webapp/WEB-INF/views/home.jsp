@@ -10,9 +10,9 @@
 <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/user.css" />
 <style>
-	.main { padding-top:148px;}
-	.logo { width:235px; margin:0 auto 60px;}
-    .logo img { width:212px; height:76px;}
+	.main { padding-top:6%;}
+	.logo { width:20%; margin:0 auto 60px;}
+    .logo img { width:100%; height:100%;}
 </style>
 </head>
 <body>
@@ -36,7 +36,7 @@
                 	<input type="submit" value="로그인"/>
                 </div>
                 </form>
-                <form action="/mgm01/user/register/" method="GET">
+                <form action="/mgm01/user/registration/" method="GET">
                 <div class="register">
                 	<input type="submit" value="회원가입"/>
                 </div>

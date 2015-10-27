@@ -71,19 +71,18 @@ public class UserController {
 		return msg;
 	}
 	
-//	@RequestMapping(value="user/updateCash")
-//	public ModelAndView updateCashControl(ModelAndView mav, Authentication auth,
-//			BigInteger cash, BigInteger prize_cash, boolean isInner) {
-//		BigInteger new_cash = cash.add(prize_cash);
-//		userService.updateCashService(auth.getName(), new_cash);
-//		System.out.println("user/updateCash" + new_cash);
-//		mav.addObject("cash", new_cash);
-//		
-//		if(isInner)
-//			mav.setViewName("game/list");
-//		else
-//			mav.setViewName("t:game/list");
-//		return mav;
-//	}
+	@ResponseBody
+	@RequestMapping(value="user/reg_inner", produces="text/plain;charset=UTF-8")
+	public String regInnerControl(ModelAndView mav, String type, String msg) {
+		String message="";
+		int result = userService.readUserForRegister(type, msg);
+		if(type.equals("id"))
+			message = (result>0)?"이미 존재하는 아이디입니다.":"사용가능한 아이디입니다.";
+		
+		if(type.equals("recmd_id"))
+			message = (result>0)?"추천인 아이디가 확인되었습니다.":"존재하지 않는 추천인 아이디입니다.";
+		
+		return message;
+	}
 	
 }

@@ -56,4 +56,10 @@ public class UserDaoImpl implements UserDao {
 		return session.selectList("com.mgm.mgm01.user.model.UserDao.readAllUser", info);
 	}
 
+	@Override
+	public int readUserForRegister(Map<String, String> info) {
+		// TODO Auto-generated method stub
+		return session.selectOne("com.mgm.mgm01.user.model.UserDao.readUserForRegister", info);
+	}
+
 }

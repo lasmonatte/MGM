@@ -9,8 +9,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/style.css" /> -->
 <title>MGM Games</title>
-<link href="/mgm01/resources/tablecloth/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
-<!-- <script type="text/javascript" src="/mgm01/resources/tablecloth/tablecloth.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/css/table-dark-styles.css" />
+<style type="text/css">
+
+body{
+	background-image: url(/mgm01/resources/images/background_gam.jpg);
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	color: #FAED7D;
+	font: 100%, Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight:bold;
+	 text-shadow: rgba(0, 0, 0, .2) 3px 3px 3px;
+     
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">

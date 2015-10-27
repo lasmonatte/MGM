@@ -1,7 +1,5 @@
 package com.mgm.mgm01;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +30,13 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
-
 		return "home";
 	}
 
-	@RequestMapping(value = "/user/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String register(Locale locale, Model model) {
 
-		return "user/register";
+		return "user/registration";
 	}
 
 	@RequestMapping("/user/denied")

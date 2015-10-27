@@ -47,4 +47,9 @@
             and u.recmd_id=#{admin_id}
         </if>
 	</select>
+	<select id="readUserForRegister" parameterType="Map" resultType="Integer">
+		select count(*) from user where ${type}=#{msg}
+	</select>
+	
+	
 </mapper>

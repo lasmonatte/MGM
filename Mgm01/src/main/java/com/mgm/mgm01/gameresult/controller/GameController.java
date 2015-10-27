@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +18,6 @@ import com.mgm.mgm01.gameresult.model.GameResultService;
 import com.mgm.mgm01.rule.model.BettingRuleDto;
 import com.mgm.mgm01.rule.model.RuleService;
 import com.mgm.mgm01.rule.model.TradeRuleDto;
-import com.mgm.mgm01.sercurity.UserDetailsVO;
 import com.mgm.mgm01.user.model.UserDto;
 import com.mgm.mgm01.user.model.UserService;
 
@@ -40,7 +38,7 @@ public class GameController {
 		mav.addObject("cash", cash);
 		mav.addObject("bettingDto", bettingDto);
 		mav.addObject("bettingRuleDto", bettingRuleDto);
-		mav.setViewName("t:game/ladder");
+		mav.setViewName("t:game/ladder_new");
 		return mav;
 	}
 	
@@ -60,7 +58,7 @@ public class GameController {
 	public ModelAndView betlistControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth) {
 		// List li = bls.readAllService();
 		BigInteger cash = userService.readCashService(auth.getName());
-		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start);
+		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start, false);
 		mav.addObject("cash", cash);
 		mav.addAllObjects(map);
 		mav.addObject("isInner", false);
@@ -71,15 +69,15 @@ public class GameController {
 	@RequestMapping("/game/betlist_inner")
 	public ModelAndView innerControl(ModelAndView mav, @RequestParam(defaultValue = "1") int start, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
-
-		// List li = bls.readAllService();
-		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start);
+		
+		Map<String, Object> map = bettingService.readBettingListByIdService(auth.getName(), start, true);
 		mav.addAllObjects(map);
 		mav.addObject("cash", cash);
 		mav.addObject("isInner", true);
-		mav.setViewName("game/list");
+		mav.setViewName("game/betList_inner");
 		return mav;
 	}
+	
 	
 	@RequestMapping(value="/game/charge")
 	public ModelAndView chargeControl(ModelAndView mav, Authentication auth) {
@@ -87,10 +85,13 @@ public class GameController {
 
 		UserDto userDto = userService.readUserService(auth.getName());
 		TradeRuleDto rule = ruleService.readTradeRuleService();
+		System.out.println("rule + " + rule.getB_account());
+		System.out.println("rule + " + rule.getB_bankname());
+		System.out.println("user : " + userDto);
 		mav.addObject("cash", cash);
 		mav.addObject("userDto", userDto);
 		mav.addObject("rule", rule);
-		mav.setViewName("trade/charge");
+		mav.setViewName("t:trade/charge");
 		return mav;
 	}
 	
@@ -102,7 +103,7 @@ public class GameController {
 
 		mav.addObject("cash", cash);
 		mav.addObject("userDto", userDto);
-		mav.setViewName("trade/exchange");
+		mav.setViewName("t:trade/exchange");
 		return mav;
 	}
 }

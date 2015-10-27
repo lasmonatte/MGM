@@ -1,6 +1,6 @@
 @CHARSET "EUC-KR";
 
-    .login_box { width:337px; height:400px; padding: 45px 44px 38px 44px; margin: 0 auto; background-color: #fff; 
+    .login_box { width:337px; height:300px; padding: 45px 44px 38px 44px; margin: 0 auto; background-color: #fff; 
                  opacity: 0.9; border-radius:5px;}
     .login_box .input_login { border-bottom: 2px solid #c4c5c4; padding: 20px 0 9px 0; }
     .login_box .input_login input { width: 100%; color: #828180; font-size: 15px; border:none; font-family: 'µ¸¿ò'; text-align: center;}

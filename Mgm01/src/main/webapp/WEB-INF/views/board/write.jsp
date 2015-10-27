@@ -6,24 +6,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>새 글 쓰기</title>
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/css/table-dark-styles.css" />
 </head>
 <body>
+<div id="container" align="center">  
+    <div class="transparency"> 	
+    	<center><h4> 새 글 쓰 기 </h4></center> 
+    </div>  
+    <div class="content">  
 	<form action="/mgm01/board/write" method="POST">
 	<input type="hidden" name="type" value="${type }"/>
-	<table>
+	<table class="dark" width="50%">
 		<tr>
-			<td>제목</td>
-			<td><input type="text" name="title" /></td>
+			<th style="height: 10%">제목</th>
+			<td><input type="text" name="title" style="width: 97%; height: 50%"/></td>
 		</tr>	
 		<tr>
-			<td>내용</td>
-			<td><textarea rows="15" cols="15" name="content"></textarea></td>
+			<th style="background-repeat: repeat-y;">내용</th>
+			<td><textarea name="content" style="height: 200px; width: 97%"></textarea></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="확인" /></td>
-			<td><a href="/mgm01/board/${type }" ><button >취소</button></a></td>
+			<td colspan="2">
+				<button style="width: 20%">확인</button>
+				<a href="/mgm01/board/${type }" ><button type="button" style="width: 20%">취소</button></a>
+				</td>
 		</tr>		
 	</table>
 	</form>
+	</div>
+</div>
 </body>
 </html>

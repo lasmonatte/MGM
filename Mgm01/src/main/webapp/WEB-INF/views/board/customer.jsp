@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/css/table-dark-styles.css" />
 <style>
 a:VISITED, a:LINK {
 	color: #C98500;
@@ -15,6 +16,12 @@ a:VISITED, a:LINK {
 a:HOVER {
 	color: #FF5E00;
 	text-decoration: none;
+}
+
+.title a:VISITED, a:LINK{
+	color: #ffffff;
+	text-decoration: none;
+	
 }
 </style>
 
@@ -29,24 +36,30 @@ a:HOVER {
 </script>
 </head>
 <body>
-<div align="center">
-<table class="table">
+<div id="container" align="center">  
+    <div class="transparency"> 	
+    	 
+    </div>  
+    <div class="content">  
+	<h2> 고 객 센 터 </h2>  
+	<table class="dark" width="80%" style="margin-top:2%;">
 	<thead>
-		<tr class="tr">
-			<th class="th">번호</th>
-			<th class="th">타이틀</th>
-			<th class="th">작성자</th>
-			<th class="th">등록일</th>
+		<tr >
+			<th style="border-right:5px solid #1a1a1a;">번호</th>
+			<th width="60%" style="border-right:5px solid #1a1a1a;">타이틀</th>
+			<th style="border-right:5px solid #1a1a1a;">작성자</th>
+			<th >등록일</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="item" items="${list }">
-			<tr class="tr">
-				<td class="td">${item.board_num }</td>
-				<td class="td"><a href="javascript:showDetail('${item.board_num }')"> ${ item.title }
-				</a></td>
-				<td class="td">${item.nickname }</td>
-				<td class="td"><fmt:formatDate value="${item.date }"
+			<tr >
+				<td style="border-right:5px solid #1a1a1a;">${item.board_num }</td>
+				<td style="border-right:5px solid #1a1a1a;" class="title">
+					<a href="javascript:showDetail('${item.board_num }')"> ${ item.title } [${item.replyCount }]</a>
+				</td>
+				<td style="border-right:5px solid #1a1a1a;">${item.nickname }</td>
+				<td ><fmt:formatDate value="${item.date }"
 						pattern="yyyy/MM/dd HH:mm " /></td>
 			</tr>
 		</c:forEach>
@@ -54,7 +67,7 @@ a:HOVER {
 			<td colspan="4" align="center">
 				<form action="write" method="GET">
 					<input type="hidden" name="type" value="customer"/>
-					<input type="submit" value="글쓰기"/>				
+					<button style="width: 20%">글쓰기</button>				
 				</form>
 			</td>
 		</tr>
@@ -74,6 +87,7 @@ a:HOVER {
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
+</div>
 </div>
 </body>
 </html>

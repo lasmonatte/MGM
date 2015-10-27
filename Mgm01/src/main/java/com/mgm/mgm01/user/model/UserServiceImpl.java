@@ -88,4 +88,13 @@ public class UserServiceImpl implements UserService {
 		return map;
 	}
 
+	@Override
+	public int readUserForRegister(String type, String msg) {
+		// TODO Auto-generated method stub
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("type", type);
+		info.put("msg", msg);
+		return dao.readUserForRegister(info);
+	}
+
 }

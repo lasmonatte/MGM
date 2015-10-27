@@ -7,56 +7,62 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/css/table-dark-styles.css" />
 </head>
+
 <body>
-게임결과
-<div align="center">
+<div id="container" align="center">  
+    <div class="transparency"> 	
+    </div>  
+    <div class="content">  
 <c:if test="${gameResultDtoList ne null}">
-	<c:forEach var="gameResultDto" items="${gameResultDtoList }">
-	<table class="table">
+	<h2>경 기 결 과 </h2>
+	<table class="dark" width="80%" style="margin-top: 2%;">
 	<thead>
-		<tr class="tr">
-			<th class="th">
+		<tr >
+			<th >
 				<div>경기일시</div>
 			</th>
-			<th class="th">
+			<th width="20%" >
 				<div>회차</div>
 			</th>
-			<th class="th">
+			<th width="10%">
 				<div>홀/짝</div>
 			</th>
-			<th class="th">
+			<th width="10%">
 				<div>좌/우</div>
 			</th>
-			<th class="th">
-				<div>사다리 줄 수</div>
+			<th width="10%">
+				<div>사다리 줄수</div>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="tr">
-			<td class="td">
+	<c:forEach var="gameResultDto" items="${gameResultDtoList }">
+		<tr >
+			<td >
 				<div><fmt:formatDate pattern="yyyy년 MM월 dd일 HH시 mm분" value="${gameResultDto.date }"/></div>
 			</td>
-			<td class="td">
+			<td >
 				<div>${gameResultDto.ordernum }</div>
 			</td>
-			<td class="td">
+			<td >
 				<div>${gameResultDto.getOe() }</div>
 			</td>
-			<td class="td">
+			<td >
 				<div>${gameResultDto.getLr() }</div>
 			</td>
-			<td class="td">
+			<td >
 				<div>${gameResultDto.getLine() }</div>
 			</td>
 		</tr>	
+		</c:forEach>
 	</tbody>
 	</table>	
-	</c:forEach>
+	
 
 </c:if>
+</div>
 </div>
 </body>
 </html>
