@@ -35,7 +35,7 @@ a:HOVER {
     <div class="transparency">  
     </div>  
     <div class="content">  
-    <h2>충 환 전 기 록</h2>
+   <h2 style="color:#C98500;">충 환 전 기 록</h2>
 	<table class="dark" width="80%" style="margin-top:2%;">
 		<thead>
 			<tr>

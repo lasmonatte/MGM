@@ -39,7 +39,7 @@ public class CashInfoServiceImpl implements CashInfoService{
 		List<CashInfoDto> li = dao.readCashInfoById(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		int size = 5;
+		int size = 10;
 		int pageSize = li.size()/size;
 		if(li.size()%size != 0)
 			pageSize++;
@@ -63,10 +63,8 @@ public class CashInfoServiceImpl implements CashInfoService{
 		info.put("id", id);
 		info.put("type", type);
 		List<CashInfoDto> li = dao.readCashInfoByRecmd(info);
-		System.err.println("TYPE : " + type);
-		System.err.println("ID : " + id);
 		Map<String, Object> map = new HashMap<String, Object>();
-		int size = 5;
+		int size = 10;
 		int pageSize = li.size()/size;
 		if(li.size()%size != 0)
 			pageSize++;
@@ -88,7 +86,7 @@ public class CashInfoServiceImpl implements CashInfoService{
 		List<CashInfoDto> li = dao.readCashInfoAll(type);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		int size = 5;
+		int size = 10;
 		int pageSize = li.size()/size;
 		if(li.size()%size != 0)
 			pageSize++;

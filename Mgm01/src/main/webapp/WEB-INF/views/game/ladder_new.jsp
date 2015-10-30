@@ -145,8 +145,12 @@
  }
 
  function betting() { // 일단 popup에서만 작동함 - feed_init(feed_num) 작성필요
-
- 	cash-=total_money;
+ 	if($('#betting_oe').length==0 && $('#betting_lr').length==0 && $('#betting_line').length==0)
+ 		alert("배팅 종목을 선택해야합니다.")
+ 	else if(total_money==0)
+ 		alert("금액을 선택하셔야합니다.")
+ 	else{
+	 cash-=total_money;
  	$.ajax({ // feed_num과 input으로 댓글작성하는 inner 작동.
  	      method : 'POST', // post!
  	      url : '/mgm01/betting/new', // url
@@ -167,7 +171,7 @@
  			   alert("배팅에 실패하셨습니다.");
  			}
  	   })
- 	   
+ 	}
  	}
 
  function printSpan(id, result){
@@ -196,8 +200,8 @@
 	<tbody>
 		<tr>
 			<td width="35%" rowspan="2" align="center" valign="top">
-				<iframe  src='/mgm01/game/betlist_inner' 
-					id='betting_list' name='betting_list' width='95%' height='95%' scrolling='no' frameborder="0">
+				<iframe  src='/mgm01/game/betlist_inner'  
+					id='betting_list' name='betting_list' width='95%' height='950' scrolling='no' frameborder="0">
 				</iframe>
 			</td>
 			<td width="55%" align="left" valign="top">

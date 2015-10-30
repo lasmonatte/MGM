@@ -23,8 +23,7 @@ public class BettingServiceImpl implements BettingService{
 	@Override
 	public int createBettingService(BettingDto dto) {
 		// TODO Auto-generated method stub
-		cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()),
-				"betting");
+		cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()),"betting");
 		return dao.createBetting(dto);
 	}
 

@@ -19,21 +19,22 @@
 <body>
 <div id="container" align="center">  
     <div class="transparency" > 	
-    	<center><h4> 고 객 센 터 </h4></center> 
     </div>  
     <div class="content"> 
+    	<center><h2 style="color:#C98500;"> 글 상 세 보 기 </h2></center> 
     <form action="/mgm01/board/reply_write" method="POST"> 
     <input type="hidden" name="board_num" value="${boardDto.board_num }"/>
 	<input type="hidden" name="nickname" value="${boardDto.nickname }"/>
 	<table class="dark" width="60%">
 		<tr>
-			<th width="20%" colspan="3" style="height: 2%; text-align: left;"><font size="2">작성일자</font> : ${boardDto.date }</th>
+			<th width="20%" colspan="3" style="height: 2%; text-align: left;"><font size="2">작성일자</font>
+			 : <font color="white"><fmt:formatDate value="${boardDto.date }" pattern="yyyy/MM/dd HH:mm" /></font></th>
 		</tr>
 		<tr >
-			<th colspan="3" style="height: auto; text-align: left;"><font size="2">글제목</font> : ${boardDto.title }</th>
+			<th colspan="3" style="height: auto; text-align: left;"><font size="2">글제목</font> : <font color="white">${boardDto.title }</font></th>
 		</tr>
 		<tr>
-			<th colspan="3" style="text-align: left;"><font size="2">닉네임 </font>: ${boardDto.nickname }</th>
+			<th colspan="3" style="text-align: left;"><font size="2">닉네임 </font>: <font color="white">${boardDto.nickname }</font></th>
 		</tr>	
 		<tr >
 			<td colspan="3"  style="height: 200px; width: 97%; padding: 3%" align="left" valign="top">${boardDto.content }</td>

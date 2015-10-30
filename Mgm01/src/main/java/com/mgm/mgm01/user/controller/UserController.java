@@ -22,15 +22,15 @@ public class UserController {
 	@Autowired UserService userService;
 	@Autowired BettingService bettingService;
 	@Autowired CashInfoService cashInfoService;
-	
+
 	@RequestMapping(value="/user/main")
 	public ModelAndView control(ModelAndView mav, Authentication auth) {
 		BigInteger cash = userService.readCashService(auth.getName());
 		mav.addObject("cash", cash);
-		mav.setViewName("t:game/main");
+		mav.setViewName("redirect:/game/ladder");
 		return mav;
 	}
-	
+
 	@Transactional
 	@RequestMapping(value="user/register", method=RequestMethod.POST)
 	public ModelAndView registerControl(ModelAndView mav, UserDto userDto) {
@@ -40,16 +40,34 @@ public class UserController {
 		mav.setViewName("redirect:/");
 		return mav;
 	}
-	
-	@RequestMapping(value="user/info", method=RequestMethod.GET)
-	public ModelAndView updateInfoControl(ModelAndView mav, Authentication auth) {
-		UserDto dto = userService.readUserService(auth.getName());
 
-		mav.addObject("userDto", dto);
-		mav.setViewName("t:user/info");
+	@RequestMapping(value="user/updateInfo", method=RequestMethod.GET)
+	public ModelAndView infoControl(ModelAndView mav, Authentication auth) {
+		UserDto dto = userService.readUserService(auth.getName());
+		String type="";
+
+		if(auth.getAuthorities().toString().equals("[ROLE_USER]"))
+			type="user";
+		else
+			type="admin";
+
+		mav.addObject("dto", dto);
+		mav.addObject("type", type);
+		mav.setViewName("user/updateInfo");
 		return mav;
 	}
-	
+
+	@RequestMapping(value="user/updateInfo", method=RequestMethod.POST)
+	public ModelAndView updateInfoControl(ModelAndView mav, Authentication auth, UserDto dto, String type) {
+		System.err.println(dto.getPassword());
+		System.err.println(dto.getB_password());
+		userService.updateUserInfoService(dto);
+		userService.updateUserAccountService(dto);
+
+		mav.setViewName("redirect:/user/logout");
+		return mav;
+	}
+
 	@Transactional
 	@ResponseBody
 	@RequestMapping(value="user/updateCash", produces="text/plain;charset=UTF-8")
@@ -58,7 +76,7 @@ public class UserController {
 		System.out.println("들어옴");
 		String msg="기본형";
 		cash = cash.add(BigInteger.valueOf(prize_money));
-		
+
 		int rst1 = userService.updateCashService(auth.getName(), cash);
 		int rst2 = bettingService.updateBettingReceivedService(game_num, auth.getName());
 		if(rst1>0 && rst2>0){
@@ -67,10 +85,10 @@ public class UserController {
 		}
 		else
 			msg = "당첨금을 수령하지 못했습니다.";
-				
+
 		return msg;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="user/reg_inner", produces="text/plain;charset=UTF-8")
 	public String regInnerControl(ModelAndView mav, String type, String msg) {
@@ -78,11 +96,11 @@ public class UserController {
 		int result = userService.readUserForRegister(type, msg);
 		if(type.equals("id"))
 			message = (result>0)?"이미 존재하는 아이디입니다.":"사용가능한 아이디입니다.";
-		
+
 		if(type.equals("recmd_id"))
 			message = (result>0)?"추천인 아이디가 확인되었습니다.":"존재하지 않는 추천인 아이디입니다.";
-		
+
 		return message;
 	}
-	
+
 }

@@ -13,6 +13,8 @@ public interface UserDao {
 	public String readB_password(String id);
 	public List<UserDto> readAllUser(Map<String, Object> info);
 	public int readUserForRegister(Map<String, String> info);
+	public int updateUserInfo(UserDto dto);
+	public int updateUserAccount(UserDto dto);
 //	public UserDto readUser(String id);
 //	public int deleteUser(String id);
 //	public UserDetailsVO loginUser(String username);

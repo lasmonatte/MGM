@@ -41,7 +41,7 @@ a:HOVER {
     	 
     </div>  
     <div class="content">  
-	<h2> 고 객 센 터 </h2>  
+	<h2 style="color:#C98500;"> 고 객 센 터 </h2>  
 	<table class="dark" width="80%" style="margin-top:2%;">
 	<thead>
 		<tr >
@@ -59,8 +59,7 @@ a:HOVER {
 					<a href="javascript:showDetail('${item.board_num }')"> ${ item.title } [${item.replyCount }]</a>
 				</td>
 				<td style="border-right:5px solid #1a1a1a;">${item.nickname }</td>
-				<td ><fmt:formatDate value="${item.date }"
-						pattern="yyyy/MM/dd HH:mm " /></td>
+				<td ><fmt:formatDate value="${item.date }" pattern="yyyy/MM/dd HH:mm" /></td>
 			</tr>
 		</c:forEach>
 		<tr>

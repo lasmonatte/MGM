@@ -65,13 +65,18 @@ public class AdminController {
 	public ModelAndView cashInfoControl(ModelAndView mav,  Authentication auth,
 			@RequestParam(defaultValue="all")String type, @RequestParam(defaultValue = "1") int start) {
 		Map<String, Object> map;
-		if(!auth.getAuthorities().toString().equals("[ROLE_MASTER]"))		
+		AdminDto dto;
+		if(!auth.getAuthorities().toString().equals("[ROLE_MASTER]")) {		
 			map = cashInfoService.readCashInfoByRecmd(start, type, auth.getName());
-		else
+			dto = adminService.readAdminOneService(auth.getName());
+		} else { 
 			map = cashInfoService.readCashInfoAll(start, type);
+			dto = adminService.readTotalService();
+		}
 		
 		mav.addAllObjects(map);
 		mav.addObject("type", type);
+		mav.addObject("dto", dto);
 		mav.setViewName("t:admin/cashInfo");
 		return mav;
 	}

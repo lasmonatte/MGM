@@ -16,6 +16,7 @@
 		<if test='master != true'>
             and t.id=u.id and u.recmd_id=#{admin_id}
         </if>
+        group by t.t_num
 		 order by t.t_num desc
 	</select>
 	<select id="readTradeListById" parameterType="Map" resultType="TradeDto">

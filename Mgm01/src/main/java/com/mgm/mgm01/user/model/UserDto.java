@@ -10,7 +10,7 @@ public class UserDto {
 	private boolean enabled;
 	private String nickname;
 	private String name;
-	private int phone;
+	private String phone;
 	private String b_bankname;
 	private String b_account;
 	private String b_username;
@@ -55,10 +55,10 @@ public class UserDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getB_bankname() {

@@ -34,6 +34,7 @@
 			<if test='master != true'>	
         		where b.id=u.id and u.recmd_id=#{admin_id}
         	</if>
+        group by b.betting_num
 		order by b.betting_num desc
 	</select>
 	<update id="updateBetting" parameterType="BettingDto">

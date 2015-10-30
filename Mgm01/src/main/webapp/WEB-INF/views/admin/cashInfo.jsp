@@ -45,8 +45,9 @@
 						
 					<tbody align="center">
 					<c:forEach var="item" items="${list }">
+						<c:choose>
+						<c:when test="${item.type eq 'charge' }">
 						<tr>
-						<c:if test="${item.type eq 'charge' }">
 							<td style="color: blue;">
 								${item.id }
 							</td>
@@ -54,13 +55,15 @@
 								충전
 							</td>
 							<td style="color: blue;">
-								${item.breakdown }
+								<fmt:formatNumber value="${item.breakdown }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<td style="color: blue;">
 								<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분 ss초"/>
 							</td>
-						</c:if>
-						<c:if test="${item.type eq 'exchange' }">
+						</tr>
+						</c:when>
+						<c:when test="${item.type eq 'exchange' }">
+						<tr>
 							<td style="color: red;">
 								${item.id }
 							</td>
@@ -68,27 +71,15 @@
 								환전
 							</td>
 							<td style="color: red;">
-								-${item.breakdown }
+								-<fmt:formatNumber value="${item.breakdown }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<td style="color: red;">
 								<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분 ss초"/>
 							</td>
-						</c:if>
-							<c:if test="${item.type eq 'lose' }">
-							<td style="color: green;">
-								${item.id }
-							</td>
-							<td style="color: green;">
-								미당첨
-							</td>
-							<td style="color: green;">
-								${item.breakdown }
-							</td>
-							<td style="color: green;">
-								<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분 ss초"/>
-							</td>
-						</c:if>
-							<c:if test="${item.type eq 'win' }">
+						</tr>
+						</c:when>
+						<c:when test="${item.type eq 'win' }">
+						<tr>
 							<td style="color: orange;">
 								${item.id }
 							</td>
@@ -96,13 +87,14 @@
 								당첨
 							</td>
 							<td style="color: orange;">
-								-${item.breakdown }
+								-<fmt:formatNumber value="${item.breakdown }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<td style="color: orange;">
 								<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분 ss초"/>
 							</td>
-						</c:if>
 						</tr>
+						</c:when>
+						</c:choose>
 					</c:forEach>
 					</tbody>
 				</table>
@@ -125,23 +117,33 @@
 					</c:choose>
 					</c:forEach>
 					</div>
-					<table>
+			<table>
 				<thead>
 					<tr>
+						<th scope="col">총 보유금액</th>
 						<th scope="col">총 충전금액</th>
 						<th scope="col">총 환전금액</th>
 						<th scope="col">총 배팅금액</th>
 						<th scope="col">총 당첨금액</th>
-						<th scope="col">총 미당첨금액</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody align="center">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>
+							<fmt:formatNumber value="${dto.total_cash }" pattern="###,###,###,###,###,###,###"/>
+						</td>
+						<td style="color:blue">
+							<fmt:formatNumber value="${dto.total_charge }" pattern="###,###,###,###,###,###,###"/>
+						</td>
+						<td style="color:red">
+							<fmt:formatNumber value="${dto.total_exchange }" pattern="###,###,###,###,###,###,###"/>
+						</td>
+						<td  style="color:brown">
+							<fmt:formatNumber value="${dto.total_betting }" pattern="###,###,###,###,###,###,###"/>
+						</td>
+						<td style="color:orange">
+							<fmt:formatNumber value="${dto.total_win }" pattern="###,###,###,###,###,###,###"/>
+						</td>
 					</tr>
 				</tbody>
 		</table>

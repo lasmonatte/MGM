@@ -28,7 +28,8 @@ public class AdminMasterControl {
 		if(auth.getAuthorities().toString().equals("[ROLE_MASTER]")){
 			Map<String, Object> info = adminService.readAdminAllService(start);
 			AdminDto dto = adminService.readTotalService();
-			
+			AdminDto dto2 = adminService.readAdminOneService(auth.getName());
+			dto.setTotal_salary(dto.getTotal_salary().subtract(dto2.getTotal_salary()));
 			mav.addAllObjects(info);
 			mav.addObject("total", dto);
 			mav.setViewName("t:admin/adminInfo");

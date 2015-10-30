@@ -9,21 +9,19 @@
 		values (#{id})
 	</insert>
 	<select id="readAdminOne" parameterType="String" resultType="AdminDto">
-		select * from admin
-		where id=#{id}
+			select * from admin where id=#{id}
 	</select>
 	<select id="readAdminAll" resultType="AdminDto">
 		select * from admin
 		order by admin_num desc
 	</select>
-	<select id="readTotal" resultType="Admindto">
+	<select id="readTotal" resultType="AdminDto">
 		select
 		sum(total_cash) as total_cash,
 		sum(total_charge) as total_charge,
 		sum(total_exchange) as total_exchange,
 		sum(total_betting) as total_betting,
 		sum(total_win) as total_win,
-		sum(total_lose) as total_lose,
 		sum(total_user) as total_user,
 		sum(salary) as total_salary
 		from admin 
@@ -39,12 +37,14 @@
 			total_exchange = total_exchange + #{exchange} 
         </if>
 		<if test='type == "betting"'>	
-			total_betting = total_betting + #{betting},
-			salary = salary * dividend,
-			total_salary= total_salary+salary
+			total_betting = total_betting + #{betting}
         </if>
 		<if test='type == "win"'>	
 					total_win = total_win + #{win} 
+        </if>
+        <if test="type == 'salary'">
+        	salary = salary + (#{salary}*dividend/100),
+		    total_salary = total_salary + salary
         </if>
 		where id=#{id}
 	</update>
@@ -61,7 +61,7 @@
 	</update>
 	<update id="updateMasterSalary" parameterType="java.math.BigInteger">
 		update admin set
-		salary = #{cash} * dividend,
+		salary = salary + (#{cash}*dividend/100),
 		total_salary = total_salary + salary
 		where id='aa00'
 	</update>

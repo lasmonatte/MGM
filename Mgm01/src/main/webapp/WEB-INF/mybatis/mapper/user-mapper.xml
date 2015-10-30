@@ -51,5 +51,13 @@
 		select count(*) from user where ${type}=#{msg}
 	</select>
 	
+	<update id="updateUserInfo" parameterType="UserDto">
+		update user set password=#{password}, nickname=#{nickname}, phone=#{phone}
+		where id=#{id}
+	</update>
+	<update id="updateUserAccount" parameterType="UserDto">
+		update user set b_bankname=#{b_bankname}, b_username=#{b_username}, b_account=#{b_account}
+		where id=#{id}
+	</update>
 	
 </mapper>

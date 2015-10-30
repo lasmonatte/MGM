@@ -55,16 +55,16 @@
 								${item.ordernum }회차							
 							</td>
 							<td>
-								${item.betting_money }
+								<fmt:formatNumber value="${item.betting_money }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<td>
 								${item.dividend }
 							</td>
 							<td>
-								${item.expect_money }
+								<fmt:formatNumber value="${item.expect_money }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<td style="color: brown;">
-								${item.prize_money }
+								<fmt:formatNumber value="${item.prize_money }" pattern="###,###,###,###,###,###,###"/>
 							</td>
 							<c:choose>
 							<c:when test="${item.result_oe eq true}">

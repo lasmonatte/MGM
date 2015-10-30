@@ -25,14 +25,17 @@
 		where c.id=u.id AND u.recmd_id=#{id}
 		<if test='type != "all"'>
             <if test='type != "ex_ch"'>	
-        		and type=#{type}
+        		and c.type=#{type}
         	</if>
         	<if test='type == "ex_ch"'>	
-        		and type='exchange' or type='charge'
-        		group by c.cashinfo_num
+        		and (c.type='exchange' or c.type='charge')
         	</if>
         </if>
-		order by date desc
+         <if test='type == "all"'>
+        	and (c.type='exchange' or c.type='charge' or c.type='win')
+        </if>
+        	group by c.cashinfo_num
+		order by  c.cashinfo_num desc
 	</select>
 	<select id="readCashInfoAll" parameterType="String" resultType="CashInfoDto">
 		select * from cashinfo 
@@ -42,10 +45,13 @@
         	</if>
         	<if test='_parameter == "ex_ch"'>	
         		where type='exchange' or type='charge'
-        		group by c.cashinfo_num
         	</if>
         </if>
-		order by date desc
+        <if test='_parameter == "all"'>
+        	where type='exchange' or type='charge' or type='win'
+        </if>
+        group by cashinfo_num
+		order by cashinfo_num desc
 	</select>
 	<delete id="deleteCashInfo" parameterType="Integer">
 		delete from cashinfo

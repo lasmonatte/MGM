@@ -33,11 +33,21 @@
 					<tbody align="center">
 						<tr>
 							<td>${dto.id }</td>
-							<td>${dto.total_cash }</td>
-							<td>${dto.total_charge }</td>
-							<td>${dto.total_exchange }</td>
-							<td>${dto.total_betting }</td>
-							<td>${dto.total_win }</td>
+							<td>
+								<fmt:formatNumber value="${dto.total_cash }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td style="color:blue">
+								<fmt:formatNumber value="${dto.total_charge }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td style="color:red">
+								<fmt:formatNumber value="${dto.total_exchange }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td  style="color:brown">
+								<fmt:formatNumber value="${dto.total_betting }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td style="color:orange">
+								<fmt:formatNumber value="${dto.total_win }" pattern="###,###,###,###,###,###,###"/>
+							</td>
 							<td>${dto.total_user }</td>
 						</tr>
 					</tbody>
@@ -70,9 +80,15 @@
 					</thead>
 					<tbody align="center">
 						<tr>
-							<td>${dto.total_salary }</td>
-							<td>${dto.salary }</td>
-							<td>${dto.date_salary }</td>
+							<td>
+								<fmt:formatNumber value="${dto.total_salary }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td>
+								<fmt:formatNumber value="${dto.salary }" pattern="###,###,###,###,###,###,###"/>
+							</td>
+							<td>
+								<fmt:formatDate value="${dto.date_salary }" pattern="yy년 MM월 dd일 HH시 mm분 ss초"/>
+							</td>
 							<td>${dto.dividend }</td>
 						</tr>
 					</tbody>

@@ -40,7 +40,7 @@ a:HOVER {
      
     </div>  
     <div class="content">
-    	<h2> 공 지 사 항 </h2>  
+    	<h2 style="color:#C98500;"> 공 지 사 항 </h2>  
 	<table class="dark" width="80%" style="margin-top:2%;">
 	<thead>
 		<tr >

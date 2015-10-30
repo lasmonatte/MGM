@@ -16,7 +16,7 @@
     </div>  
     <div class="content">  
 <c:if test="${gameResultDtoList ne null}">
-	<h2>경 기 결 과 </h2>
+	<h2 style="color:#C98500;">경 기 결 과 </h2>
 	<table class="dark" width="80%" style="margin-top: 2%;">
 	<thead>
 		<tr >

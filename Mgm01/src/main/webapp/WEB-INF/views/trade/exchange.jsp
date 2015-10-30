@@ -45,7 +45,7 @@ function checkAmount(){
 		alert("보유 금액 이상 환전할 수 없습니다.");
 		form.amount.focus();
 		return false;
-	} else if(form.amount.value<=0){
+	} else if(form.amount.value<=0 || form.amount.value==""){
 		alert("금액을 제대로 입력해주세요.");
 		form.amount.focus();
 		return false;

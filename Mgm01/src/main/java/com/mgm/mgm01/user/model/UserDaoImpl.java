@@ -62,4 +62,16 @@ public class UserDaoImpl implements UserDao {
 		return session.selectOne("com.mgm.mgm01.user.model.UserDao.readUserForRegister", info);
 	}
 
+	@Override
+	public int updateUserInfo(UserDto dto) {
+		// TODO Auto-generated method stub
+		return session.update("com.mgm.mgm01.user.model.UserDao.updateUserInfo", dto);
+	}
+
+	@Override
+	public int updateUserAccount(UserDto dto) {
+		// TODO Auto-generated method stub
+		return session.update("com.mgm.mgm01.user.model.UserDao.updateUserAccount", dto);
+	}
+
 }

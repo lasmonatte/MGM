@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +24,7 @@
 	    		alert(msg);
 	    		alert("실패");
 		    }
-	   	})
+	   	});
 }
 	   
 </script>
@@ -77,10 +78,10 @@
 									${item.b_account }
 								</td>
 								<td>
-									${item.date }
+									<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 HH시 mm분 ss초"/>
 								</td>
 								<td style="color: brown;">
-									${item.amount }
+									<fmt:formatNumber value="${item.amount }" pattern="###,###,###,###,###,###,###"/>
 								</td>
 								<c:if test="${item.result eq false }">
 									<td style="color: red;">
@@ -95,7 +96,7 @@
 										처리완료
 									</td>
 									<td>
-										${item.result_date }
+										<fmt:formatDate value="${item.result_date }" pattern="yy년 MM월 dd일 HH시 mm분 ss초"/>
 									</td>
 								</c:if>
 						</tr>

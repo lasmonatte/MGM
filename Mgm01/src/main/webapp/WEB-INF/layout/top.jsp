@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" href="/mgm01/resources/css/semi-transparent-buttons.css">
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/navi.css" media="screen" />
 <style>
 <!--
     .logo img { width:400px; height:250px;}
@@ -23,20 +24,22 @@
 </script>
 </head>
 <body>
-<table border="5px" width="90%" align="center" style="margin-top: 1%;" class="dark">
+<table width="90%" align="center" style="margin-bottom: 3%; border: 2px;">
 <tbody>
 	<tr>
-		<th width="20%" style="text-indent: 2em;">
-			<sec:authentication property="principal.nickname"/>님 반갑습니다.
+		<th class="loginfo">
+			<font style="color:gold; font-weight: bold; "><sec:authentication property="principal.nickname"/></font>님 반갑습니다.
 		</th>
-		<th width="20%">
-			캐쉬: <fmt:formatNumber value="${cash }" pattern="###,###,###,###,###,###,###" /> 원
+		<th class="loginfo">
+			캐쉬: <font style="color:gold; font-weight: bold; ">
+			<fmt:formatNumber value="${cash }" pattern="###,###,###,###,###,###,###" />
+			</font>원
 		</th>
-		<th align="right" style="background: none;">
-			<a href="/mgm01/trade/list"><button type="button" style="width: 20%;">충/환전기록</button></a>
-			<a href="#"><button type="button" style="width: 20%;">정보수정</button></a>
-			<a href="/mgm01/user/logout"><button type="button" style="width: 20%;">로그아웃</button></a>
-		</th>
+		<td align="right" style="background: none;">
+			<a href="/mgm01/trade/list"><button type="button" style="width: 10%;">충/환전기록</button></a>
+			<a href="/mgm01/user/updateInfo"><button type="button" style="width: 10%;">정보수정</button></a>
+			<a href="/mgm01/user/logout"><button type="button" style="width: 10%;">로그아웃</button></a>
+		</td>
 	</tr>	
 </tbody>
 </table>

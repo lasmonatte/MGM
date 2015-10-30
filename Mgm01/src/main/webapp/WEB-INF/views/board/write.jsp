@@ -11,9 +11,9 @@
 <body>
 <div id="container" align="center">  
     <div class="transparency"> 	
-    	<center><h4> 새 글 쓰 기 </h4></center> 
     </div>  
     <div class="content">  
+    	<h2 style="color:#C98500;"> 새 글 쓰 기 </h2> 
 	<form action="/mgm01/board/write" method="POST">
 	<input type="hidden" name="type" value="${type }"/>
 	<table class="dark" width="50%">

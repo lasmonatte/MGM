@@ -25,7 +25,7 @@
 					<div class="sep"></div>
 				</div>
 	<form action="/mgm01/admin/reply_write" method="POST">
-	<table>
+	<table width="60%;">
 		<tr>
 			<th scope="col">제목</th>
 			<td colspan="3">${boardDto.title }</td>

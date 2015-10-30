@@ -51,7 +51,7 @@ a:VISITED, a:LINK {
     <div class="transparency">  
     </div>  
     <div class="content">  
-    <h2>배 팅 목 록 </h2>
+    <h2 style="color:#C98500;">배 팅 목 록 </h2>
 	<table class="dark" id="betlist" width="90%" style="margin-top: 2%;">
 		<thead>
 			<tr>
@@ -75,7 +75,12 @@ a:VISITED, a:LINK {
 				<td>
 					<fmt:formatDate value="${item.date }" pattern="yy년 MM월 dd일 hh시 mm분"/>
 				</td>
-				<td>${item.ordernum }회차</td>
+				<c:if test="${item.ordernum eq 0}">
+					<td>진행중</td>
+				</c:if>
+				<c:if test="${item.ordernum ne 0}">
+					<td>${item.ordernum }회차</td>
+				</c:if>
 				<c:if test="${item.betting_oe ne null }">
 					<c:if test="${item.result_oe eq true  }">
 						<td style="color: blue;">적중</td>

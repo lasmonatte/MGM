@@ -78,8 +78,7 @@ public class GameResultServiceImpl implements GameResultService{
 
 			dto.setOrdernum(mgr.dto.getOrdernum());
 			bettingService.updateBettingService(dto);
-			cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()),
-					"betting");
+			cashInfoService.createCashInfo(dto.getId(), BigInteger.valueOf(dto.getBetting_money()), "salary");
 			adminService.updateMasterSalaryService(BigInteger.valueOf(dto.getBetting_money()));
 		}
 

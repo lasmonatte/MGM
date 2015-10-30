@@ -7,9 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SimpleAdmin</title>
-<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/navi.css" media="screen" />
+
 <script type="text/javascript" src="/mgm01/resources/admin/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -28,8 +26,8 @@ $(function(){
 			</div>
 			<div class="right">
 				<div class="align-right">
-				<p><strong><sec:authentication property="principal.username"/></strong>님 어서오세요 [ <a href="/mgm01/user/logout">logout</a> ]</p>
-<!-- 					<p>Last login: <strong>23-04-2012 23:12</strong></p> -->
+				<p><strong><sec:authentication property="principal.username"/></strong>님 어서오세요 [ <a href="/mgm01/user/logout">logout</a> ]
+				<strong>[<a href="/mgm01/user/updateInfo">정보수정</a>]</strong></p>
 				</div>
 			</div>
 		</div>
@@ -66,7 +64,7 @@ $(function(){
 					<ul>
 						<li>&#8250; <a href="/mgm01/admin/adminInfo">전체현황</a></li>
 						<li>&#8250; <a href="/mgm01/admin/modAdmin">총판관리</a></li>
-						<li>&#8250; <a href="/mgm01/admin/ruleInfo">게임정보 및 계좌 관리</a></li>
+						<li>&#8250; <a href="/mgm01/admin/ruleInfo">배팅정보/계좌관리</a></li>
 					</ul>
 				</li>
 			</sec:authorize>

@@ -18,10 +18,6 @@ a:VISITED, a:LINK {
 	var isIn = ${isInner };
 	var cash = ${cash };
 	var prize_cash = 0;
-	function showDetail(num) {
-		var loc = "/board/detailPop.it?num=" + num;
-		//	location.href=loc;
-	}
 	
 	function updateCash(game_num, prize_money){
 
@@ -60,45 +56,64 @@ a:VISITED, a:LINK {
 			<tr>
 				<th>회차</th>
 				<c:if test="${item.ordernum eq 0 }">
-					<td style="height:3%;">현재 진행중</td>	
+					<td style="height:3%;">현재 진행중</td>
+					<c:if test="${item.betting_oe ne '' }">
+						<tr>
+							<th>홀짝</th>
+							<td style="height:3%;">진행중</td>
+						</tr>
+					</c:if>
+					<c:if test="${item.betting_lr ne '' }">
+						<tr>
+							<th>좌우</th>
+							<td style="height:3%;">진행중</td>
+						</tr>
+					</c:if>
+					<c:if test="${item.betting_line ne '' }">
+						<tr>
+							<th>사다리수</th>
+							<td style="height:3%;">진행중</td>
+						</tr>
+					</c:if>
 				</c:if>
 				<c:if test="${item.ordernum ne 0 }">
 					<td style="height:3%;">${item.ordernum }회차</td>
+					<c:if test="${item.betting_oe ne '' }">
+						<tr>
+							<th>홀짝</th>
+							<c:if test="${item.result_oe eq true  }">
+								<td style="height:3%; color: blue;">적중</td>
+							</c:if>
+							<c:if test="${item.result_oe eq false  }">
+								<td style="height:3%; color: red;">실패</td>
+							</c:if>
+						</tr>
+					</c:if>
+					<c:if test="${item.betting_lr ne '' }">
+						<tr>
+							<th>좌우</th>
+							<c:if test="${item.result_lr eq true  }">
+								<td style="height:3%; color: blue;">적중</td>
+							</c:if>
+							<c:if test="${item.result_lr eq false  }">
+								<td style="height:3%; color: red;">실패</td>
+							</c:if>
+						</tr>
+					</c:if>
+					<c:if test="${item.betting_line ne '' }">
+						<tr>
+							<th>사다리수</th>
+							<c:if test="${item.result_line eq true  }">
+								<td style="height:3%; color: blue;">적중</td>
+							</c:if>
+							<c:if test="${item.result_line eq false  }">
+							<td style="height:3%; color: red;">실패</td>
+							</c:if>
+						</tr>
+					</c:if>
 				</c:if>
 			</tr>
-			<c:if test="${item.betting_oe ne null }">
-			<tr>
-				<th>홀짝</th>
-					<c:if test="${item.result_oe eq true  }">
-						<td style="height:3%; color: blue;">적중</td>
-					</c:if>
-					<c:if test="${item.result_oe eq false  }">
-						<td style="height:3%; color: red;">실패</td>
-					</c:if>
-			</tr>
-			</c:if>
-			<c:if test="${item.betting_lr ne null }">
-			<tr>
-				<th>좌우</th>
-					<c:if test="${item.result_lr eq true  }">
-						<td style="height:3%; color: blue;">적중</td>
-					</c:if>
-					<c:if test="${item.result_lr eq false  }">
-						<td style="height:3%; color: red;">실패</td>
-					</c:if>
-			</tr>
-			</c:if>
-			<c:if test="${item.betting_line ne null }">
-			<tr>
-				<th>사다리수</th>
-					<c:if test="${item.result_line eq true  }">
-						<td style="height:3%; color: blue;">적중</td>
-					</c:if>
-					<c:if test="${item.result_line eq false  }">
-						<td style="height:3%; color: red;">실패</td>
-					</c:if>
-			</tr>
-			</c:if>
+			
 			<tr>
 				<th>배팅액</th>
 				<td style="height:3%;">${item.betting_money }</td>

@@ -8,9 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="/mgm01/resources/css/style.css" /> -->
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/mgm01/resources/admin/css/navi.css" media="screen" />
 <title>MGM Games</title>
-<link href="/mgm01/resources/tablecloth2/tablecloth.css" rel="stylesheet" type="text/css" media="screen" />
-<script type="text/javascript" src="/mgm01/resources/tablecloth2/tablecloth.js"></script>
 </head>
 <body>
 	<div class="wrapper">

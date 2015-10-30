@@ -97,4 +97,18 @@ public class UserServiceImpl implements UserService {
 		return dao.readUserForRegister(info);
 	}
 
+	@Override
+	public int updateUserInfoService(UserDto dto) {
+		// TODO Auto-generated method stub
+		if(dto.getPassword().length()<15)
+			dto.setPassword(encoder.saltEncoding(dto.getPassword(), dto.getNickname()));
+		return dao.updateUserInfo(dto);
+	}
+
+	@Override
+	public int updateUserAccountService(UserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.updateUserAccount(dto);
+	}
+
 }
